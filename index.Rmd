@@ -1,5 +1,0 @@
----
-title: "Home page"
----
-
-Nice to meet you!

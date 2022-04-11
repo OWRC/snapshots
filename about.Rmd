@@ -1,5 +1,0 @@
----
-title: "About us"
----
-
-*NOTE: place about us page here.*
