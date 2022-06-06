@@ -43,6 +43,8 @@ vignettes/*.pdf
 *.rar
 
 # temporary
+/external/
 *.py
 *.csv
 *.Rmd
+*.R
