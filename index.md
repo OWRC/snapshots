@@ -17,7 +17,7 @@ Periodically, a number of "snapshots" of our data collection are complied to pro
 
 The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-length municipal agency covering a greater portion of south-central Ontario, Canada. We maintain hydrogeologic information and host analytical tools for our 15 partners, all of which are the decision makers in need of sharing groundwater resources that often cross political divides.
 
-[**See our 15 partners**](partners.html)
+<iframe src="https://golang.oakridgeswater.ca/pages/subwatersheds.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
 <br>
 
 ## Spatially distributed data
@@ -25,14 +25,14 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 * **Database summaries**
   * boreholes
   * wells
-  * [**meteorological**](gantt-met.html)
+  * [**Meteorological — Periods of Record**](md/gantt-met.html)
   * stream flow
-* [**Groundwater Variability**](https://golang.oakridgeswater.ca/pages/gwvar.html)
-* [**Hydraulic Properties**](hydraulicProperties.html)
-* [**Numerical Model Custodianship Program**](numerical-model-custodianship-program.html)
+* [**Groundwater Variability**](md/gwvar.html)
+* [**Hydraulic Properties**](md/hydraulicProperties.html)
+* [**Numerical Model Custodianship Program**](md/numerical-model-custodianship-program.html)
 
 ## Temporal Analyses
 
-* [**Automated Hydrograph Separation, a regional look**](baseflow-piechart.html)
+* [**Automated Hydrograph Separation, a regional look**](md/baseflow-piechart.html)
 
 

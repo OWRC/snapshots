@@ -1,3 +1,5 @@
 title: ORMGP Snapshots
 markdown: kramdown
+kramdown:
+    math_engine: katex
 theme: jekyll-theme-slate
