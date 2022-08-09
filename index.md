@@ -17,7 +17,7 @@ Periodically, a number of "snapshots" of our data collection are complied to pro
 
 The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-length municipal agency covering a greater portion of south-central Ontario, Canada. We maintain hydrogeologic information and host analytical tools for our 15 partners, all of which are the decision makers in need of sharing groundwater resources that often cross political divides.
 
-<iframe src="https://golang.oakridgeswater.ca/pages/subwatersheds.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://golang.oakridgeswater.ca/pages/partners.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
 <br>
 
 ## Spatially distributed data

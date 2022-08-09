@@ -7,6 +7,6 @@ output: html_document
 
 
 
-<iframe src="https://golang.oakridgeswater.ca/pages/gwvar.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://golang.oakridgeswater.ca/pages/gwvar.html" width="100%" height="800" allowfullscreen></iframe>
 
 *be patient*
