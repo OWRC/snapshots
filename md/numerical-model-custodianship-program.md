@@ -1,5 +1,5 @@
 ---
-title: numerical-model-custodianship-program
+title: Numerical Model  Custodianship Program
 author: Oak Ridges Moraine Groundwater Program
 output: html_document
 ---
@@ -28,6 +28,6 @@ The ORMGP is aware that consultants maintain independent workflows and internal 
 
 When a model boundary polygon is `clicked` attributes of the model are displayed. Access to model reports and the files for running of the model are available to the partner agencies for any water related study. One may access the model once they've agrees to our Model Sharing Agreement, please [contact us](https://www.oakridgeswater.ca/contact-us) for more details.
 
-`click on any pie chart to reveal station properties. Full-screen available in the top-left corner`
+`Full-screen available in the top-left corner`
 
 <iframe src="https://golang.oakridgeswater.ca/pages/numerical-model-custodianship-program.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>

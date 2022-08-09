@@ -13,7 +13,7 @@ As a useful summary of our historical time series data set, our data are present
 
 ## Climate
 
-<iframe src="https://golang.oakridgeswater.ca/pages/gantt-met.html" width="100%" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://golang.oakridgeswater.ca/pages/gantt-met.html" width="100%" height="600" scrolling="no" allowfullscreen></iframe>
 <br>
 
 ## Sodium
