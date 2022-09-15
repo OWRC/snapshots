@@ -20,13 +20,15 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 <iframe src="https://golang.oakridgeswater.ca/pages/partners.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
 <br>
 
+# Snapshots
+
 ## Spatially distributed data
 
 * **Database summaries**
-  * boreholes
-  * wells
-  * [**Meteorological — Periods of Record**](md/gantt-met.html)
-  * stream flow
+  * [**Boreholes — Cumulative summary**](md/cum-bh.html)
+  * [**Groundwater levels — Periods of record**](md/gantt-gw.html)
+  * [**Meteorological — Periods of record**](md/gantt-met.html)
+  * [**Stream Flow — Periods of record**](md/gantt-sw.html)
 <!-- * [**Groundwater Variability**](https://golang.oakridgeswater.ca/pages/gwvar.html) — *be patient* -->
 * [**Groundwater Variability**](md/gwvar.html)
 * [**Hydraulic Properties**](md/hydraulicProperties.html)

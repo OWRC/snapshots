@@ -33,11 +33,13 @@ Locations with >34 water level measurements are queried from our database. At ev
 <!-- simultaneous interval for a penalized spline in a fitted Generalized additive model (GAM) -->
 
 
-![](8275.png)
+![](gwvar-8275.png)
 
 [See plots of all locations here.](https://www.dropbox.com/s/35ukkbfu6al25x7/gwvar-summary.pdf?dl=1)
 
-## Map (..takes >1min to load)
+## Map 
+> ..takes more than a minute to load, 120MB html downloading..
+
 `click on any circle to reveal station properties. Full-screen available in the top-left corner`
 
 <iframe src="https://golang.oakridgeswater.ca/pages/gwvar.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
