@@ -27,7 +27,8 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
   * wells
   * [**Meteorological — Periods of Record**](md/gantt-met.html)
   * stream flow
-* [**Groundwater Variability**](https://golang.oakridgeswater.ca/pages/gwvar.html) — *be patient*
+<!-- * [**Groundwater Variability**](https://golang.oakridgeswater.ca/pages/gwvar.html) — *be patient* -->
+* [**Groundwater Variability**](md/gwvar.html)
 * [**Hydraulic Properties**](md/hydraulicProperties.html)
 * [**Numerical Model Custodianship Program**](md/numerical-model-custodianship-program.html)
 
