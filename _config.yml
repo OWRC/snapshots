@@ -1,4 +1,4 @@
-title: ORMGP Snapshots
+title: Database Snapshots
 markdown: kramdown
 kramdown:
     math_engine: katex
