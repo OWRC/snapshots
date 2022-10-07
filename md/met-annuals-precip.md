@@ -13,4 +13,4 @@ Precipitation is summed and air temperature is averaged for every water year (Oc
 
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
-<iframe src="https://golang.oakridgeswater.ca/pages/met-annuals-precip.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://golang.oakridgeswater.ca/pages/met-annuals-precip.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
