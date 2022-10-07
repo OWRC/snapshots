@@ -11,6 +11,6 @@ In the map below, climate stations having recorded precipitation or temperature 
 
 Precipitation is summed and air temperature is averaged for every water year (Oct-Sept).  Minimum, mean, and maximum values of these annual sums/averages are posted once a station is `clicked`.
 
-> click on any pie chart to reveal station properties. Full-screen available in the top-left corner
+`click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
 <iframe src="https://golang.oakridgeswater.ca/pages/met-annuals-precip.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
