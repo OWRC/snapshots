@@ -37,6 +37,7 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 ## Temporal Analyses
 
 * [**Annual climate summary, a regional look**](md/met-annuals.html)
+* [**Chlorides, a regional look**](md/chem-chloride.html)
 * [**Automated Hydrograph Separation, a regional look**](md/baseflow-piechart.html)
 
 
