@@ -8,7 +8,7 @@ This snapshot provides a regional overview of the chloride data held in the ORMG
 
 
 ### Data processing
-In the map below, climate stations having five or more chloride measurements have been averaged.
+In the map below, the averages (of at least 5) chloride measurements from shallow groundwater monitors (depth <20m) are plotted.
 
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
