@@ -34,10 +34,15 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 * [**Hydraulic Properties**](md/hydraulicProperties.html)
 * [**Numerical Model Custodianship Program**](md/numerical-model-custodianship-program.html)
 
-## Temporal Analyses
 
-* [**Annual climate summary, a regional look**](md/met-annuals.html)
-* [**Chlorides, a regional look**](md/chem-chloride.html)
-* [**Automated Hydrograph Separation, a regional look**](md/baseflow-piechart.html)
+## Temporal Analyses at the Regional scale
+
+### Hydrology
+* [**Annual climate summary**](md/met-annuals.html)
+* [**Automated Hydrograph Separation**](md/baseflow-piechart.html)
+
+### Chemistry
+* [**Chlorides**](md/chem-chloride.html)
+* [**Tritium**](md/chem-chloride.html)
 
 
