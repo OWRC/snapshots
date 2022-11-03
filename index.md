@@ -43,6 +43,6 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 
 ### Chemistry
 * [**Chlorides**](md/chem-chloride.html)
-* [**Tritium**](md/chem-chloride.html)
+* [**Tritium**](md/chem-tritium.html)
 
 
