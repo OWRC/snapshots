@@ -26,3 +26,7 @@ In the map below, isotope measurements from shallow groundwater monitors (depth 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-deuterium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
 <br>
+
+<iframe src="https://golang.oakridgeswater.ca/pages/chem-isotope-delplot.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
+
+<br>
