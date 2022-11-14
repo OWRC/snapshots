@@ -37,9 +37,9 @@ Clark, I.D, and Fritz, P. 1997. Environmental Isotopes in Hydrogeology. Lewis Pu
 
 Craig, H. 1961. Isotopic variations in meteoric water. Science, 133, 1702-1703.
 
-Fritz, P., Drimmie, R.J., Frape, S.K., and O'Shea. 1987. The isotopic composition of precipitation and groundwater in Canada. In Isotope Techniques in Water Resources    Development. IAEA Symposium 299, March 1987, Vienna. 539-550.
+Fritz, P., Drimmie, R.J., Frape, S.K., and O'Shea. 1987. The isotopic composition of precipitation and groundwater in Canada. In Isotope Techniques in Water Resources   Development. IAEA Symposium 299, March 1987, Vienna. 539-550.
 
-Gat, J.R., Bowser, C.J., and Kendall, C. 1994. The contribution of evaporation from the Great Lakes to the continental atmosphere: estimate based on stable isotope       data. Geophysical Research Letter, 21(7), 557-560.
+Gat, J.R., Bowser, C.J., and Kendall, C. 1994. The co ntribution of evaporation from the Great Lakes to the continental atmosphere: estimate based on stable isotope      data. Geophysical Research Letter, 21(7), 557-560.
 
 Kendall, C., and McDonnell, J.J. (Editors). 1998. Isotope Tracers in Catchment Hydrology. Elsevier, 839p.
 
