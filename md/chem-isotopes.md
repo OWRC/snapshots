@@ -18,19 +18,19 @@ In the maps below, isotope measurements from shallow groundwater monitors (top o
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-tritium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 <br>
-Figure 1: $\delta$^18^O for samples from shallow wells (top of screen <20 mbgs).
+Figure 1: Measured tritium (3H) for samples from shallow wells (top of screen <20 mbgs).
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-dO18-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 <br>
-Figure 2:
+Figure 2: Measured $\delta$18O for samples from shallow wells (top of screen <20 mbgs).
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-deuterium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 <br>
-Figure 3:
+Figure 3: Measured deuterium ($\delta$2H) for samples from shallow wells (top of screen <20 mbgs).
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-isotope-delplot.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 <br>
-Figure 4:
+Figure 4: $\delta$2H versus $\delta$18O for shallow wells?
 
 
 ### Deep Groundwater (>20 mbgs)
