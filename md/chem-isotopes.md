@@ -25,15 +25,15 @@ Figure 1: $\delta$^18^O for samples from shallow wells (top of screen <20 mbgs).
 <br>
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-dO18-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
-
+Figure 2:
 <br>
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-deuterium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
-
+Figure 3:
 <br>
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-isotope-delplot.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
-
+Figure 4:
 <br>
 
 ### Deep Groundwater (>20 mbgs)
