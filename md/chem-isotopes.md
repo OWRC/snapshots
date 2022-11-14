@@ -14,27 +14,24 @@ Isotopes are atoms with the same number of protons, but not neutrons. They share
 In the maps below, isotope measurements from shallow groundwater monitors (top of well screen <20m deep) are plotted.
 
 
-
-
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-tritium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 <br>
 Figure 1: $\delta$^18^O for samples from shallow wells (top of screen <20 mbgs).
 
-<br>
-
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-dO18-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
-Figure 2:
 <br>
+Figure 2:
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-deuterium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
-Figure 3:
 <br>
+Figure 3:
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-isotope-delplot.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
-Figure 4:
 <br>
+Figure 4:
+
 
 ### Deep Groundwater (>20 mbgs)
 
