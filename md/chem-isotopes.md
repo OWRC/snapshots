@@ -9,7 +9,6 @@ Isotopes are atoms with the same number of protons, but not neutrons. They share
 ### All Samples
 
 
-
 ### Shallow Groundwater (<20 mbgs)
 In the maps below, isotope measurements from shallow groundwater monitors (top of well screen <20m deep) are plotted.
 
@@ -34,7 +33,6 @@ Figure 4: $\delta$2H versus $\delta$18O for shallow wells?
 
 
 ### Deep Groundwater (>20 mbgs)
-
 
 
 ### References
