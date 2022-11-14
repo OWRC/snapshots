@@ -19,7 +19,9 @@ In the maps below, isotope measurements from shallow groundwater monitors (top o
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-tritium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
+<br>
 Figure 1: $\delta$^18^O for samples from shallow wells (top of screen < 20 mbgs).
+
 <br>
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-dO18-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
