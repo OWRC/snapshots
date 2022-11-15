@@ -4,7 +4,7 @@ author: Oak Ridges Moraine Groundwater Program
 output: html_document
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;Isotopes are atoms with the same number of protons, but not neutrons. They share similar chemical properties but differ in mass and by extension physical properties. An isotopic signature is expressed as the ratio between the amount of various isotopes of an element. Isotopes are used as tracers for many types of investigations including, but not limited to, groundwater provenance, relative ages, recharge processes, subsurface processes, and geochemical reactions including reaction rates (Clark and Fritz, 1997). This snapshot provides a regional overview of some of the isotope data held in the ORMGP database - specifically the stable isotopes $^{18}O$ and $^2H$ (Deuterium) and the radioactive isotope  $^3H$ (tritium). Within the study area tritium is used to provide an understanding regarding if groundwaters have a component recharged in modern or recent times, approximately within the last 50 years. $^{18}O$ and $^2H$ provide information regarding recharge sources and conditions such as temperature, as well as potential differences in water types and relative ages. Further information regarding the use of isotopes in water investigations are available in Clark and Fritz (1997) and Kendall and McDonnell (1998).
+&nbsp;&nbsp;&nbsp;&nbsp;Isotopes are atoms with the same number of protons, but not neutrons. They share similar chemical properties but differ in mass and by extension physical properties. An isotopic signature is expressed as the ratio between the amount of various isotopes of an element. Isotopes are used as tracers for many types of investigations including, but not limited to, groundwater provenance, relative ages, recharge processes, subsurface processes, and geochemical reactions including reaction rates (Clark and Fritz, 1997). This snapshot provides a regional overview of some of the isotope data held in the ORMGP database - specifically the stable isotopes $^{18}O$ and $^2H$ (Deuterium) and the radioactive isotope  $^3H$ (tritium). Within the study area tritium is used to provide an understanding regarding if groundwaters have a component recharged in modern or recent times, approximately within the last 50 years. $^{18}O$ and $^2H$ provide information regarding recharge sources and conditions such as temperature, as well as potential differences in water types and relative ages. Further information regarding the use of isotopes in water investigations are available in Clark and Fritz (1997) and Kendall and McDonnell (1998). A brief summary of historical data for the study area is included in Gerber et al., 2009.
 
 
 ### Isotope Measurements
@@ -15,7 +15,7 @@ In the maps below, isotope measurements for $^{18}O$, $^2H$ (Deuterium) and $^3H
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-tritium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
-Figure 1: Measured tritium ($^3H$) in groundwater. Shallow wells have top of screen <=20 mbgs. Deep wells have top of screen >20mbgs.
+Figure 1: Measured tritium ($^3H$) in groundwater. Shallow wells have top of screen <=20 mbgs. Deep wells have top of screen >20mbgs. See also Priebe and Hamilton (2022) for a discussion on tritium concentrations in groundwater in southern Ontario.
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-dO18-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
@@ -27,7 +27,7 @@ Figure 3: Measured deuterium ($\delta$$^2H$) in groundwater. Shallow wells have 
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-isotope-delplot.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
-Figure 4: $\delta$$^2H$ versus $\delta$$^{18}O$.
+Figure 4: $\delta$ $^2H$ versus $\delta$ $^{18}O$. GMWL = Global Meteoric Water Line from Craig, 1961. LMWL = Local Meteoric Water Line (Simcoe, Ontario) from Fritz et al., 1987. Study area results occur above both the GMWL and LMWL due to deuterium-excess effects created by proximity to the Great Lakes (Gat et al., 1994).
 
 
 ### References
