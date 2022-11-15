@@ -43,7 +43,7 @@ Craig, H. 1961. Isotopic variations in meteoric water. Science, 133, 1702-1703.
 
 Fritz, P., Drimmie, R.J., Frape, S.K., and O'Shea. 1987. The isotopic composition of precipitation and groundwater in Canada. In Isotope Techniques in Water Resources Development. IAEA Symposium 299, March 1987, Vienna. 539-550.
 
-Gat, J.R., Bowser, C.J., and Kendall, C. 1994. The co ntribution of evaporation from the Great Lakes to the continental atmosphere: estimate based on stable isotope data. Geophysical Research Letter, 21(7), 557-560.
+Gat, J.R., Bowser, C.J., and Kendall, C. 1994. The contribution of evaporation from the Great Lakes to the continental atmosphere: estimate based on stable isotope data. Geophysical Research Letter, 21(7), 557-560.
 
 Gerber, R.E., Holysh, S., Doughty, M., Frape, S., Henkemans, E., and Kemp, W. 2009. Flow system dynamics: isotope tracer studies, south-central Ontario. In proceedings GeoHalifax 2009, 1203-1213.
 
