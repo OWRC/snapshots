@@ -4,7 +4,7 @@ author: Oak Ridges Moraine Groundwater Program
 output: html_document
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;Isotopes are atoms with the same number of protons, but not neutrons. They share similar chemical properties but differ in mass and by extension physical properties. An isotopic signature is expressed as the ratio between the amount of various isotopes of an element. Isotopes are used as tracers for many types of investigations including, but not limited to, groundwater provenance, relative ages, recharge processes, subsurface processes, and geochemical reactions including reaction rates (Clark and Fritz, 1997). This snapshot provides a regional overview of some of the isotope data held in the ORMGP database - specifically the stable isotopes $^{18}O$ and $^2H$ (Deuterium) and the radioactive isotope  $^2H$ (tritium). Within the study area tritium is used to provide an understanding regarding if groundwaters have a component recharged in modern or recent times, approximately within the last 50 years. $^{18}O$ and $^2H$ provide information regarding recharge sources and conditions such as temperature, as well as potential differences in water types and relative ages. Further information regarding the use of isotopes in water investigations are available in Clark and Fritz (1997) and Kendall and McDonnell (1998).
+&nbsp;&nbsp;&nbsp;&nbsp;Isotopes are atoms with the same number of protons, but not neutrons. They share similar chemical properties but differ in mass and by extension physical properties. An isotopic signature is expressed as the ratio between the amount of various isotopes of an element. Isotopes are used as tracers for many types of investigations including, but not limited to, groundwater provenance, relative ages, recharge processes, subsurface processes, and geochemical reactions including reaction rates (Clark and Fritz, 1997). This snapshot provides a regional overview of some of the isotope data held in the ORMGP database - specifically the stable isotopes $^{18}O$ and $^2H$ (Deuterium) and the radioactive isotope  $^3H$ (tritium). Within the study area tritium is used to provide an understanding regarding if groundwaters have a component recharged in modern or recent times, approximately within the last 50 years. $^{18}O$ and $^2H$ provide information regarding recharge sources and conditions such as temperature, as well as potential differences in water types and relative ages. Further information regarding the use of isotopes in water investigations are available in Clark and Fritz (1997) and Kendall and McDonnell (1998).
 
 ### All Samples
 
@@ -17,19 +17,19 @@ In the maps below, isotope measurements from shallow groundwater monitors (top o
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-tritium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
-Figure 1: Measured tritium (<sup>3</sup>H) for samples from shallow wells (top of screen <20 mbgs).
+Figure 1: Measured tritium ($^3H$) for samples from shallow wells (top of screen <20 mbgs).
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-dO18-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
-Figure 2: Measured $\delta$<sup>18</sup>O for samples from shallow wells (top of screen <20 mbgs).
+Figure 2: Measured $\delta$$^{18}O$ for samples from shallow wells (top of screen <20 mbgs).
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-deuterium-map.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
-Figure 3: Measured deuterium ($\delta$<sup>2</sup>H) for samples from shallow wells (top of screen <20 mbgs).
+Figure 3: Measured deuterium ($\delta$$^2H$) for samples from shallow wells (top of screen <20 mbgs).
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-isotope-delplot.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
-Figure 4: $\delta$<sup>2</sup>H versus $\delta$<sup>18</sup>O for shallow wells?
+Figure 4: $\delta$$^2H$ versus $\delta$$^{18}O$ for shallow wells?
 
 
 
