@@ -27,7 +27,7 @@ Figure 3: Measured deuterium ($\delta$$^2H$) in groundwater. Shallow wells have 
 
 <iframe src="https://golang.oakridgeswater.ca/pages/chem-isotope-delplot.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
 
-Figure 4: $\delta$ $^2H$ versus $\delta$ $^{18}O$. GMWL = Global Meteoric Water Line from Craig, 1961. LMWL = Local Meteoric Water Line (Simcoe, Ontario) from Fritz et al., 1987. Study area results occur above both the GMWL and LMWL due to deuterium-excess effects created by proximity to the Great Lakes (Gat et al., 1994).
+Figure 4: $\delta$ $^2H$ versus $\delta$ $^{18}O$. GMWL = Global Meteoric Water Line from Craig, 1961. LMWL = Local Meteoric Water Line (Simcoe, Ontario) from Fritz et al., 1987. Study area results occur above both the GMWL and LMWL due to deuterium enrichment from impacts associated with Grreat Lakes humidity and vapour exchange (Gat et al., 1994).
 
 
 ### References
