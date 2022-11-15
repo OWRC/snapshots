@@ -26,6 +26,7 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 
 * **Database summaries**
   * [**Boreholes — Cumulative summary**](md/cum-bh.html)
+  * [**Geologic Picks**](md/picks.html)
   * [**Groundwater levels — Periods of record**](md/gantt-gw.html)
   * [**Meteorological — Periods of record**](md/gantt-met.html)
   * [**Stream Flow — Periods of record**](md/gantt-sw.html)
@@ -45,4 +46,4 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 * [**Chlorides**](md/chem-chloride.html)
 * [**Isotopes**](md/chem-isotopes.html)
 
-
+[*see also raw snapshots*](https://golang.oakridgeswater.ca/pages/)
