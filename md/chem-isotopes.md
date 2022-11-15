@@ -45,7 +45,7 @@ Fritz, P., Drimmie, R.J., Frape, S.K., and O'Shea. 1987. The isotopic compositio
 
 Gat, J.R., Bowser, C.J., and Kendall, C. 1994. The contribution of evaporation from the Great Lakes to the continental atmosphere: estimate based on stable isotope data. Geophysical Research Letter, 21(7), 557-560.
 
-Gerber, R.E., Holysh, S., Doughty, M., Frape, S., Henkemans, E., and Kemp, W. 2009. Flow system dynamics: isotope tracer studies, south-central Ontario. In proceedings GeoHalifax 2009: 62<sup>nd</sup/> Canadian Geotechnical Conference & 10th Joint CGS/IAH-CNC Groundwater Conference, Halifax, 1203-1213.
+Gerber, R.E., Holysh, S., Doughty, M., Frape, S., Henkemans, E., and Kemp, W. 2009. Flow system dynamics: isotope tracer studies, south-central Ontario. In proceedings GeoHalifax 2009: 62<sup>nd</sup> Canadian Geotechnical Conference & 10th Joint CGS/IAH-CNC Groundwater Conference, Halifax, 1203-1213.
 
 Kendall, C., and McDonnell, J.J. (Editors). 1998. Isotope Tracers in Catchment Hydrology. Elsevier, 839p.
 
