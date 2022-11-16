@@ -10,10 +10,16 @@ output: html_document
 
 ### Isotope Measurements
 In the maps below, isotope measurements currently in the ORMGP database for $^{18}O$, $^2H$ (Deuterium) and $^3H$ (tritium) are plotted. The isotopic data that have currently been incorporated into the ORMGP database include:
-<ul>
-  <li>Data from research</li>
-  <li>Data from landfill investigations</li>
-</ul>
+
+<ol>
+  <li>Data from research investigations (Aravena and Wassenaar, 1993; Aravena et al., 1993; 1995; 2004; Gerber, 1999; Gerber and Howard, 1996);</li>
+  <li>Data from landfill siting investigations (M.M. Dillon Limited, 1990; IWA, 1994a-d);</li>
+  <li>Data from municipal pumping and monitoring wells (Regions of Halton, York, Peel and Durham);</li>
+  <li>Data from the Provincial Groundwater Monitoring Network (PGMN) operated by the Province of Ontario and Conservation Authorities;</li>
+  <li>Data from the Province of Ontario Drinking Water Surveillance Program (DWSP);</li>
+  <li>Data from regional groundwater quality surveys (2007-2019) conducted by the Ontario Geological Survey (Hamilton, 2021); and</li>
+  <li>Data from ongoing University of Waterloo/ORMGP geochemical and isotopic analyses initiated in 2008.</li>
+</ol>
 
 
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
