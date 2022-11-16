@@ -9,7 +9,11 @@ output: html_document
 
 
 ### Isotope Measurements
-In the maps below, isotope measurements currently in the ORMGP database for $^{18}O$, $^2H$ (Deuterium) and $^3H$ (tritium) are plotted.
+In the maps below, isotope measurements currently in the ORMGP database for $^{18}O$, $^2H$ (Deuterium) and $^3H$ (tritium) are plotted. The isotopic data that have currently been incorporated into the ORMGP database include:
+<ul>
+  <li>Data from research</li>
+  <li>Data from landfill investigations</li>
+</ul>
 
 
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
