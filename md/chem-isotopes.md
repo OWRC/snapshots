@@ -44,6 +44,14 @@ Figure 4: $\delta$ $^2H$ versus $\delta$ $^{18}O$. GMWL = Global Meteoric Water 
 
 ### References
 
+Aravena, R. and Wassenaar, L.I.  1993.  Dissolved organic carbon and methane in a regional confined aquifer, southern Ontario, Canada: Carbon isotope evidence for associated subsurface sources.  Applied Geochemistry, 8, 483-493.
+
+Aravena, R., L.I. Wassenaar, and J.F. Barker.  1993.  Distribution and isotopic characterization of methane in a confined aquifer in southern Ontario, Canada.  Journal of Hydrology, 173, 51-70.
+
+Aravena, R., Wassenaar, L.I. and Plummer, L.N.  1995.  Estimating 14C groundwater ages in a methanogenic aquifer.  Water Resources Research, 31 (9), 2307-2317.
+
+Aravena, R., L.I. Wassenaar, and E.C. Spiker.  2004.  Chemical and carbon isotopic composition of dissolved organic carbon in a regional confined methanogenic aquifer.  Isotopes Environ. Health Studies, 40(2), 1-12.
+
 Clark, I.D, and Fritz, P. 1997. Environmental Isotopes in Hydrogeology. Lewis Publishers. 328p.
 
 Craig, H. 1961. Isotopic variations in meteoric water. Science, 133, 1702-1703.
@@ -52,8 +60,24 @@ Fritz, P., Drimmie, R.J., Frape, S.K., and O'Shea. 1987. The isotopic compositio
 
 Gat, J.R., Bowser, C.J., and Kendall, C. 1994. The contribution of evaporation from the Great Lakes to the continental atmosphere: estimate based on stable isotope data. Geophysical Research Letter, 21(7), 557-560.
 
+Gerber, R.E. 1999. Hydrogeologic behavior of the Northern till aquitard near Toronto, Ontario. Ph.D. thesis, University of Toronto, 172p.
+
+Gerber, R.E., and K.W.F. Howard.  1996.  Evidence for recent groundwater flow through Late Wisconsinan till near Toronto, Ontario. Canadian Geotechnical Journal, v. 33, p. 538-555.
+
 Gerber, R.E., Holysh, S., Doughty, M., Frape, S., Henkemans, E., and Kemp, W. 2009. Flow system dynamics: isotope tracer studies, south-central Ontario. In proceedings GeoHalifax 2009: 62<sup>nd</sup> Canadian Geotechnical Conference & 10th Joint CGS/IAH-CNC Groundwater Conference, Halifax, 1203-1213.
 
+Hamilton, S.M. 2021. Ambient Groundwater Geochemical and Isotopic Data for Southern Ontario, 2007-2019.  Ontario Geological Survey, Miscellaneous Release – Data 283 – Revision 2.
+
+Interim Waste Authority.  1994a. EA document IV, geology/hydrogeology, technical appendix 1: Site T1 for Durham Region landfill site search.  Prepared by M.M. Dillon Limited, February, 1994, 90 p.
+
+Interim Waste Authority (IWA).  1994b. EA document IV, geology/hydrogeology, technical appendix 2: Site EE4 for Durham Region landfill site search.  Prepared by M.M. Dillon Limited, February, 1994, 70 p.
+
+Interim Waste Authority (IWA).  1994c. EA document IV, geology/hydrogeology, technical appendix 3: Site EE10 for Durham Region landfill site search.  Prepared by M.M. Dillon Limited, February, 1994.
+
+Interim Waste Authority (IWA).  1994d. IWA landfill site search, Durham Region. Detailed Assessment of the Proposed Site EE11, Appendix C Geology/Hydrogeology.  Prepared by M.M. Dillon Limited, October, 1994, 197p.
+
 Kendall, C., and McDonnell, J.J. (Editors). 1998. Isotope Tracers in Catchment Hydrology. Elsevier, 839p.
+
+M.M. Dillon Limited. 1990. Regional Municipality of Durham Contingency Landfill Site Assessment Technical Support Volume B, Technical Report, Hydrogeology.  September 1990. Published by Ontario Ministry of the Attorney General.  588p.
 
 Priebe, E.H., and Hamilton, S.M. 2022. Tritium in shallow groundwater of southern Ontario. Ontario Geological Survey, Groundwater Resources Study 20.
