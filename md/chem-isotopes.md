@@ -21,6 +21,7 @@ In the maps below, isotope measurements currently in the ORMGP database for $^{1
   <li>Data from ongoing University of Waterloo/ORMGP geochemical and isotopic analyses initiated in 2008.</li>
 </ol>
 
+<br>
 
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
@@ -40,7 +41,7 @@ Figure 3: Measured deuterium ($\delta$$^2H$) in groundwater. Shallow wells have 
 
 Figure 4: $\delta$ $^2H$ versus $\delta$ $^{18}O$. GMWL = Global Meteoric Water Line from Craig, 1961. LMWL = Local Meteoric Water Line (Simcoe, Ontario) from Fritz et al., 1987. Study area results occur above both the GMWL and LMWL due to deuterium enrichment from processes associated with Great Lakes humidity and vapour exchange (Gat et al., 1994).
 
-
+<br>
 
 ### References
 
