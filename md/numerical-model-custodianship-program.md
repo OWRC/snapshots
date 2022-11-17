@@ -18,14 +18,14 @@ The models we maintain typically remain in the hydrological realm, including lon
 
 For source water protection, the models we archive can be typically categorized as:
 
-1. *Hydrologic* models: $(a)$ take climatological information (i.e, precipitation, temperature, etc.); $(b)$ make estimates of other climatic processes (potential evaporation, snowmelt, etc.); and $(c)$ take land surface characteristics (imperviousness, use type, soil type, etc.) to project likely quantities of evapotranspiration, groundwater recharge, and overland runoff.
+1. *Hydrologic* models: *(i)* take climatological information (i.e, precipitation, temperature, etc.); *(ii)* make estimates of other climatic processes (potential evaporation, snowmelt, etc.); and *(iii)* take land surface characteristics (imperviousness, use type, soil type, etc.) to project likely quantities of evapotranspiration, groundwater recharge, and overland runoff.
 1. *Groundwater* flow models take a 3D representation of the sub-surface and provide estimates of how water migrates underground. Among many things, the groundwater model requires estimates of *groundwater recharge*, as it is a major source of water into the groundwater system.
 1. *Integrated* models are a newer technology which include all of the processing of Hydrologic and Groundwater models in one, saving the need to working with many models.
 1. *Coupled* models are such projects where multiple models were required to gain an understanding of the surface-water/groundwater interaction. These models often work in conjunction iteratively, as both models can be made to provide feedback.
 
 #### Map
 
-When a model boundary polygon is `clicked` attributes of the model are displayed. Access to model reports and the files for running of the model are available to our [partner agencies](/snapshots/) for any water related study. One may access the model once they've agreed to our Model Sharing Agreement, please [contact us](https://www.oakridgeswater.ca/contact-us) for more details.
+When a model boundary polygon is `clicked` attributes of the model are displayed. Access to model reports and the files for running of the model are available to our partner agencies for any water related study. One may access the model once they've agreed to our Model Sharing Agreement, please [contact us](https://www.oakridgeswater.ca/contact-us) for more details.
 
 `Full-screen mode available in the top-left corner`
 

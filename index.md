@@ -47,3 +47,4 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 * [**Isotopes**](md/chem-isotopes.html)
 
 [*see also raw snapshots*](https://golang.oakridgeswater.ca/pages/)
+[*see also data products*](https://golang.oakridgeswater.ca/interpolants/)
