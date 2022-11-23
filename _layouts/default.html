@@ -52,6 +52,12 @@
         font-weight: bold;
       }
     </style>
+    <style id="font-size">
+      p.subtitle {
+        font-size: 30px;
+        font-weight: bold;
+      }
+    </style>     
     <style id="inner-width">
       .inner {
         max-width: 800px;
@@ -86,6 +92,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <p class="title">{{ page.title }}</p>
+        <p class="subtitle">{{ page.subtitle }}</p>
         {{ content }}
       </section>
     </div>
@@ -93,7 +100,8 @@
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p>&copy; 2022 <a href="https://www.oakridgeswater.ca/">Oak Ridges Moraine Groundwater Program</a></p>
+        <p class="copyright">&copy; 2022 <a href="https://www.oakridgeswater.ca/">Oak Ridges Moraine Groundwater Program</a></p>
+        <p>to cite, go to <a href="{{ site.github.repository_url }}"><em>"Cite this repository"</em></a></p>
         <!-- {% if site.github.is_project_page %}
         <p class="copyright">{{ site.title | default: site.github.repository_name }} maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
         {% endif %} -->
