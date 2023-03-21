@@ -46,7 +46,3 @@ vignettes/*.pdf
 /external/
 /html/
 /old/
-*.py
-*.csv
-*.Rmd
-*.R
