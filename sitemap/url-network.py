@@ -93,26 +93,6 @@ grps['ee-11-1']=len(grps)
 with open('sites.txt','w') as f: f.write('\n'.join(ids.keys()))
 
 
-# grps=dict()
-# gid=0
-# def groupRecurse(root,href,gid):
-#     gid+=1 # 0 is reserved for rootdir
-#     grps[href]=gid
-#     if href in coll:
-#         slnks = filter(root, coll[href])
-#         # print(root)
-#         # print(slnks)
-#         for h in slnks: 
-#             if h in grps: continue
-#             grps[h]=gid
-#             groupRecurse(root,h,gid)
-#     else:
-#         gid+=1
-#         grps[href]=gid
-
-# for sroot,gid in grps.items():
-#     if sroot==rooturl: continue
-
 
 def groupRecurse(root,href,gid):
     grps[href]=gid
@@ -130,17 +110,6 @@ for href in ids:
         groupRecurse(lnk, href, grps[lnk])
 
 
-# for href in ids:
-#     lnk = href.replace(rooturl,"/")
-#     if lnk == '/': 
-#         grps[href]=0
-#         continue
-
-#     if lnk.count("/")<3 and lnk[-1]=='/': # lnk[-5:]!='.html':
-
-
-#         groupRecurse(lnk, href, gid)
-
 
 
 with open('links.csv', 'w') as f:
@@ -155,7 +124,6 @@ with open('links.csv', 'w') as f:
 
 with open('nodes.csv', 'w') as f:
     f.write('name,group,typ\n')
-    # for nam,gid in grps.items():
     for href in ids:
         lnk = href.replace(rooturl,"").split("/", 1)[0]
         if href==rooturl+lnk+'/':
