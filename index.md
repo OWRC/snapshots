@@ -46,5 +46,11 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 * [**Chlorides**](md/chem-chloride.html)
 * [**Isotopes**](md/chem-isotopes.html)
 
+
+## Studies
+* [**Chloride Loading to Lake Ontario, North Shore**](https://golang.oakridgeswater.ca/pages/ycdb-chloride-lake-loading.html)
+
+
+
 [*see also raw snapshots*](https://golang.oakridgeswater.ca/pages/)
 [*see also data products*](https://golang.oakridgeswater.ca/interpolants/)
