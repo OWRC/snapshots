@@ -53,6 +53,9 @@ Model codes currently maintained/licensed include:
 
 All requests for model codes have required the singing of a Model Sharing Agreement. This is an agreement to indemnify all parties, those who created the model, those who own the model, those who distribute the model and the users. But better yet, it lets us keep track of model (re-)usage supported by the ORMGP.
 
+[__Request for numerical model(s) can be made here__](https://arcg.is/1OzLfX).
 
+
+As of the initiation of the program since 2017, a total of 23 models have been successfully redistributed and applied to water resource studies.
 
 ![](numerical-model-custodianship-program-getMSAdates.png)
