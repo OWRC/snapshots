@@ -1,0 +1,3 @@
+
+
+<meta name="image" property="og:image" content="https://raw.githubusercontent.com/OWRC/interpolants/main/images/misc/result.png">

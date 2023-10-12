@@ -41,9 +41,16 @@ vignettes/*.pdf
 
 
 # mm
+ycdb-connect.R
+external/
+html/
+old/
+pkl/
+rosm.cache/
 *.rar
-
-# temporary
-/external/
-/html/
-/old/
+*.pkl
+*.pdf
+*_files/
+*.Rproj
+# *.csv
+*.html
