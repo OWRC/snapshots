@@ -6,10 +6,7 @@ library(leaflet)
 library(leaflet.extras)
 library(dplyr)
 
-mdl.bounds <- geojson_read("https://www.dropbox.com/s/3xb0dp1hmlntily/ORMGP_model_bounds.geojson?dl=1", what = "sp")
-
-
-
+mdl.bounds <- geojson_read("https://www.dropbox.com/scl/fi/u5aqvjckulef44hlj7gpd/NMCP_model_bounds.geojson?rlkey=2lxwbzdb9ckhz3a21xtzbvrxw&dl=1", what = "sp")
 
 
 
@@ -33,7 +30,7 @@ m <- leaflet(mdl.bounds, #width = "100%", height = "500px",
   addFullscreenControl() %>%
   addPolygons(weight = 1, color = ~factpal(ModelType), opacity = 1, group = ~ModelType,
               highlightOptions = highlightOptions(weight = 5),
-              popup = ~paste0('<b>',ModelName,'</b> (',Delivery,')',
+              popup = ~paste0(ModelID,'<br><b>',ModelName,'</b><br>(',Delivery,')',
                               '<br>       Area: ',round(AreaKM2,1),'km²',
                               '<br> Model code: ',ModelCode,
                               '<br>    n cells: ',nCE,
@@ -47,4 +44,4 @@ m <- leaflet(mdl.bounds, #width = "100%", height = "500px",
   )
 
 
-htmlwidgets::saveWidget(m, "external/nmcp/numerical-model-custodianship-program.html")
+htmlwidgets::saveWidget(m, "../../html/numerical-model-custodianship-program.html")
