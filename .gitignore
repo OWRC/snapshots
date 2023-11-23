@@ -41,6 +41,7 @@ vignettes/*.pdf
 
 
 # mm
+getMSAdates.txt
 ycdb-connect.R
 external/
 html/
