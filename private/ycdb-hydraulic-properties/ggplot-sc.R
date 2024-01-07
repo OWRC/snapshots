@@ -60,7 +60,7 @@ ggplot() +
   geom_text(data = df.dist.label, aes(x,y,label=mu), parse=T, hjust=0, size=3.5) +
   geom_text(data = df.dist.label, aes(x,y-.5*y,label=sigma), parse=T, hjust=0, size=3.5) +
     
-  scale_y_log10(name="specific capacity (m²/s)",
+  scale_y_log10(name="Specific capacity or transmissivity (m²/s)",
                 breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x)),
                 limits = c(1e-7,1)) +
@@ -74,4 +74,4 @@ ggplot() +
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 
 
-ggsave("E:/Sync/@dev/pages_owrc/snapshots/md/hydraulicProperties-ggplot-sc.png", height=6, width=6, units = "in")
+ggsave("md/hydraulicProperties-ggplot-sc.png", height=6, width=6, units = "in", dpi="retina")

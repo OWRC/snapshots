@@ -97,5 +97,4 @@ ggplot() +
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 
 
-ggsave("E:/Sync/@dev/pages_owrc/snapshots/md/hydraulicProperties-ggplot-k.png", height=6, width=6, units = "in")
-
+ggsave("md/hydraulicProperties-ggplot-k.png", height=6, width=6, units = "in", dpi="retina")
