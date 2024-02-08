@@ -63,5 +63,5 @@ l <- subplot(p, style(h, showlegend = F), nrows = 2, margin = 0.04, heights = c(
 #                              title='Data Source',
 #                              orientation='h'))
 
-htmlwidgets::saveWidget(l, "external/cum-bh/cum-bh.html")
+htmlwidgets::saveWidget(l, "md/cum-bh.html")
 
