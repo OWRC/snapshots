@@ -1,0 +1,149 @@
+---
+title: "CTC Source Protection Region Municipal Wells Water Quality Status, Trends, and Projections"
+subtitle: "Statistical analysis of municipal water quality parameters in the CTC Source Protection Region"
+author: "Oak Ridges Moraine Groundwater Program and CTC Source Protection Region"
+date: "`r gsub(' 0', ' ', format(Sys.time(), '%d %B, %Y'))`"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  word_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Introduction
+
+The *Clean Water Act, 2006* (CWA) and its associated regulations aim to protect existing and future sources of drinking water before it enters the municipal drinking water treatment system. The CWA established a locally driven, science-based, multi-stakeholder process to protect municipal drinking water sources and designated private drinking water sources. This process is meant to promote the shared responsibility of all stakeholders to protect local sources of drinking water from threats to both water quantity and quality. 
+
+In compliance with the *Safe Drinking Water Act, 2002*, the quality of municipal drinking water must be monitored to ensure it meets provincial standards. Regular sampling and testing of raw, treated, and distributed drinking water is performed for several organic, inorganic, physical and radiological parameters. From a drinking water source protection perspective, emphasis is placed on three inorganic parameters — sodium (Na), chloride (Cl) and nitrate (NO3) — since they are commonly sampled, are typical indications of surface activity, and are mobile in the groundwater flow system.
+
+Water quality trend analysis and accompanying plots are tools used to identify deteriorating source water quality conditions before they become a drinking water *Issue.* They can also be used to both isolate what may be contributing to the identified *Issue*, as well as improve our understanding of the impact of existing Drinking Water Source Protection Plan policy’s ability to protect the quality of source water.
+
+## Oak Ridges Moraine Groundwater Program (ORMGP)
+
+The [Oak Ridges Moraine Groundwater Program](https://www.oakridgeswater.ca/) reflects the intent of fifteen government agencies (municipalities and conservation authorities) to jointly manage, synthesize and disseminate water resources data, analysis, knowledge, geologic interpretations, and numerical models over a 30,000 km² area situated in south-central Ontario.
+
+## CTC Source Protection Region
+
+The CTC Source Protection Region contains 25 large and small watersheds and spans from the Oak Ridges Moraine in the north to Lake Ontario in the south. The region contains portions of the Niagara Escarpment, Oak Ridges Moraine, Greenbelt, Lake Ontario, and the most densely populated region of Canada. The CTC Source Protection Region includes: 
+
+- 25 local municipalities and eight single tier, regional or county municipalities; 
+- 63 active municipal supply wells; and 
+- 16 municipal surface water intakes on Lake Ontario. 
+
+The region is complex and diverse in terms of geology, physiology, population, and development pressures. This diverse setting represents a significant challenge because of the variability of available information upon which to base the technical work, the differing stresses on water resources related to development pressure and population growth, and the differences in the nature, density, and locations of threats to the quality and quantity of water resources.
+
+`Insert map of CTC Source Protection Region jurisdiction`
+
+# Purpose of the snapshot
+
+Water quality parameter data collected from municipal wells are regularly analyzed to determine if a specific parameter: 
+
+1. Exceeds the applicable Ontario Drinking Water Quality Standard (ODWQS), 
+1. Statistical projections show the potential for concentrations to increase above the applicable ODWQS threshold within a defined projection period, or 
+1. The frequency with which the half concentration of the ODWQS threshold was met or exceeded. 
+
+The CTC Source Protection Region Municipal Wells Water Quality Status, Trends, and Projections snapshot provides a platform for users to analyze municipal well water quality data using preferred statistical analysis methods. Through this platform, specific water quality parameters can be evaluated through statistical status, trend, and projection analysis to monitor changes over time.  
+
+# Methodology
+
+There are many analytic techniques available to assess water quality trends, model, or project future concentrations, and test the influence of different factors in the observed trends. These different approaches vary in their assumptions, flexibility, and ability to meet analytic objectives.
+
+## Ontario Drinking Water Quality Standard (ODWQS)
+
+Groundwater chemistry is evaluated based on the Ontario Drinking Water Quality Standards Guidelines (ODWQS; MOE, 2006). ODWQS has defined an aesthetic objective for chloride of 250 mg/L, sodium of 200 mg/L and a maximum acceptable concentration for nitrite + nitrate (i.e., nitrate) of 10 mg/L. Regarding municipal drinking water wells, the Local Medical Officer of Health is notified when sodium concentrations exceed 20 mg/L so that information may be communicated to local physicians for use with patients on sodium reduced diets. 
+The focus on chloride, sodium, and nitrate is to identify and differentiate natural versus anthropogenic impacts on groundwater quality. An increasing trend over time in these parameters shows an anthropogenic impact. In addition, these three parameters have been identified as existing drinking water *Issues* in the CTC Source Protection Region.
+
+## Generalized Additive Mixed Model (GAMM)
+
+Generalized additive models are an extension of simple regressions, where the distribution is not defined. These models are particularly useful for data sets with non-normal error distributions (i.e., proportions, counts, or when they do not have negative values) and when data points are not independent. This makes the GAMM a good approach for environmental monitoring data. In addition, these models are non-parametric, so data do not need to be normalized. This ensures that the relationship between the predictor and independent factor are not modified in the transformation process. These models are also able to include covariates and predictors, to help explain the observed trends, so we can isolate drivers behind an observed *Issue*, and better develop a management response to improve conditions. 
+
+Notably, GAMMs can identify patterns in the data that are more difficult to detect with other techniques. This is because the models are non-monotonic and can pick up on periods of increase and decrease within a year, and across years (**Figure 1**). Being able to isolate trends in months or seasons improves the effectiveness of mitigation recommendations.
+
+![](img/Aspose.Words.4a7902ec-8cd5-4a8a-8fd6-fd6c219b0c9f.001.png)
+
+***Figure 1.** Example of a GAMM, with trend line and 95% confidence intervals. The data points and trend line are plotted against the ODWQS (maximum acceptable concentration; higher dashed grey line) to determine if concentrations exceed guidelines throughout the monitoring period.*
+
+A hybrid approach using linear regression and GAMM is used to identify projected guideline exceedances (**Figure 2**). Specifically, the certainty of exceeding a guideline is described as follows: 
+
+- when forecasts from both statistical tests show an exceedance, an *Issue* is considered ***highly likely***. 
+- when only one test shows an exceedance, an *Issue* is ***somewhat likely***. 
+- if neither trend lines exceeds, or shows a decreasing trend, an *Issue* is ***not likely***. 
+
+![](img/Aspose.Words.4a7902ec-8cd5-4a8a-8fd6-fd6c219b0c9f.002.png)
+
+***Figure 2.** Example of how information from the linear regression and GAMM can be used to identify guideline exceedances and trends.*
+
+Importantly, the projection period should not exceed the length of the data record used to estimate a statistical trend or baseline period (e.g., if a 20-year monitoring period is available, the projections should not extend more than 20 years into the future). However, the Drinking Water Source Protection Plan policies are interested in projecting concentrations to 2040. Unfortunately, the data record is not long enough for some wells to project to 2040 with confidence. Although these projections are provided, they are assigned a confidence score. Where the existing data record is shorter than how far into the future the projections are made, it is assigned a ‘***low confidence***’. When the existing data record is as long or exceeds how far into the future the projections are made, this is assigned a ‘***moderate confidence***’.
+
+## Application of statistical analysis and data requirements  
+
+Groundwater chemistry data is analyzed for sixty-six municipal production wells across six regional municipalities in the CTC Source Protection Region. Monitoring duration was highly variable, ranging from a low of one year and up to thirty-eight years. For each well, groundwater samples were collected multiple times during each monitoring year, ranging from one to fifty-four times in any given year.
+
+To be included in the analyses the data had to meet the following conditions: 
+
+- Include more than two discrete values (i.e., could not be all 0 with one different value).
+- Contain a minimum of at least four years of uninterrupted monitoring data. If a 2-year gap in monitoring was present, the monitoring period post gap had to be a minimum of four years.
+- Contain no unreliable values, such as extreme outliers that were likely due to data entry, lab, sampling, or other anthropogenic errors. 
+
+The data records that did not meet the requirements were for two main reasons: 
+
+1. large data gaps, or 
+1. samples all had the same concentrations and were therefore below the detection limit. 
+
+To run the monthly GAMM, a minimum of ten months of data per year were required across the monitoring period.
+
+## Annual trends and projections
+
+The purpose of any trend analysis is to identify and quantify trends in a parameter of interest, after controlling for the many potential sources of variability in a dataset. This will show whether conditions are improving or deteriorating. Besides identifying how conditions are changing over time, some approaches can be used to identify if the parameter of interest is responding to the implementation of management measures or conservation actions. 
+
+Parameter concentrations in each of the wells were compared to the applicable ODWQS objectives, to determine if concentrations exceed the objectives in both the most recent year of data and into the future. For the most recent year of data, this was done by simply reporting whether the median concentration values for that year exceeds the objectives. 
+
+Statistical tests were used to plot trends in groundwater chemistry as a visual aid (**Figure 3**). Annual trends over the monitoring period are produced using GAMM to show periods of increase and decrease. Monthly plots are produced to compare across two years – the first and last year of the monitoring period with a full data record. Lastly, projection plots show groundwater chemistry trends and evaluate the likelihood of exceeding the ODWQS objective in the future. By extending the trend lines into the future using slope estimates from each of the models (GAMM and linear regression), predictions can be made as to whether parameter concentrations are likely to exceed the objectives by a defined period.   
+
+![](img/Aspose.Words.4a7902ec-8cd5-4a8a-8fd6-fd6c219b0c9f.003.png)
+
+***Figure 3**. Examples of trend plots derived from GAMM analysis. A) annual non-monotonic trends where periods of increase are bolded in red, and periods of decrease are bolded in green. B) monthly variation in groundwater chemistry concentrations in the first and last year of the monitoring period. C) projections of parameter concentrations to 2040 based on linear regression and GAMM.*  
+
+To be included in the trend analysis, a well needed to have at least four years of monitoring data. Tests were run on individual wells using the full continuous data record available, unless there were large monitoring gaps present. If gaps exceeded two years in duration, only the data after the gap were analyzed.
+
+# Results
+
+Statistical tests and trend analysis using the GAMM method were completed on chloride, sodium, and nitrate data from sixty-six municipal production wells across six regional municipalities in the CTC Source Protection Region. 
+
+**Download** annual and projection trend analysis plots for the sixty-six municipal production wells in the CTC Source Protection Region (`make this a hyperlink to the plots`). Example provided below.
+
+![](img/Aspose.Words.4a7902ec-8cd5-4a8a-8fd6-fd6c219b0c9f.004.png)
+
+**Tabular** form here (`make this a hyperlink to the spreadsheet`). Example provided below.  
+
+![](img/Aspose.Words.4a7902ec-8cd5-4a8a-8fd6-fd6c219b0c9f.005.png)
+
+For the **detailed methodology** applied to produce the plots, please refer to the CTC Source Protection Region Water Quality Assessment Report (`make this a hyperlink to a pdf. of the report`). 
+
+Maps providing an overview of the status and trend results for the sixty-six municipal production wells are presented below. In all the figures, the term Maximum Acceptable Concentration (MAC) and ODWQS refer to the same threshold and are interchangeable.
+
+
+# Maps
+
+Status of each well in reference to the applicable half-Maximum Allowable Concentration and ODWQS objectives based on the most recent year of data. Hover over any point to reveal municipal well properties, click for more details. 
+
+`Insert map here `
+
+## Trends (last five years)
+
+`Insert map here (show increasing, decreasing, no trend)`
+
+
+# References
+
+Credit Valley Source Protection Authority. 2023. CTC Source Protection Region Water Quality Assessment Technical Report. October 25, 2023.
+
+Clean Water Act, S.O. 2006, c. [22], (2006). 
+
+Ministry of Environment (MOE). (2006). Technical support document for Ontario drinking water standards, objectives, and guidelines. 
