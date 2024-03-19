@@ -47,6 +47,10 @@ external/
 html/
 old/
 pkl/
+shp/
+orig/
+dat/
+img/
 rosm.cache/
 *.rar
 *.pkl

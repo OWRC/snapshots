@@ -38,7 +38,7 @@ for ln in tqdm(lns):
     # plt.show()
     plt.savefig('pkl/outliers/{}.pdf'.format(iid), bbox_inches='tight')
     plt.close() 
-    break   
+    # break   
 
 #     pdf.savefig(fig)
 #     plt.clf()

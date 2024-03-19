@@ -6,7 +6,7 @@ from PyPDF2 import PdfMerger, PdfReader
 mergedObject = PdfMerger()
 
 
-indir = 'E:/Sync/@dev/pages_owrc/snapshots-private/gwvar'
+indir = 'E:/Sync/@owrc/pages/snapshots/private/gwvar/pkl/outliers' # 'E:/Sync/@dev/pages_owrc/snapshots-private/gwvar'
 
 def getFromDir(d):
     l = []
@@ -15,7 +15,7 @@ def getFromDir(d):
             l.append(os.path.join(d, f))
     return l
 
-for fp in getFromDir(indir+'/pkl'):
+for fp in getFromDir(indir): #(indir+'/pkl'):
     print(fp)
     mergedObject.append(PdfReader(fp, 'rb'))
  
