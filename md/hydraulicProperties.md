@@ -5,7 +5,7 @@ output: html_document
 ---
 
 
-The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosity, specific capacity, storativity, transmissivity, hydraulic conductivity) into the program's database. To date, activities have focussed on collation of hydraulic conductivity (K) and specific capacity (SC) estimates. The specific capacity estimates are being extended into estimates of transmissivity (T) and hydraulic conductivity (K) utilizing the methodology of Bradbury and Rothschild (1985). Further information of methodology is included in the [program's database manual](https://owrc.github.io/database-manual/Contents/TOC.html).
+The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosity, specific capacity, storativity, transmissivity, hydraulic conductivity) into the program's database. To date, activities have focussed on collation of hydraulic conductivity (K) and specific capacity (SC) estimates. Further information on the use of water well specific capacity tests to estimate transmissivity and hydraulic conductivity can be found in Theis et al. (1963), Walton (1970), Bradbury and Rothschild (1985), Domenico and Schwartz (1990), Richard et al. (2016), and Priebe et al. (2018). For the ORMGP study area, the specific capacity estimates are being extended into estimates of transmissivity (T) and hydraulic conductivity (K) utilizing the methodology of Bradbury and Rothschild (1985). Further information of methodology is included in the [program's database manual](https://owrc.github.io/database-manual/Contents/TOC.html).
 
 
 1. K_MS - estimates of hydraulic conductivity (K) from slug tests on piezometers/wells (Units = m/s). Locations with K estimates from slug test analysis are shown on Figure 1;
@@ -56,4 +56,14 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 
 # References
 
-Bradbury, K.R., and Rothschild, E.R. 1985. A computerized technique for estimating the hydraulic conductivity of aquifers from specific capacity data. Ground Water, 23(2), 240-246
+Bradbury, K.R., and Rothschild, E.R. 1985. A computerized technique for estimating the hydraulic conductivity of aquifers from specific capacity data. Ground Water, 23(2), 240-246.
+
+Domenico, P.A., and Schwartz, F.W. 1990. Physical and Chemical Hydrogeology. John Wley & Sons, Inc., 824p.
+
+Priebe, E.H., Neville, C.J., and Rudolph, D.L. 2018. Enhancing the spatial coverage of a regional high-quality hydraulic conductivity dataset with estimates made from domestic water-well specific-capacity tests. Hydrogeology Journal, 26, 395-405.
+
+Richard, S.K., Chesnaux, R., Rouleau, A., and Coupe, R.H. 2015. Estimating the reliability of aquifer transmissivity obtained from specific capacity tests: examples from the Saguenay-Lac-Saint-Jean aquifers, Canada. Hydrological Sciences Journal, 61(1), 173-185.
+
+Theis, C.V., Brown, R.H., and Meyer, R.R. 1963. Estimating the transmissivity of aquifers from the specific capacity of wells. In R. Bental (compiler), Methods of determining permeability, transmissivity, and drawdown. U.S. Geological Survey Water-Supply Paper 1536-I, p331-341.
+
+Walton, W.C. 1970. Groundwater Resource Evaluation. McGraw-Hill Book Company. 664p.
