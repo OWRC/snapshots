@@ -42,10 +42,10 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 * [**Annual climate summary**](md/met-annuals.html)
 * [**Automated Hydrograph Separation**](md/baseflow-piechart.html)
 
-### Chemistry
+### Water Quality
 * [**Chlorides**](md/chem-chloride.html)
 * [**Isotopes**](md/chem-isotopes.html)
-
+* [**Municipal Well Water Quality Status**](ctc/MunicipalWellWaterQualityStatus.html) (in partnership with [CTC Source Protection](https://www.ctcswp.ca/))
 
 ## Numerical model outputs
 * [**Particle tracking**](/interpolants/modelling/particleTracking/)
