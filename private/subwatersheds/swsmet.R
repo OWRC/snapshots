@@ -8,7 +8,7 @@ library(sf)
 sf_use_s2(FALSE)
 
 sws <- st_read("https://raw.githubusercontent.com/OWRC/geojson/main/PDEM-South-D2013-OWRC23-60-HC-sws10-simpl.geojson")
-sws.met <- read.csv("M:/FEWS2023/scripts/ncBasinToGob/binToSWSsummary.csv")
+sws.met <- read.csv("M:/FEWS2023/scripts/ncBasinToGob-historic/binToSWSsummary.csv")
 
 sws.cent.sf <- sws %>% 
   st_transform(4236) %>%
@@ -40,7 +40,7 @@ m <- leaflet(sws) %>%
   addPolygons(
     color = "black",
     fillColor = ~pal(pr),
-    fillOpacity = 1,
+    fillOpacity = .8,
     weight = 1,
     label = ~paste0(round(pr,0),'mm/yr'),
     popup = ~paste0('<b>sub-watershed: ',oid,'</b>',
@@ -58,7 +58,7 @@ m <- leaflet(sws) %>%
                     '<br><a href="https://owrc.shinyapps.io/shyMetDS/?lat=',lat,'&lng=',lng,'"  target="_blank">open climate data service</a>'
     ),
     highlightOptions = highlightOptions(
-      opacity = 1, fillOpacity = .8, color='yellow', weight = 5, bringToFront = TRUE
+      opacity = 1, fillOpacity = .4, color='yellow', weight = 5, bringToFront = TRUE
     ) 
   ) %>%  
   addLegend("topright", pal = pal, values = ~pr, #c(0,1000), #
