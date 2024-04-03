@@ -65,6 +65,7 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 <br>
 
 *Table 1: Summary distribution statistics of conductivity (m/s).*
+
 | Formation | estimate | n | mean | geomean | median |
 |---|---:|---:|---:|---:|---:|
 | Late Stage Glaciolacustrine-Glaciofluvial | KSC_SCR_MS | 12697 | 1.11E-03 | 1.19E-04 | 1.52E-04 |
