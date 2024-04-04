@@ -42,15 +42,10 @@ m <- df %>% leaflet()  %>%
                  title = 'Specific Capacity (L/min/m)', orientation = 'horizontal', labelStyle = "",
                  width = sizes, height = sizes, position = 'bottomright') %>%
   
-  addTiles(attribution = '<a href="https://www.oakridgeswater.ca/" target="_blank" rel="noopener noreferrer"><b>Oak Ridges Moraine Groundwater Program</b></a>') %>%
-  addTiles(attribution = '<a href="https://owrc.github.io/snapshots/md/hydraulicProperties.html" target="_blank" rel="noopener noreferrer"><b>README</b></a>') %>%
-  
-  addTiles(group='Open StreetMap') %>% # OpenStreetMap by default
-  # addProviderTiles(providers$OpenTopoMap, group='Open TopoMap', options = providerTileOptions(attribution=" Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)")) %>%
-  # addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite", options = providerTileOptions(attribution=" Map tiles by Stamen Design, CC BY 3.0 — Map data © OpenStreetMap contributors")) %>%
+  addTiles(attribution = '<a href="https://owrc.github.io/snapshots/md/hydraulicProperties.html" target="_blank" rel="noopener noreferrer"><b>README</b></a> © <a href="https://www.oakridgeswater.ca/" target="_blank" rel="noopener noreferrer"><b>Oak Ridges Moraine Groundwater Program</b></a>') %>%
   
   addFullscreenControl() %>%
-  addMouseCoordinates() %>%
+  # addMouseCoordinates() %>%
   addCircleMarkers(layerId = ~INT_ID,
                    lng = ~LONG, lat = ~LAT,
                    radius = ~SC_CAT,
@@ -63,10 +58,10 @@ m <- df %>% leaflet()  %>%
   setView(lng = -78.7, lat = 44.2, zoom = 12) %>%
   addLayersControl(
     # baseGroups = c("Open StreetMap", "Open TopoMap", "Toner Lite"),
-    overlayGroups = layers_ordered,
+    overlayGroups = layers.ordered,
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
-  # hideGroup(layers_ordered[-2]) %>%
+  # hideGroup(layers.ordered[-2]) %>%
   htmlwidgets::onRender("
         function() {
             $('.leaflet-control-layers-base').prepend('<label style=\"text-align:center\"><b>Formation</b></label>');
@@ -74,4 +69,4 @@ m <- df %>% leaflet()  %>%
     ")
 
 
-htmlwidgets::saveWidget(m, file="ycdb-hydraulic-properties/hydraulicproperties-se.html")
+htmlwidgets::saveWidget(m, file="hydraulicproperties-se.html")

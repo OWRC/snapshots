@@ -42,18 +42,13 @@ symbols <- Map(makeSymbol, shape = 'circle', width = sizes,
 
 m <- df %>% leaflet()  %>%
   addLegendImage(images = symbols, labels = breaks,
-                 title = 'Hydraulic Conductivity log(m/s)', orientation = 'horizontal', labelStyle = "",
+                 title = 'Hydraulic Conductivity (m/s)', orientation = 'horizontal', labelStyle = "",
                  width = sizes, height = sizes, position = 'bottomright') %>%
   
-  addTiles(attribution = '<a href="https://www.oakridgeswater.ca/" target="_blank" rel="noopener noreferrer"><b>Oak Ridges Moraine Groundwater Program</b></a>') %>%
-  addTiles(attribution = '<a href="https://owrc.github.io/snapshots/md/hydraulicProperties.html" target="_blank" rel="noopener noreferrer"><b>README</b></a>') %>%
-  
-  addTiles(group='Open StreetMap') %>% # OpenStreetMap by default
-  # addProviderTiles(providers$OpenTopoMap, group='Open TopoMap', options = providerTileOptions(attribution=" Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)")) %>%
-  # addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite", options = providerTileOptions(attribution=" Map tiles by Stamen Design, CC BY 3.0 — Map data © OpenStreetMap contributors")) %>%
+  addTiles(attribution = '<a href="https://owrc.github.io/snapshots/md/hydraulicProperties.html" target="_blank" rel="noopener noreferrer"><b>README</b></a> © <a href="https://www.oakridgeswater.ca/" target="_blank" rel="noopener noreferrer"><b>Oak Ridges Moraine Groundwater Program</b></a>') %>%
   
   addFullscreenControl() %>%
-  addMouseCoordinates() %>%
+  # addMouseCoordinates() %>%
   addCircleMarkers(layerId = ~INT_ID,
                    lng = ~LONG, lat = ~LAT,
                    radius = ~K_CAT,
@@ -65,11 +60,11 @@ m <- df %>% leaflet()  %>%
                    popup = ~paste0(LOC_NAME,': ', LOC_NAME_ALT1,'<br>',FORMATION)) %>%
   setView(lng = -79, lat = 44, zoom = 9) %>%
   addLayersControl(
-    overlayGroups = layers_ordered,
+    overlayGroups = layers.ordered,
     # baseGroups = c("Open StreetMap", "Open TopoMap", "Toner Lite"),
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
-  # hideGroup(layers_ordered[-2]) %>%
+  # hideGroup(layers.ordered[-2]) %>%
   htmlwidgets::onRender("
         function() {
             $('.leaflet-control-layers-base').prepend('<label style=\"text-align:center\"><b>Formation</b></label>');
@@ -77,4 +72,4 @@ m <- df %>% leaflet()  %>%
     ")
 
 
-htmlwidgets::saveWidget(m, file="ycdb-hydraulic-properties/hydraulicproperties-k.html")
+htmlwidgets::saveWidget(m, file="hydraulicproperties-k.html")

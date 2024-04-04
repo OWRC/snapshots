@@ -2,7 +2,6 @@
 
 library(ggplot2)
 library(scales)
-library(dplyr)
 library(formatdown)
 
 
@@ -62,15 +61,15 @@ ggplot() +
   
   ## slow, comment-out when debugging
   geom_point(data = ddf(KSC_SCR_MS),
-             aes(x,y, colour=paste0("KSC_SCR_MS (n=",format(length(KSC_SCR_MS),big.mark=",",scientific=FALSE),")")),
+             aes(x,y, colour=paste0("KSC_SCR (n=",format(length(KSC_SCR_MS),big.mark=",",scientific=FALSE),")")),
              alpha=.1) +
   geom_point(data = ddf(KSC_MS),
-             aes(x,y, colour=paste0("KSC_MS (n=",format(length(KSC_MS),big.mark=",",scientific=FALSE),")")),
+             aes(x,y, colour=paste0("KSC (n=",format(length(KSC_MS),big.mark=",",scientific=FALSE),")")),
              alpha=.1) +
   geom_point(data = ddf(K_MS_AQT),
-             aes(x,y, colour=paste0("K_MS (aquitard, n=",format(length(K_MS_AQT),big.mark=",",scientific=FALSE),")"))) +
+             aes(x,y, colour=paste0("K (aquitard, n=",format(length(K_MS_AQT),big.mark=",",scientific=FALSE),")"))) +
   geom_point(data = ddf(K_MS_AQF),
-             aes(x,y, colour=paste0("K_MS (aquifer, n=",format(length(K_MS_AQF),big.mark=",",scientific=FALSE),")"))) +
+             aes(x,y, colour=paste0("K (aquifer, n=",format(length(K_MS_AQF),big.mark=",",scientific=FALSE),")"))) +
 
   
   geom_smooth(data = ddf(KSC_SCR_MS), aes(x,y), method="lm", colour='black', linetype='dotted',se = FALSE) +
@@ -97,4 +96,4 @@ ggplot() +
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 
 
-ggsave("md/hydraulicProperties-ggplot-k.png", height=6, width=6, units = "in", dpi="retina")
+ggsave("../../md/hydraulicProperties-ggplot-k.png", height=6, width=6, units = "in", dpi="retina")

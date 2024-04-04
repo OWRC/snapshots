@@ -1,26 +1,9 @@
 
-library(dplyr)
 library(ggplot2)
-library(stringr)
 library(scales)
 library(tidyr)
 
-layers.ordered <- c(
-  "Late Stage Glaciolacustrine-Glaciofluvial",
-  "Halton Till",
-  "Mackinaw/Oak Ridges",
-  "Channel - Silt",
-  "Channel - Sand",
-  "Upper Newmarket",
-  "Inter Newmarket Sediment",
-  "Lower Newmarket",
-  "Newmarket Till/Northern Till",
-  "Thorncliffe",
-  "Sunnybrook",
-  "Scarborough",
-  "Bedrock - Undifferentiated",
-  "unknown"
-)
+
 
 # layer.cols <- c("#cb4f31", "#52c274", "#c25abc", "#65af3a", "#7a67ca", "#b6b138", "#6b8fce", "#d79139", "#4cbdaf", "#d1416d", "#447f47", "#bc6990", "#a0b26a", "#c77a5c")
 
@@ -43,6 +26,31 @@ layers.ordered <- c(
 #     scale_x_discrete(position = 'top')
 
 
+
+# From: https://stackoverflow.com/questions/35717353/split-violin-plot-with-ggplot2
+GeomSplitViolin <- ggproto("GeomSplitViolin", GeomViolin, 
+                           draw_group = function(self, data, ..., draw_quantiles = NULL) {
+                             data <- transform(data, xminv = x - violinwidth * (x - xmin), xmaxv = x + violinwidth * (xmax - x))
+                             grp <- data[1, "group"]
+                             newdata <- plyr::arrange(transform(data, x = if (grp %% 2 == 1) xminv else xmaxv), if (grp %% 2 == 1) y else -y)
+                             newdata <- rbind(newdata[1, ], newdata, newdata[nrow(newdata), ], newdata[1, ])
+                             newdata[c(1, nrow(newdata) - 1, nrow(newdata)), "x"] <- round(newdata[1, "x"])
+                             
+                             if (length(draw_quantiles) > 0 & !scales::zero_range(range(data$y))) {
+                               stopifnot(all(draw_quantiles >= 0), all(draw_quantiles <=
+                                                                         1))
+                               quantiles <- ggplot2:::create_quantile_segment_frame(data, draw_quantiles)
+                               aesthetics <- data[rep(1, nrow(quantiles)), setdiff(names(data), c("x", "y")), drop = FALSE]
+                               aesthetics$alpha <- rep(1, nrow(quantiles))
+                               both <- cbind(quantiles, aesthetics)
+                               quantile_grob <- GeomPath$draw_panel(both, ...)
+                               ggplot2:::ggname("geom_split_violin", grid::grobTree(GeomPolygon$draw_panel(newdata, ...), quantile_grob))
+                             }
+                             else {
+                               ggplot2:::ggname("geom_split_violin", GeomPolygon$draw_panel(newdata, ...))
+                             }
+                           })
+
 geom_split_violin <- function(mapping = NULL, data = NULL, stat = "ydensity", position = "identity", ..., 
                               draw_quantiles = NULL, trim = TRUE, scale = "area", na.rm = FALSE, 
                               show.legend = NA, inherit.aes = TRUE) {
@@ -60,6 +68,7 @@ df.full %>%
   
   select(c(FORMATION, K_MS, KSC_SCR_MS)) %>%
   gather("est", "k", -FORMATION) %>%
+  mutate(est = str_replace(est, '_MS', '')) %>%
   drop_na() %>%
   
   ggplot(aes(FORMATION, k, fill=est)) +
@@ -77,7 +86,7 @@ df.full %>%
     scale_x_discrete(position = 'top')
 
 
-ggsave("md/hydraulicProperties-ggplot-k-violin.png", height=6, width=6, units = "in", dpi="retina")
+ggsave("../../md/hydraulicProperties-ggplot-k-violin.png", height=6, width=6, units = "in", dpi="retina")
 
 
 
@@ -93,10 +102,12 @@ df.full %>%
   
   select(c(FORMATION, K_MS, KSC_SCR_MS)) %>%
   gather("est", "k", -FORMATION) %>%
+  mutate(est = str_replace(est, '_MS', '')) %>%
+  drop_na() %>%
 
   group_by(FORMATION,est) %>%
   summarise(n=n(), 
-              mean=mean(k, na.rm=TRUE), 
-              geomean=exp(mean(log(k), na.rm=TRUE)), 
-              median=median(k, na.rm=TRUE)) 
+            mean=mean(k, na.rm=TRUE), 
+            geomean=exp(mean(log(k), na.rm=TRUE)), 
+            median=median(k, na.rm=TRUE)) 
 )

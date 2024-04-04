@@ -1,4 +1,6 @@
 
+library(dplyr)
+library(stringr)
 
 
 q <- "SELECT L.LOC_ID, INT_ID, LOC_NAME, LOC_NAME_ALT1, LAT, LONG, FORMATION, GEOL_UNIT_CODE, SCREEN_TOP_DEPTH_M, WL_AVG_TOTAL_NUM, WL_START_DATE_MDY, WL_END_DATE_MDY, 
@@ -16,11 +18,11 @@ q <- "SELECT L.LOC_ID, INT_ID, LOC_NAME, LOC_NAME_ALT1, LAT, LONG, FORMATION, GE
                   				WHERE LAT IS NOT NULL
                   			) AS C ON L.LOC_ID = C.LOC_ID"
 
-df.full <- dbGetQuery(con,q)
+df.full <- dbGetQuery(con,q) %>%
+  mutate(FORMATION = str_replace(FORMATION, ' \\(ORMGP\\)', ''))
 
 # WHERE WL_AVG_TOTAL_NUM>34
 # AND WL_START_DATE_MDY != 'NA'
-
 
 df.full$FORMATION[is.na(df.full$FORMATION)] <- "unknown"
 df.full$FORMATION = as.factor(df.full$FORMATION)
@@ -28,20 +30,20 @@ df.full$LOC_NAME_ALT1 <- iconv( x = df.full$LOC_NAME_ALT1, from = "UTF-8", to = 
 levels(df.full$FORMATION)
 
 
-layers_ordered <- c(
-  "Late Stage Glaciolacustrine-Glaciofluvial (ORMGP)",
+layers.ordered <- c(
+  "Late Stage Glaciolacustrine-Glaciofluvial",
   "Halton Till",
-  "Mackinaw/Oak Ridges (ORMGP)",
-  "Channel - Silt (ORMGP)",
-  "Channel - Sand (ORMGP)",
-  "Upper Newmarket (ORMGP)",
-  "Inter Newmarket Sediment (ORMGP)",
-  "Lower Newmarket (ORMGP)",
+  "Mackinaw/Oak Ridges",
+  "Channel - Silt",
+  "Channel - Sand",
+  "Upper Newmarket",
+  "Inter Newmarket Sediment",
+  "Lower Newmarket",
   "Newmarket Till/Northern Till",
-  "Thorncliffe (ORMGP)",
-  "Sunnybrook (ORMGP)",
-  "Scarborough (ORMGP)",
-  "Bedrock - Undifferentiated (ORMGP)",
+  "Thorncliffe",
+  "Sunnybrook",
+  "Scarborough",
+  "Bedrock - Undifferentiated",
   "unknown"
 )
 
@@ -50,5 +52,5 @@ aquifer.GEOL_UNIT_CODE <- c(3,5,12,59,65)
 pal <- leaflet::colorFactor(
   palette = c("#cb4f31", "#52c274", "#c25abc", "#65af3a", "#7a67ca", "#b6b138", "#6b8fce", "#d79139", "#4cbdaf", "#d1416d", "#447f47", "#bc6990", "#a0b26a", "#c77a5c", "#7e7029"),
   # domain = df$FORMATION
-  levels = layers_ordered
+  levels = layers.ordered
 )

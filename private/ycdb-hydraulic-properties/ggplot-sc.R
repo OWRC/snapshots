@@ -2,7 +2,6 @@
 
 library(ggplot2)
 library(scales)
-library(dplyr)
 
 
 SPEC_CAP_M2S <- df.full %>% filter(!is.na(SPEC_CAP_LPMM)) %>% mutate(SPEC_CAP_M2S = SPEC_CAP_LPMM/1000/60 ) %>% pull(SPEC_CAP_M2S)
@@ -44,13 +43,13 @@ ggplot() +
         legend.background = element_rect(colour='black', linewidth=0.1)) +
    
   geom_point(data = ddf(TSC_M2S),
-             aes(x,y, colour=paste0("TSC_M2S (n=",format(length(TSC_M2S),big.mark=",",scientific=FALSE),")")),
+             aes(x,y, colour=paste0("TSC (n=",format(length(TSC_M2S),big.mark=",",scientific=FALSE),")")),
              alpha=.1) +
   geom_point(data = ddf(TSC_SCR_M2S),
-             aes(x,y, colour=paste0("TSC_SCR_M2S (n=",format(length(TSC_SCR_M2S),big.mark=",",scientific=FALSE),")")),
+             aes(x,y, colour=paste0("TSC_SCR (n=",format(length(TSC_SCR_M2S),big.mark=",",scientific=FALSE),")")),
              alpha=.1) +
   geom_point(data = ddf(SPEC_CAP_M2S),
-             aes(x,y, colour=paste0("SPEC_CAP_M2S (n=",format(length(SPEC_CAP_M2S),big.mark=",",scientific=FALSE),")")),
+             aes(x,y, colour=paste0("SPEC_CAP (n=",format(length(SPEC_CAP_M2S),big.mark=",",scientific=FALSE),")")),
              alpha=.1) +
   
   geom_smooth(data = ddf(TSC_M2S), aes(x,y), method="lm", colour='black', linetype='dotted',se = FALSE) +
@@ -74,4 +73,4 @@ ggplot() +
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 
 
-ggsave("md/hydraulicProperties-ggplot-sc.png", height=6, width=6, units = "in", dpi="retina")
+ggsave("../../md/hydraulicProperties-ggplot-sc.png", height=6, width=6, units = "in", dpi="retina")
