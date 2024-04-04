@@ -68,30 +68,31 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 
 | Formation | estimate | n | mean | geomean | median |
 |---|---:|---:|---:|---:|---:|
-| Late Stage Glaciolacustrine-Glaciofluvial | KSC_SCR_MS | 12697 | 1.11E-03 | 1.19E-04 | 1.52E-04 |
-|  | K_MS | 12697 | 2.45E-05 | 1.16E-06 | 2.15E-06 |
-| Halton Till | KSC_SCR_MS | 23564 | 1.24E-03 | 3.23E-04 | 3.73E-04 |
-|  | K_MS | 23564 | 1.54E-05 | 2.42E-08 | 2.00E-08 |
-| Mackinaw/Oak Ridges | KSC_SCR_MS | 32684 | 6.59E-04 | 1.57E-04 | 1.53E-04 |
-|  | K_MS | 32684 | 1.70E-04 | 5.43E-06 | 6.70E-06 |
-| Channel - Silt | KSC_SCR_MS | 1643 | 5.68E-04 | 1.30E-04 | 1.21E-04 |
-|  | K_MS | 1643 | 9.48E-06 | 5.66E-07 | 1.09E-06 |
-| Channel - Sand | KSC_SCR_MS | 1850 | 6.00E-04 | 1.24E-04 | 9.88E-05 |
-|  | K_MS | 1850 | 4.67E-05 | 5.53E-06 | 1.85E-05 |
-| Upper Newmarket | KSC_SCR_MS | 23326 | 7.50E-04 | 2.00E-04 | 1.93E-04 |
-|  | K_MS | 23326 | 1.02E-05 | 3.27E-07 | 3.40E-07 |
-| Inter Newmarket Sediment | KSC_SCR_MS | 8929 | 9.74E-04 | 2.12E-04 | 2.09E-04 |
-|  | K_MS | 8929 | 4.01E-04 | 3.54E-06 | 1.00E-06 |
-| Lower Newmarket | KSC_SCR_MS | 29818 | 8.81E-04 | 2.10E-04 | 2.20E-04 |
-|  | K_MS | 29818 | 1.83E-04 | 4.41E-07 | 7.70E-07 |
-| Thorncliffe | KSC_SCR_MS | 23417 | 6.43E-04 | 1.08E-04 | 1.01E-04 |
-|  | K_MS | 23417 | 6.04E-04 | 1.83E-05 | 3.31E-05 |
-| Sunnybrook | KSC_SCR_MS | 11916 | 4.62E-04 | 1.07E-04 | 1.06E-04 |
-|  | K_MS | 11916 | 9.11E-07 | 9.11E-07 | 9.11E-07 |
-| Scarborough | KSC_SCR_MS | 19606 | 6.90E-04 | 1.10E-04 | 1.16E-04 |
-|  | K_MS | 19606 | 3.51E-04 | 2.39E-05 | 9.16E-05 |
-| Bedrock - Undifferentiated | KSC_SCR_MS | 116295 | 5.33E-04 | 1.69E-05 | 1.72E-05 |
-|  | K_MS | 116295 | 2.23E-05 | 7.05E-07 | 1.00E-06 |
+| Late Stage Glaciolacustrine-Glaciofluvial | KSC_SCR_MS | 12697 | 1.11E-03 | 1.2E-04 | 1.5E-04 |
+|  | K_MS | 12697 | 2.45E-05 | 1.2E-06 | 2.1E-06 |
+| Halton Till | KSC_SCR_MS | 23564 | 1.24E-03 | 3.2E-04 | 3.7E-04 |
+|  | K_MS | 23564 | 1.54E-05 | 2.4E-08 | 2.0E-08 |
+| Mackinaw/Oak Ridges | KSC_SCR_MS | 32684 | 6.59E-04 | 1.6E-04 | 1.5E-04 |
+|  | K_MS | 32684 | 1.70E-04 | 5.4E-06 | 6.7E-06 |
+| Channel - Silt | KSC_SCR_MS | 1643 | 5.68E-04 | 1.3E-04 | 1.2E-04 |
+|  | K_MS | 1643 | 9.48E-06 | 5.7E-07 | 1.1E-06 |
+| Channel - Sand | KSC_SCR_MS | 1850 | 6.00E-04 | 1.2E-04 | 9.9E-05 |
+|  | K_MS | 1850 | 4.67E-05 | 5.5E-06 | 1.9E-05 |
+| Upper Newmarket | KSC_SCR_MS | 23326 | 7.50E-04 | 2.0E-04 | 1.9E-04 |
+|  | K_MS | 23326 | 1.02E-05 | 3.3E-07 | 3.4E-07 |
+| Inter Newmarket Sediment | KSC_SCR_MS | 8929 | 9.74E-04 | 2.1E-04 | 2.1E-04 |
+|  | K_MS | 8929 | 4.01E-04 | 3.5E-06 | 1.0E-06 |
+| Lower Newmarket | KSC_SCR_MS | 29818 | 8.81E-04 | 2.1E-04 | 2.2E-04 |
+|  | K_MS | 29818 | 1.83E-04 | 4.4E-07 | 7.7E-07 |
+| Thorncliffe | KSC_SCR_MS | 23417 | 6.43E-04 | 1.1E-04 | 1.0E-04 |
+|  | K_MS | 23417 | 6.04E-04 | 1.8E-05 | 3.3E-05 |
+| Sunnybrook | KSC_SCR_MS | 11916 | 4.62E-04 | 1.1E-04 | 1.1E-04 |
+|  | K_MS | 11916 | 9.11E-07 | 9.1E-07 | 9.1E-07 |
+| Scarborough | KSC_SCR_MS | 19606 | 6.90E-04 | 1.1E-04 | 1.2E-04 |
+|  | K_MS | 19606 | 3.51E-04 | 2.4E-05 | 9.2E-05 |
+| Bedrock - Undifferentiated | KSC_SCR_MS | 116295 | 5.33E-04 | 1.7E-05 | 1.7E-05 |
+|  | K_MS | 116295 | 2.23E-05 | 7.1E-07 | 1.0E-06 |
+
 
 
 
