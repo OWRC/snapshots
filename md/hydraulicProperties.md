@@ -60,7 +60,7 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 
 ![](hydraulicProperties-ggplot-k-violin.png)
 
-*Figure 5: Distribution of conductivities by formation. Upper distribution KSC; Lower distribution KSC_SCR*
+*Figure 5: Distribution of hydraulic conductivity (m/s) by formation. Upper distribution (KSC_SCR) is hydraulic conductivity estimate from specific capacity utilizing the screen length as the aquifer thickness. The lower distribution (K) is hydraulic conductivity estimates from slug testing. Note that many of the KSC_SCR estimates in the figure apply to aquitard formations (e.g., Lower Newmarket Till). The ORMGP classifies screens according to formation by comparing screen elevation to the latest geologic model interpretation. KSC_SCR estimates for aquitard formations are treated as part of the program's QA/QC process which includes testing the 3D geologic unit interpretation. Specific capacity estimates are from water well testing at the time of well completion. While heterogeneities exist within study area aquitards, it is considered low probability that domestic water wells will be installed within aquitards. Areas with KSC_SCR estimates for aquitard formations are subject to further inspection and refinement of the 3D geologic/hydrostratigraphic unit interpretation where necessary.*
 
 <br>
 
