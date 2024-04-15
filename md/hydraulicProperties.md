@@ -5,7 +5,7 @@ output: html_document
 ---
 
 
-The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosity, specific capacity, storativity, transmissivity, hydraulic conductivity) into the program's database. To date, activities have focussed on collation of hydraulic conductivity (K) and specific capacity (SC) estimates. Further information on the use of water well specific capacity tests to estimate transmissivity and hydraulic conductivity can be found in Theis et al. (1963), Walton (1970), Bradbury and Rothschild (1985), Domenico and Schwartz (1990), Richard et al. (2016), and Priebe et al. (2018). For the ORMGP study area, the specific capacity estimates are being extended into estimates of transmissivity (T) and hydraulic conductivity (K) utilizing the methodology of Bradbury and Rothschild (1985). Further information of methodology is included in the [program's database manual](https://owrc.github.io/database-manual/Contents/TOC.html).
+The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosity, specific capacity, storativity, transmissivity, hydraulic conductivity) into the program's database. To date, activities have focussed on collation of hydraulic conductivity (K) and specific capacity (SC) estimates. Further information on the use of water well specific capacity tests to estimate transmissivity and hydraulic conductivity can be found in Theis et al. (1963), Walton (1970), Bradbury and Rothschild (1985), Domenico and Schwartz (1990), Richard et al. (2016), and Priebe et al. (2018). For the ORMGP study area, the specific capacity estimates are being extended into estimates of transmissivity (T) and hydraulic conductivity (K) utilizing the methodology of Bradbury and Rothschild (1985). Further information on methodology is included in the [program's database manual](https://owrc.github.io/database-manual/Contents/TOC.html). Current estimates within the database are as follows:
 
 
 1. K - estimates of hydraulic conductivity (K) from slug tests on piezometers/wells (Units = m/s). Locations with K estimates from slug test analysis are shown on Figure 1;
@@ -14,6 +14,8 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 1. KSC - estimates of hydraulic conductivity (K) from specific capacity (SC) estimates utilizing methodology of Bradbury and Rothschild (1985). Cumulative probability plot of the data shown on Figure 4 (Units = m/s);
 1. TSC_SCR - estimates of Transmissivity (T) from specific capacity (SC) estimates utilizing methodology of Bradbury and Rothschild (1985). The formation thickness is taken as the screen length (Units = m<sup>2</sup>/s; Figure 3); and
 1. KSC_SCR - estimates of hydraulic conductivity (K) from specific capacity (SC) estimates (Figure 4) utilizing methodology of Bradbury and Rothschild (1985). The formation thickness is taken as the screen length (Units = m/s).
+
+A summary of all the current hydraulic conductivity estimates within the ORMGP database is included in Figure 5 and Table 1.
 
 
 
