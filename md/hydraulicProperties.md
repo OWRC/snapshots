@@ -108,3 +108,9 @@ Richard, S.K., Chesnaux, R., Rouleau, A., and Coupe, R.H. 2015. Estimating the r
 Theis, C.V., Brown, R.H., and Meyer, R.R. 1963. Estimating the transmissivity of aquifers from the specific capacity of wells. In R. Bental (compiler), Methods of determining permeability, transmissivity, and drawdown. U.S. Geological Survey Water-Supply Paper 1536-I, p331-341.
 
 Walton, W.C. 1970. Groundwater Resource Evaluation. McGraw-Hill Book Company. 664p.
+
+
+
+<br>
+
+*last commit 2024-04-12*
