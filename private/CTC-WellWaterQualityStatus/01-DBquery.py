@@ -4,7 +4,7 @@ import sqlalchemy
 
 
 dfloclst = pd.read_excel('dat/SampleData Loc from Britt.xlsx')
-cnxn = sqlalchemy.create_engine("mssql+pyodbc://sqlyc-mm:dt82Wa35@cloca_oak_master")
+cnxn = sqlalchemy.create_engine("mssql+pyodbc://sql-webmm:fv62Aq31@cloca_oak_master")
 
 # qry = """SELECT L.LOC_ID, INT_ID, LOC_NAME, LOC_NAME_ALT1, LAT, LONG, Z AS GRND_ELEV, FORMATION, SCREEN_TOP_DEPTH_M
 #         FROM D_LOCATION AS L

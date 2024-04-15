@@ -11,10 +11,8 @@ from pymmio import files
 
 
 
-# import pymssql
-# cnxn = pymssql.connect("sqlserver2k16","sql-webmm","fv62Aq31","OAK_20160831_MASTER")
 import sqlalchemy
-cnxn = sqlalchemy.create_engine("mssql+pyodbc://sqlyc-mm:dt82Wa35@cloca_oak_master")
+cnxn = sqlalchemy.create_engine("mssql+pyodbc://sql-webmm:fv62Aq31@cloca_oak_master")
 
 rootdir = 'E:/Sync/@dev/pages_owrc/snapshots-private/gwvar/'
 
@@ -33,6 +31,7 @@ qloc = """SELECT L.LOC_ID, INT_ID, LOC_NAME, LOC_NAME_ALT1, SCREEN_NAME, LAT, LO
 				WHERE LAT IS NOT NULL
 			) AS C ON L.LOC_ID = C.LOC_ID"""
 dfLoc = pd.read_sql(qloc, cnxn).drop_duplicates()
+# print(dfLoc)
 lname = dict(zip(dfLoc.INT_ID,dfLoc.LOC_NAME))
 sname = dict(zip(dfLoc.INT_ID,dfLoc.SCREEN_NAME))
 depths = dict(zip(dfLoc.INT_ID,dfLoc.SCREEN_TOP_DEPTH_M))

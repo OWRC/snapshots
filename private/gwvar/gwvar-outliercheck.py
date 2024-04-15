@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 
-cnxn = sqlalchemy.create_engine("mssql+pyodbc://sqlyc-mm:dt82Wa35@cloca_oak_master")
+cnxn = sqlalchemy.create_engine("mssql+pyodbc://sql-webmm:fv62Aq31@cloca_oak_master")
 
 
 # # create a PdfPages object
