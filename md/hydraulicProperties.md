@@ -12,7 +12,7 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 1. SPEC_CAP - specific capacity (pumping rate/maximum drawdown) estimates from data obtained during short-term pumping tests (<4 hours) conducted by well drillers following well installation (Units = L/minute/m). Locations with specific capacity (SC) estimates are shown on Figure 3. The cumulative probability plot of the data is shown on Figure 4;
 1. TSC - Transmissivity (T) estimates from specific capacity (SC) estimates according to the methodology of Bradbury and Rothschild (1985) which allows for corrections for partial penetration of well screen and incorporates estimates of formation thickness (Units = m$^2$/s; Figure 4);
 1. KSC - estimates of hydraulic conductivity (K) from specific capacity (SC) estimates utilizing methodology of Bradbury and Rothschild (1985). Cumulative probability plot of the data shown on Figure 5 (Units = m/s);
-1. TSC_SCR - estimates of Transmissivity (T) from specific capacity (SC) estimates utilizing methodology of Bradbury and Rothschild (1985). The formation thickness is taken as the screen length (Units = m<sup>2</sup>/s; Figure 4); and
+1. TSC_SCR - estimates of Transmissivity (T) from specific capacity (SC) estimates utilizing methodology of Bradbury and Rothschild (1985). The formation thickness is taken as the screen length (Units = m$^2$/s; Figure 4); and
 1. KSC_SCR - estimates of hydraulic conductivity (K) from specific capacity (SC) estimates (Figure 5) utilizing methodology of Bradbury and Rothschild (1985). The formation thickness is taken as the screen length (Units = m/s).
 
 A summary of all the current hydraulic conductivity estimates within the ORMGP database is included in Figure 6 and Table 1.
@@ -20,7 +20,7 @@ A summary of all the current hydraulic conductivity estimates within the ORMGP d
 
 ![](hydraulicProperties-REG-hydrostrat-units.png)
 
-*Figure 1: Summary of hydrostratigraphic units within the study area. Quaternary sediments present within the study area represent an alternating glacial-interglacial assemblage with major glaciations occurring approximately 135 190 ka (Illinoian) and 30 10 ka (Late Wisconsinan; Barnett, 1992). Use of the term “complex” denotes variable facies and, by extension, variable hydrogeologic properties within a hydrostratigraphic unit. Use of the term “or equivalent” refers to similar materials and hydraulic properties leading to the possibility of being of hydrostratigraphic (flow property) equivalence.*
+*Figure 1: Summary of hydrostratigraphic units within the study area. Quaternary sediments present within the study area represent an alternating glacial-interglacial assemblage with major glaciations occurring approximately 190-135 ka (Illinoian) and 30-10 ka (Late Wisconsinan; Barnett, 1992). Use of the term “complex” denotes variable facies and, by extension, variable hydrogeologic properties within a hydrostratigraphic unit. Use of the term “or equivalent” refers to similar materials and hydraulic properties leading to the possibility of being of hydrostratigraphic (flow property) equivalence.*
 
 ## Interactive maps
 
