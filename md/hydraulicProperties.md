@@ -17,9 +17,10 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 
 A summary of all the current hydraulic conductivity estimates within the ORMGP database is included in Figure 6 and Table 1.
 
+
 ![](hydraulicProperties-REG-hydrostrat-units.png)
 
-*Figure 1: Summary of hydrostratigraphic units within the study area.*
+*Figure 1: Summary of hydrostratigraphic units within the study area. Quaternary sediments present within the study area represent an alternating glacial-interglacial assemblage with major glaciations occurring approximately 135 190 ka (Illinoian) and 30 10 ka (Late Wisconsinan; Barnett, 1992). Use of the term “complex” denotes variable facies and, by extension, variable hydrogeologic properties within a hydrostratigraphic unit. Use of the term “or equivalent” refers to similar materials and hydraulic properties leading to the possibility of being of hydrostratigraphic (flow property) equivalence.*
 
 ## Interactive maps
 
@@ -101,6 +102,8 @@ A summary of all the current hydraulic conductivity estimates within the ORMGP d
 
 # References
 
+Barnett, P.J. (1992). 21. Quaternary Geology of Ontario. In Thurston, P.C., Williams, H.R., Sutcliffe, R.H., & Stott, G.M. (Eds.), Geology of Ontario, Ontario Geological Survey, Ontario Ministry of Northern Development and Mines, Special Volume 4, Part 2, Chapter 21, 1011–1088. 
+
 Bradbury, K.R., and Rothschild, E.R. 1985. A computerized technique for estimating the hydraulic conductivity of aquifers from specific capacity data. Ground Water, 23(2), 240-246.
 
 Copper, H.H., Jr., Bredehoeft, J.D., and Papadopulos, I.S. 1967. Response of a finite diameter well to an instantaneous charge of water. Water Resources Research, 3(1), 263-269.
@@ -119,4 +122,4 @@ Walton, W.C. 1970. Groundwater Resource Evaluation. McGraw-Hill Book Company. 66
 
 <br>
 
-*last commit 2024-04-15*
+*last commit 2024-04-18*
