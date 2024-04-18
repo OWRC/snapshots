@@ -15,7 +15,7 @@ The ORMGP is actively compiling hydrogeologic parameter estimates (e.g., porosit
 1. TSC_SCR - estimates of Transmissivity (T) from specific capacity (SC) estimates utilizing methodology of Bradbury and Rothschild (1985). The formation thickness is taken as the screen length (Units = m²/s; Figure 4); and
 1. KSC_SCR - estimates of hydraulic conductivity (K) from specific capacity (SC) estimates (Figure 5) utilizing methodology of Bradbury and Rothschild (1985). The formation thickness is taken as the screen length (Units = m/s).
 
-A summary of all the current hydraulic conductivity estimates within the ORMGP database is included in Figure 6 and Table 1.
+A summary of all the current hydraulic conductivity estimates within the ORMGP database is included in Figure 6 and Table 1. Constant testing and refinement of the conceptual model, particularly the 3D geologic interpretation and by extension screen geologic formation assignement, is being conducted by ORMGP staff. This testing and refinement includes data mining of hydraulic paramater estimates included within the program's library of documents.
 
 
 ![](hydraulicProperties-REG-hydrostrat-units.png)
