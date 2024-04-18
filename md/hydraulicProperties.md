@@ -50,13 +50,13 @@ A summary of all the current hydraulic conductivity estimates within the ORMGP d
 
 ![](hydraulicProperties-ggplot-sc.png)
 
-*Figure 4: Cumulative probability plot showing SPEC_CAP, TSC, and TSC_SCR (m²/s).*
+*Figure 4: Cumulative probability plot showing SPEC_CAP, TSC, and TSC_SCR (m²/s). The geometric mean (cumulative probability = 50%) TSC value is approximately an order of magnitude greater than the geometric mean specific capacity (SPEC_CAP) estimates. Utilizing the screen length as the formation thickness leads to derived Tsc_scr values closer to SPEC_CAP estimates with a geometric mean of ~1x10^-4^ m²/s, likely due to heterogeneity within study area formations, particularly in the vertical direction (Cooper et al., 1967).*
 
 <br>
 
 ![](hydraulicProperties-ggplot-k.png)
 
-*Figure 5: Cumulative probability plot showing K, KSC and KSC_SCR (m/s).*
+*Figure 5: Cumulative probability plot showing K (slug tests), KSC and KSC_SCR (m/s). Note that Ksc from specific capacity estimates are generally higher than K estimates from slug tests. This is not surprising given that drillers choose to screen the most permeable interval within an aquifer complex in order to maximize well yield. Hydraulic conductivity estimates from short term pumping tests (<4 hours) will sample a larger aquifer volume than a slug test so therefore have a higher likelihood of accessing higher K sediment if there is heterogeneity, which is typical in glaciated environments.*
 
 
 
