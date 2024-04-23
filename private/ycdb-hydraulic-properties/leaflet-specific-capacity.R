@@ -40,7 +40,7 @@ symbols <- Map(makeSymbol, shape = 'circle', width = sizes,
 m <- df %>% leaflet()  %>%
   addLegendImage(images = symbols, labels = breaks,
                  title = 'Specific Capacity (L/min/m)', orientation = 'horizontal', labelStyle = "",
-                 width = sizes, height = sizes, position = 'bottomright') %>%
+                 width = sizes, height = sizes, position = 'bottomleft') %>%
   
   addTiles(attribution = '<a href="https://owrc.github.io/snapshots/md/hydraulicProperties.html" target="_blank" rel="noopener noreferrer"><b>README</b></a> © <a href="https://www.oakridgeswater.ca/" target="_blank" rel="noopener noreferrer"><b>Oak Ridges Moraine Groundwater Program</b></a>') %>%
   
@@ -55,13 +55,13 @@ m <- df %>% leaflet()  %>%
                    opacity = .5,
                    label = ~paste0("SC: ",round(SPEC_CAP_LPMM,1)," L/min/m"),
                    popup = ~paste0(LOC_NAME,': ', LOC_NAME_ALT1,'<br>',FORMATION)) %>%
-  setView(lng = -78.7, lat = 44.2, zoom = 12) %>%
+  setView(lng = -79.0, lat = 44.0, zoom = 10) %>%
   addLayersControl(
     # baseGroups = c("Open StreetMap", "Open TopoMap", "Toner Lite"),
     overlayGroups = layers.ordered,
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
-  # hideGroup(layers.ordered[-2]) %>%
+  hideGroup(layers.ordered[-9]) %>% # all but Thorncliffe
   htmlwidgets::onRender("
         function() {
             $('.leaflet-control-layers-base').prepend('<label style=\"text-align:center\"><b>Formation</b></label>');

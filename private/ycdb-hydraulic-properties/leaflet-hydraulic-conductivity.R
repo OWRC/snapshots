@@ -43,7 +43,7 @@ symbols <- Map(makeSymbol, shape = 'circle', width = sizes,
 m <- df %>% leaflet()  %>%
   addLegendImage(images = symbols, labels = breaks,
                  title = 'Hydraulic Conductivity (m/s)', orientation = 'horizontal', labelStyle = "",
-                 width = sizes, height = sizes, position = 'bottomright') %>%
+                 width = sizes, height = sizes, position = 'bottomleft') %>%
   
   addTiles(attribution = '<a href="https://owrc.github.io/snapshots/md/hydraulicProperties.html" target="_blank" rel="noopener noreferrer"><b>README</b></a> © <a href="https://www.oakridgeswater.ca/" target="_blank" rel="noopener noreferrer"><b>Oak Ridges Moraine Groundwater Program</b></a>') %>%
   
@@ -58,7 +58,7 @@ m <- df %>% leaflet()  %>%
                    opacity = .5,
                    label = ~paste0("K: ",formatC(K_MS, format = "e", digits = 2)," m/s"),
                    popup = ~paste0(LOC_NAME,': ', LOC_NAME_ALT1,'<br>',FORMATION)) %>%
-  setView(lng = -79, lat = 44, zoom = 9) %>%
+  setView(lng = -79.3, lat = 43.9, zoom = 10) %>%
   addLayersControl(
     overlayGroups = layers.ordered,
     # baseGroups = c("Open StreetMap", "Open TopoMap", "Toner Lite"),

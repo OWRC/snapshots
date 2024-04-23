@@ -39,7 +39,7 @@ layers.ordered <- c(
   "Upper Newmarket",
   "Inter Newmarket Sediment",
   "Lower Newmarket",
-  "Newmarket Till/Northern Till",
+  # "Newmarket Till/Northern Till",
   "Thorncliffe",
   "Sunnybrook",
   "Scarborough",
