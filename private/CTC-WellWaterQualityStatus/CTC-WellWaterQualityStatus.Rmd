@@ -37,8 +37,11 @@ addLegendCustom <- function(map, colors, labels, sizes, shapes, borders, opacity
   
   return(addLegend(map, colors = legend_colors, labels = legend_labels, opacity = opacity))
 }
-```
 
+ormgp.bound <- read_sf("E:/Sync/@owrc/geojson/ORMGP_region.geojson")
+ctc.bound <- read_sf('shp/CTC-smpl.geojson')
+wells.loc <- read.csv('dat/locations-stats.csv')
+```
 
 # Introduction
 
@@ -62,38 +65,37 @@ The CTC Source Protection Region contains 25 large and small watersheds and span
 
 The region is complex and diverse in terms of geology, physiology, population, and development pressures. This diverse setting represents a significant challenge because of the variability of available information upon which to base the technical work, the differing stresses on water resources related to development pressure and population growth, and the differences in the nature, density, and locations of threats to the quality and quantity of water resources.
 
-`click square in upper-left corner to enable full-screen mode`
+<!-- `click square in upper-left corner to enable full-screen mode` -->
 
-```{r basemap1, echo=FALSE, warning=FALSE}
-ormgp.bound <- read_sf("E:/Sync/@owrc/geojson/ORMGP_region.geojson")
-ctc.bound <- read_sf('shp/CTC-smpl.geojson')
-wells.loc <- read.csv('dat/locations-stats.csv')
+<!-- ```{r basemap1, echo=FALSE, warning=FALSE} -->
+<!-- leaflet(ctc.bound) %>% -->
+<!--   setView(lng = -79.45, lat = 43.84, zoom = 9) %>% -->
+<!--   addFullscreenControl() %>% -->
+<!--   addTiles() %>% -->
+<!--   addPolygons(data = ormgp.bound, -->
+<!--               weight = 4, -->
+<!--               color = "darkred", -->
+<!--               fill = FALSE, -->
+<!--               opacity = .4, -->
+<!--               options = pathOptions(clickable = FALSE) -->
+<!--   ) %>% -->
+<!--   addPolygons(weight = 2, -->
+<!--               color = "black", -->
+<!--               fill=FALSE, -->
+<!--               dashArray = c(10, 5), -->
+<!--               opacity = .8, -->
+<!--               options = pathOptions(clickable = FALSE) -->
+<!--   ) %>% -->
+<!--   addMarkers(data = wells.loc, -->
+<!--              lat = ~LAT, lng= ~LONG, -->
+<!--              label = ~Name) %>% -->
+<!--   addLegendCustom(colors = 'white', labels = c('CTC','ORMGP'), sizes = 20, shapes = 'square', borders = c('black','darkred'), opacity = 1.) -->
+<!-- ``` -->
 
-leaflet(ctc.bound) %>%
-  setView(lng = -79.45, lat = 43.84, zoom = 9) %>%
-  addFullscreenControl() %>%
-  addTiles() %>%
-  addPolygons(data = ormgp.bound,
-              weight = 4,
-              color = "darkred",
-              fill = FALSE,
-              opacity = .4,
-              options = pathOptions(clickable = FALSE)
-  ) %>%
-  addPolygons(weight = 2,
-              color = "black",
-              fill=FALSE,
-              dashArray = c(10, 5),
-              opacity = .8,
-              options = pathOptions(clickable = FALSE)
-  ) %>%
-  addMarkers(data = wells.loc,
-             lat = ~LAT, lng= ~LONG,
-             label = ~Name) %>%
-  addLegendCustom(colors = 'white', labels = c('CTC','ORMGP'), sizes = 20, shapes = 'square', borders = c('black','darkred'), opacity = 1.)
-```
+<!-- ***Map 1.** CTC Source Protection Region jurisdiction and the ORMGP jurisdiction.* -->
 
-***Map 1.** CTC Source Protection Region jurisdiction and the ORMGP jurisdiction.*
+![](img/CTC_Map.jpg)
+***Map 1.** CTC Source Protection Region jurisdiction.*
 
 <br>
 
@@ -198,7 +200,7 @@ Statistical tests and trend analysis using the GAMM method were completed on chl
 
 <br>
 
-For the **detailed methodology** applied to produce the plots, please refer to the CTC Source Protection Region Water Quality Assessment Report (`make this a hyperlink to a pdf. of the report`). 
+For the **detailed methodology** applied to produce the plots, please refer to the [**CTC Source Protection Region Water Quality Assessment Report**](https://www.ctcswp.ca/who-we-are/meetings/rpt_20231108_ctc-water-quality-assessment-technical-report_fnl.pdf). 
 
 Maps providing an overview of the status and trend results for the sixty-six municipal production wells are presented below. In all the figures, the term Maximum Acceptable Concentration (MAC) and ODWQS refer to the same threshold and are interchangeable.
 
