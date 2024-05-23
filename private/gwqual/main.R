@@ -1,18 +1,11 @@
 
 
 
-library(odbc)
 library(ggplot2)
 library(dplyr)
 library(scales)
 library(MASS)
 library(rgdal)
-
-con <- dbConnect(odbc(), Driver = "SQL Server", Server = "sqlserver2k16", 
-                 Database = "OAK_20160831_MASTER", UID = "sql-webmm", PWD = "fv62Aq31", 
-                 Port = 1433)
-
-
 
 
 

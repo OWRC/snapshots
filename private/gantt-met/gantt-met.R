@@ -1,13 +1,9 @@
 
-library(odbc)
+
 library(dplyr)
 library(ggplot2)
 library(plotly)
 library(lubridate)
-
-con <- dbConnect(odbc(), Driver = "SQL Server", Server = "sqlserver2k16", 
-                 Database = "OAK_20160831_MASTER", UID = "sql-webmm", PWD = "fv62Aq31", 
-                 Port = 1433)
 
 
 
