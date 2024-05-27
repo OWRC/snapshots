@@ -4,6 +4,7 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 library(lubridate)
+library(stringr)
 
 
 
@@ -20,11 +21,19 @@ q <- "SELECT L.LOC_ID, LOC_NAME, LOC_NAME_ALT1, LOC_STUDY, RD_DATE
       LEFT JOIN OAK_20160831_MASTER.dbo.D_LOCATION AS L ON I.LOC_ID = L.LOC_ID
       ORDER BY L.LOC_ID, RD_DATE"
 
-df <- dbGetQuery(con,q)
-df$RD_DATE <- as.Date(df$RD_DATE)
+qdf <- dbGetQuery(con,q)
+df <- qdf %>%
+  mutate(RD_DATE = as.Date(RD_DATE)) %>%
+  filter(!(LOC_STUDY %in% c('ORCA - Spot Flow Survey','trca - Climate Station','LSRCA - Spot Flow Survey'))) %>%
+  mutate(LOC_STUDY = if_else(str_detect(LOC_STUDY, 'Env Canada - Hydat SW Gauge Station'), 'ECCC', LOC_STUDY)) %>%
+  mutate(LOC_STUDY = if_else(str_detect(LOC_STUDY, 'TRCA - SW Gauge Station'), 'TRCA', LOC_STUDY)) %>%
+  mutate(LOC_STUDY = if_else(str_detect(LOC_STUDY, 'CVC - KISTERS Streamflow'), 'CVC', LOC_STUDY)) %>%
+  mutate(LOC_STUDY = if_else(str_detect(LOC_STUDY, 'LSRCA - Surface Water Monitoring'), 'LSRCA', LOC_STUDY)) %>%
+  mutate(LOC_NAME = str_replace(LOC_NAME, 'FLO_RT_', 'CVC: ')) %>%
+  mutate(LOC_STUDY = factor(LOC_STUDY))
+
 head(df)
-
-
+print(unique(df$LOC_STUDY))
 
 
 
@@ -53,41 +62,38 @@ head(gdf)
 
 
 
-
-cnts <- df %>%
+allcnts <- df %>%
   count(RD_DATE) %>%
   mutate(year=year(RD_DATE)) %>%
   group_by(year) %>%
   summarize(n=sum(n)/365.24)
-# cnts <- df %>%
-#   count(RD_DATE,LOC_STUDY) %>%
-#   mutate(year=year(RD_DATE)) %>%
-#   group_by(year,LOC_STUDY) %>%
-#   summarize(n=sum(n)/365.24)
-head(cnts)
+head(allcnts)
 
-
-
+srccnts <- df %>%
+  count(RD_DATE,LOC_STUDY) %>%
+  mutate(year=year(RD_DATE)) %>%
+  group_by(year,LOC_STUDY) %>%
+  summarize(n=sum(n)/365.24)
+head(srccnts)
 
 
 
 
 p <- ggplot(gdf,aes(y=group_id*max(cnts$n)/max(group_id))) + 
   theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        legend.title = element_blank()) +
-  geom_linerange(aes(xmin = year(startdate), xmax = year(enddate), group=name), alpha=.5) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  geom_line(data=allcnts,aes(x=year,y=n), colour="red",linewidth=2,alpha=0.5) +
+  geom_line(data=srccnts,aes(x=year,y=n, colour=LOC_STUDY),linewidth=1,alpha=0.85) +  
+  geom_linerange(aes(xmin = year(startdate), xmax = year(enddate), group=name, colour=src), alpha=.5) +
   geom_point(aes(year(startdate), group=name),size=.5) +
   geom_point(aes(year(enddate), group=name),size=.5) +
-  geom_line(data=cnts,aes(x=year,y=n), colour="red",size=2,alpha=0.5) +
-  # geom_line(data=cnts,aes(x=year,y=n, colour=LOC_STUDY),size=1,alpha=0.85) + 
   scale_x_continuous(breaks=seq(min(year(gdf$startdate)),max(year(gdf$enddate)),by=10)) +
-  labs(x='year',y='average annual number of concurrent stations reporting')
+  labs(title='ORMGP streamflow Gauges',x='year',y='average annual number of concurrent stations reporting') #+
+  # scale_color_manual(values = c("black", "blue", "green", "yellow"))
 
-l <- ggplotly(p, tooltip = "name", height = 800) %>% 
-  plotly::layout(legend=list(x=0, 
-                             y=-.15,
+l <- ggplotly(p, tooltip = "name", height = 800) %>%
+  plotly::layout(legend=list(x=0,
                              title='Data Source',
-                             orientation='h')) 
-htmlwidgets::saveWidget(l, "external/gantt-sw/gantt-sw.html") 
+                             orientation='h'))
+htmlwidgets::saveWidget(l, "gantt-sw.html") 
 
