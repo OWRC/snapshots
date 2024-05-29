@@ -11,6 +11,8 @@ output:
     toc: yes
 ---
 
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -18,6 +20,10 @@ library(sf)
 library(leaflet)
 library(leaflet.extras)
 library(dplyr)
+library(tidyr)
+library(gt)
+library(stringr)
+sf_use_s2(FALSE)
 
 # https://stackoverflow.com/questions/72296705/how-to-add-triangles-when-customizing-a-leaflet-legend-in-r
 addLegendCustom <- function(map, colors, labels, sizes, shapes, borders, opacity = 0.5){
@@ -40,7 +46,40 @@ addLegendCustom <- function(map, colors, labels, sizes, shapes, borders, opacity
 
 ormgp.bound <- read_sf("E:/Sync/@owrc/geojson/ORMGP_region.geojson")
 ctc.bound <- read_sf('shp/CTC-smpl.geojson')
-wells.loc <- read.csv('dat/locations-stats.csv')
+wells.loc <- read.csv('dat/locations-stats.csv') %>%
+  mutate(Cl.current=round(Cl.current,2),Cl.first=round(Cl.first,2),Cl.pred.GAM=round(Cl.pred.GAM,2),Cl.pred.LM=round(Cl.pred.LM,2)) %>%
+  mutate(Na.current=round(Na.current,2),Na.first=round(Na.first,2),Na.pred.GAM=round(Na.pred.GAM,2),Na.pred.LM=round(Na.pred.LM,2)) %>%
+  mutate(NO3.current=round(NO3.current,2),NO3.first=round(NO3.first,2),NO3.pred.GAM=round(NO3.pred.GAM,2),NO3.pred.LM=round(NO3.pred.LM,2))
+
+muni.sf <- read_sf('E:/Sync/@gis/Boundaries/municipal/MUNICIPAL_BOUNDARY_open_data_shapefiles/MUNICIPAL_BOUNDARY_UPPER_TIER_AND_DISTRICT.shp')
+
+pnts_sf <- st_as_sf(wells.loc %>% filter(!is.na(LAT)), coords = c('LONG', 'LAT'), crs = st_crs(muni.sf))
+wells.loc.rfmt <- pnts_sf %>% 
+  mutate(intersection = as.integer(st_intersects(geometry, muni.sf)), Municipality = if_else(is.na(intersection), '', muni.sf$NAME[intersection])) %>%
+  dplyr::select(-c(LOC_ID,LOC_NAME,LOC_NAME_ALT1,GRND_ELEV,loc.id,intersection)) %>%
+  st_drop_geometry() 
+
+up.arr = "\u2191"
+up.arr.str = paste0(up.arr,"*")
+dwn.arr = "\u2193"
+dwn.arr.str = paste0(dwn.arr,"*")
+none.arr = "\u2194"
+trnd.trsh = 0.005
+
+icons.up <- makeIcon(
+  iconUrl = 'icons/arrow-up-outline.svg',
+  iconWidth = 31*215/230,
+  iconHeight = 31, 
+  iconAnchorY = 16,
+  iconAnchorX = 1.05*31*215/230/2,
+)
+icons.dwn <- makeIcon(
+  iconUrl = 'icons/arrow-down-outline.svg',
+  iconWidth = 31*215/230,
+  iconHeight = 31, 
+  iconAnchorY = 16,
+  iconAnchorX = .95*31*215/230/2,
+)
 ```
 
 # Introduction
@@ -192,13 +231,11 @@ Statistical tests and trend analysis using the GAMM method were completed on chl
 
 <br>
 
-**Tabular** form here (`make this a hyperlink to the spreadsheet`). Example provided below.  
+<!-- **Tabular** form here (`make this a hyperlink to the spreadsheet`). Example provided below.   -->
 
-***Table 1**. Sample summary of municipal production wells with existing or potential Nitrate Issues. The row in bold font is a municipal production well with an existing Nitrate Issue. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.* 
+<!-- ***Table 1**. Sample summary of municipal production wells with existing or potential Nitrate Issues. The row in **bold font** is a municipal production well with an existing Nitrate Issue. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.*  -->
 
-![](img/summary-muni-table.png)
-
-<br>
+<!-- ![](img/summary-muni-table.png) -->
 
 For the **detailed methodology** applied to produce the plots, please refer to the [**CTC Source Protection Region Water Quality Assessment Report**](https://www.ctcswp.ca/who-we-are/meetings/rpt_20231108_ctc-water-quality-assessment-technical-report_fnl.pdf). 
 
@@ -206,15 +243,141 @@ Maps providing an overview of the status and trend results for the sixty-six mun
 
 <br>
 
-# Maps
+### Chloride by well
 
-Status of each well in reference to the applicable half-Maximum Allowable Concentration and ODWQS objectives based on the most recent year of data. Hover over any point to reveal municipal well properties, click for more details. 
+Summary of municipal production wells with existing or potential Chloride Issues. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
+
+
+```{r tbl.Cl, echo=FALSE, warning=FALSE}
+wells.loc.rfmt %>%
+  drop_na() %>%
+  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Name) %>%
+  mutate('Current_Concentration (mg/L)'=Cl.current,'Current_Magnitude of change (mg/L)'=Cl.current-Cl.first) %>%
+  mutate('2024 Projections_2040 Concentration (mg/L)'=if_else(Cl.pred.GAM>0,Cl.pred.GAM,0),'2024 Projections_Magnitude of change (mg/L)'=Cl.pred.GAM-Cl.current) %>%
+  mutate('Current_Comparison to ODWQS'=if_else(Cl.current<10,'Below','Above')) %>%
+  mutate('2024 Projections_Likelihood of exceeding ODWQS'=if_else(Cl.status==2,'Likely',if_else(Cl.status==1,'Somewhat likely','Unlikely'))) %>%
+  mutate('Current_Trend direction'=if_else(Cl.cur.trnd > trnd.trsh,
+                                   if_else(Cl.cur.trnd.sig==1,up.arr.str,up.arr),
+                           if_else(Cl.cur.trnd < -trnd.trsh,
+                                   if_else(Cl.cur.trnd.sig==1,dwn.arr.str,dwn.arr),
+                           none.arr))) %>%
+  mutate('2024 Projections_Trend direction'=if_else(Cl.fut.trnd > trnd.trsh,
+                                   if_else(Cl.fut.trnd.sig==1,up.arr.str,up.arr),
+                                   if_else(Cl.fut.trnd < -trnd.trsh,
+                                           if_else(Cl.fut.trnd.sig==1,dwn.arr.str,dwn.arr),
+                                           none.arr))) %>%
+  dplyr::select(c(Location_Municipality,Location_Well,
+                  'Current_Concentration (mg/L)','Current_Comparison to ODWQS','Current_Trend direction','Current_Magnitude of change (mg/L)',
+                  '2024 Projections_2040 Concentration (mg/L)','2024 Projections_Likelihood of exceeding ODWQS','2024 Projections_Trend direction','2024 Projections_Magnitude of change (mg/L)')) %>%
+  arrange(Location_Municipality,Location_Well) %>%
+  gt() %>%
+  # tab_header(title="Nitrate") %>%
+  tab_spanner_delim(delim = "_") %>%
+  tab_options(container.height = 600, 
+              column_labels.background.color = "lightblue",
+              table.font.size = '12px') %>% 
+  tab_style(
+    style = css(position = "sticky", top = px(-10), zIndex = 100),
+    locations = list(cells_column_spanners(), cells_column_labels())
+  ) 
+```
+
+<br>
+
+### Sodium by well
+
+Summary of municipal production wells with existing or potential Sodium Issues. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
+
+
+```{r tbl.Na, echo=FALSE, warning=FALSE}
+wells.loc.rfmt %>%
+  drop_na() %>%
+  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Name) %>%
+  mutate('Current_Concentration (mg/L)'=Na.current,'Current_Magnitude of change (mg/L)'=Na.current-Na.first) %>%
+  mutate('2024 Projections_2040 Concentration (mg/L)'=if_else(Na.pred.GAM>0,Na.pred.GAM,0),'2024 Projections_Magnitude of change (mg/L)'=Na.pred.GAM-Na.current) %>%
+  mutate('Current_Comparison to ODWQS'=if_else(Na.current<200,'Below','Above')) %>%
+  mutate('2024 Projections_Likelihood of exceeding ODWQS'=if_else(Na.status==2,'Likely',if_else(Na.status==1,'Somewhat likely','Unlikely'))) %>%
+  mutate('Current_Trend direction'=if_else(Na.cur.trnd > trnd.trsh,
+                                   if_else(Na.cur.trnd.sig==1,up.arr.str,up.arr),
+                           if_else(Na.cur.trnd < -trnd.trsh,
+                                   if_else(Na.cur.trnd.sig==1,dwn.arr.str,dwn.arr),
+                           none.arr))) %>%
+  mutate('2024 Projections_Trend direction'=if_else(Na.fut.trnd > trnd.trsh,
+                                   if_else(Na.fut.trnd.sig==1,up.arr.str,up.arr),
+                                   if_else(Na.fut.trnd < -trnd.trsh,
+                                           if_else(Na.fut.trnd.sig==1,dwn.arr.str,dwn.arr),
+                                           none.arr))) %>%
+  dplyr::select(c(Location_Municipality,Location_Well,
+                  'Current_Concentration (mg/L)','Current_Comparison to ODWQS','Current_Trend direction','Current_Magnitude of change (mg/L)',
+                  '2024 Projections_2040 Concentration (mg/L)','2024 Projections_Likelihood of exceeding ODWQS','2024 Projections_Trend direction','2024 Projections_Magnitude of change (mg/L)')) %>%
+  arrange(Location_Municipality,Location_Well) %>%
+  gt() %>%
+  # tab_header(title="Nitrate") %>%
+  tab_spanner_delim(delim = "_") %>%
+  tab_options(container.height = 600, 
+              column_labels.background.color = "lightblue",
+              table.font.size = '12px') %>% 
+  tab_style(
+    style = css(position = "sticky", top = px(-10), zIndex = 100),
+    locations = list(cells_column_spanners(), cells_column_labels())
+  ) 
+```
+
+<br>
+
+
+### Nitrate by well
+
+Summary of municipal production wells with existing or potential Nitrate Issues. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
+
+
+```{r tbl.N03, echo=FALSE, warning=FALSE}
+wells.loc.rfmt %>%
+  drop_na() %>%
+  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Name) %>%
+  mutate('Current_Concentration (mg/L)'=NO3.current,'Current_Magnitude of change (mg/L)'=NO3.current-NO3.first) %>%
+  mutate('2024 Projections_2040 Concentration (mg/L)'=if_else(NO3.pred.GAM>0,NO3.pred.GAM,0),'2024 Projections_Magnitude of change (mg/L)'=NO3.pred.GAM-NO3.current) %>%
+  mutate('Current_Comparison to ODWQS'=if_else(NO3.current<10,'Below','Above')) %>%
+  mutate('2024 Projections_Likelihood of exceeding ODWQS'=if_else(NO3.status==2,'Likely',if_else(NO3.status==1,'Somewhat likely','Unlikely'))) %>%
+  mutate('Current_Trend direction'=if_else(NO3.cur.trnd > trnd.trsh,
+                                   if_else(NO3.cur.trnd.sig==1,up.arr.str,up.arr),
+                           if_else(NO3.cur.trnd < -trnd.trsh,
+                                   if_else(NO3.cur.trnd.sig==1,dwn.arr.str,dwn.arr),
+                           none.arr))) %>%
+  mutate('2024 Projections_Trend direction'=if_else(NO3.fut.trnd > trnd.trsh,
+                                   if_else(NO3.fut.trnd.sig==1,up.arr.str,up.arr),
+                                   if_else(NO3.fut.trnd < -trnd.trsh,
+                                           if_else(NO3.fut.trnd.sig==1,dwn.arr.str,dwn.arr),
+                                           none.arr))) %>%
+  dplyr::select(c(Location_Municipality,Location_Well,
+                  'Current_Concentration (mg/L)','Current_Comparison to ODWQS','Current_Trend direction','Current_Magnitude of change (mg/L)',
+                  '2024 Projections_2040 Concentration (mg/L)','2024 Projections_Likelihood of exceeding ODWQS','2024 Projections_Trend direction','2024 Projections_Magnitude of change (mg/L)')) %>%
+  arrange(Location_Municipality,Location_Well) %>%
+  gt() %>%
+  # tab_header(title="Nitrate") %>%
+  tab_spanner_delim(delim = "_") %>%
+  tab_options(container.height = 600, 
+              column_labels.background.color = "lightblue",
+              table.font.size = '12px') %>%  
+  tab_style(
+    style = css(position = "sticky", top = px(-10), zIndex = 100),
+    locations = list(cells_column_spanners(), cells_column_labels())
+  ) 
+```
+
+
+<br>
+
+
+# Maps: Projections
+
+Status of each well in reference to the applicable half-Maximum Allowable Concentration and ODWQS objectives based on the most recent year of data. `Hover over any point to reveal municipal well properties, click for more details.` 
 
 ```{r mappal, echo=FALSE, warning=FALSE}
   pal <- colorNumeric(c("black", "purple", "red"), 0:2)
 ```
 
-### Chloride
+### Chloride projections
 
 `click square in upper-left corner to enable full-screen mode`
 
@@ -243,6 +406,8 @@ leaflet(ctc.bound) %>%
                                                               Cl.status==1 ~ 'somewhat likely',
                                                               Cl.status==2 ~ 'highly likely'),
                                    '<br>confidence: ', Cl.conf,
+                                   '<br>current conc: ', Cl.current,' mg/L',
+                                   '<br>projected conc: ', Cl.pred.GAM,' mg/L',
                                    '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    options = popupOptions(maxWidth = 1000)
@@ -256,7 +421,7 @@ leaflet(ctc.bound) %>%
 ```
 
 
-### Sodium
+### Sodium projections
 
 `click square in upper-left corner to enable full-screen mode`
 
@@ -285,6 +450,8 @@ leaflet(ctc.bound) %>%
                                                               Na.status==1 ~ 'somewhat likely',
                                                               Na.status==2 ~ 'highly likely'),
                                    '<br>confidence: ', Na.conf,
+                                   '<br>current conc: ', Na.current,' mg/L',
+                                   '<br>projected conc: ', Na.pred.GAM,' mg/L',
                                    '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    ) %>%
@@ -297,7 +464,7 @@ leaflet(ctc.bound) %>%
 ```
 
 
-### Nitrate 
+### Nitrate projections
 
 `click square in upper-left corner to enable full-screen mode`
 
@@ -325,6 +492,8 @@ leaflet(ctc.bound) %>%
                                                               NO3.status==1 ~ 'somewhat likely',
                                                               NO3.status==2 ~ 'highly likely'),
                                    '<br>confidence: ', NO3.conf,
+                                   '<br>current conc: ', NO3.current,' mg/L',
+                                   '<br>projected conc: ', NO3.pred.GAM,' mg/L',
                                    '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    ) %>%
@@ -336,11 +505,162 @@ leaflet(ctc.bound) %>%
                   opacity = 1.)
 ```
 
+<br>
+
+# Maps: Trends
+
+Summary of municipal production well Trends. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
 
 
-## Trends (last five years)
+### Chloride trends
 
-`Insert map here (show increasing, decreasing, no trend)`
+`click square in upper-left corner to enable full-screen mode`
+
+```{r Cl.trnd.map, echo=FALSE, warning=FALSE}
+
+leaflet(ctc.bound) %>%
+  setView(lng = -79.45, lat = 43.84, zoom = 9) %>%
+  addFullscreenControl() %>%
+  addTiles() %>%
+  addPolygons(weight = 2,
+              color = "black",
+              fill=FALSE,
+              dashArray = c(10, 5),
+              opacity = .4,
+              options = pathOptions(clickable = FALSE)
+  ) %>%
+  addMarkers(data = wells.loc %>% filter(!is.na(Cl.status), Cl.cur.trnd>trnd.trsh),
+             lat = ~LAT, lng= ~LONG,
+             icon = icons.up,
+             label = ~Name, 
+             popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+               '<b>',Name,':</b> Chloride',
+               '<br>ODWQS exceedance: ',case_when(Cl.status==0 ~ 'unlikely',
+                                                  Cl.status==1 ~ 'somewhat likely',
+                                                  Cl.status==2 ~ 'highly likely'),
+               '<br>confidence: ', Cl.conf,
+               '<br>current conc: ', Cl.current,' mg/L',
+               '<br>projected conc: ', Cl.pred.GAM,' mg/L'),
+             options = popupOptions(maxWidth = 1000)
+  ) %>%
+  addMarkers(data = wells.loc %>% filter(!is.na(Cl.status), Cl.cur.trnd < -trnd.trsh),
+             lat = ~LAT, lng= ~LONG,
+             icon = icons.dwn,
+             label = ~Name, 
+             popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+               '<b>',Name,':</b> Chloride',
+               '<br>ODWQS exceedance: ',case_when(Cl.status==0 ~ 'unlikely',
+                                                  Cl.status==1 ~ 'somewhat likely',
+                                                  Cl.status==2 ~ 'highly likely'),
+               '<br>confidence: ', Cl.conf,
+               '<br>current conc: ', Cl.current,' mg/L',
+               '<br>projected conc: ', Cl.pred.GAM,' mg/L'),
+             options = popupOptions(maxWidth = 1000)
+  ) 
+```
+
+<br>
+
+
+### Sodium trends
+
+`click square in upper-left corner to enable full-screen mode`
+
+```{r Na.trnd.map, echo=FALSE, warning=FALSE}
+
+leaflet(ctc.bound) %>%
+  setView(lng = -79.45, lat = 43.84, zoom = 9) %>%
+  addFullscreenControl() %>%
+  addTiles() %>%
+  addPolygons(weight = 2,
+              color = "black",
+              fill=FALSE,
+              dashArray = c(10, 5),
+              opacity = .4,
+              options = pathOptions(clickable = FALSE)
+  ) %>%
+  addMarkers(data = wells.loc %>% filter(!is.na(Na.status), Na.cur.trnd>trnd.trsh),
+             lat = ~LAT, lng= ~LONG,
+             icon = icons.up,
+             label = ~Name, 
+             popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+               '<b>',Name,':</b> Chloride',
+               '<br>ODWQS exceedance: ',case_when(Na.status==0 ~ 'unlikely',
+                                                  Na.status==1 ~ 'somewhat likely',
+                                                  Na.status==2 ~ 'highly likely'),
+               '<br>confidence: ', Na.conf,
+               '<br>current conc: ', Na.current,' mg/L',
+               '<br>projected conc: ', Na.pred.GAM,' mg/L'),
+             options = popupOptions(maxWidth = 1000)
+  ) %>%
+  addMarkers(data = wells.loc %>% filter(!is.na(Na.status), Na.cur.trnd < -trnd.trsh),
+             lat = ~LAT, lng= ~LONG,
+             icon = icons.dwn,
+             label = ~Name, 
+             popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+               '<b>',Name,':</b> Chloride',
+               '<br>ODWQS exceedance: ',case_when(Na.status==0 ~ 'unlikely',
+                                                  Na.status==1 ~ 'somewhat likely',
+                                                  Na.status==2 ~ 'highly likely'),
+               '<br>confidence: ', Na.conf,
+               '<br>current conc: ', Na.current,' mg/L',
+               '<br>projected conc: ', Na.pred.GAM,' mg/L'),
+             options = popupOptions(maxWidth = 1000)
+  ) 
+```
+
+<br>
+
+
+### Nitrate trends
+
+`click square in upper-left corner to enable full-screen mode`
+
+```{r NO3.trnd.map, echo=FALSE, warning=FALSE}
+
+leaflet(ctc.bound) %>%
+  setView(lng = -79.45, lat = 43.84, zoom = 9) %>%
+  addFullscreenControl() %>%
+  addTiles() %>%
+  addPolygons(weight = 2,
+              color = "black",
+              fill=FALSE,
+              dashArray = c(10, 5),
+              opacity = .4,
+              options = pathOptions(clickable = FALSE)
+  ) %>%
+  addMarkers(data = wells.loc %>% filter(!is.na(NO3.status), NO3.cur.trnd>trnd.trsh),
+             lat = ~LAT, lng= ~LONG,
+             icon = icons.up,
+             label = ~Name, 
+             popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+               '<b>',Name,':</b> Chloride',
+               '<br>ODWQS exceedance: ',case_when(NO3.status==0 ~ 'unlikely',
+                                                  NO3.status==1 ~ 'somewhat likely',
+                                                  NO3.status==2 ~ 'highly likely'),
+               '<br>confidence: ', NO3.conf,
+               '<br>current conc: ', NO3.current,' mg/L',
+               '<br>projected conc: ', NO3.pred.GAM,' mg/L'),
+             options = popupOptions(maxWidth = 1000)
+  ) %>%
+  addMarkers(data = wells.loc %>% filter(!is.na(NO3.status), NO3.cur.trnd < -trnd.trsh),
+             lat = ~LAT, lng= ~LONG,
+             icon = icons.dwn,
+             label = ~Name, 
+             popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+               '<b>',Name,':</b> Chloride',
+               '<br>ODWQS exceedance: ',case_when(NO3.status==0 ~ 'unlikely',
+                                                  NO3.status==1 ~ 'somewhat likely',
+                                                  NO3.status==2 ~ 'highly likely'),
+               '<br>confidence: ', NO3.conf,
+               '<br>current conc: ', NO3.current,' mg/L',
+               '<br>projected conc: ', NO3.pred.GAM,' mg/L'),
+             options = popupOptions(maxWidth = 1000)
+  ) 
+```
+
+<br>
+
 
 
 # Acknowledgments

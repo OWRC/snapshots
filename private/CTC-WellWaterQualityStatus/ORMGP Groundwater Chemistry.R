@@ -22,7 +22,7 @@ library(mgcv) # GAMs
 library(stringr)
 
 
-RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
+RunCVCscript <- function(temfp, dfloc, endyear=2040) {
   
   # From the Bottom of the Heap: https://fromthebottomoftheheap.net/
   Deriv <- function(mod, n = 200, eps = 1e-7, newdata, term) {
@@ -183,7 +183,7 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
 
 
   # --- --- Read data -  probably include a function here for filtering relevant data
-  Wells <- read.csv(csvfp) %>%
+  Wells <- read.csv(temfp) %>%
     as_tibble()  %>%
     mutate(Time = Year + (Month - 1)*0.09)
   #
@@ -674,6 +674,55 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
   
   #
   
+  # Get current(/last) value 
+  current.WQ <- function(muni,well_id,para) {
+    
+    # a <- Wells %>% 
+    #   filter(Muni == muni & Well == well_id & Parameter == para) %>%
+    #   mutate(Date = as.Date(Date)) %>%
+    #   slice(which.max(Date)) %>%
+    #   select(Value)
+    meds <- Wells %>% 
+      filter(Muni == muni & Well == well_id & Parameter == para) %>%
+      group_by(Year) %>%
+      summarize(v=median(Value))
+    a0 <- first(meds, order_by=meds$Year)$v
+    a1 <- last(meds, order_by=meds$Year)$v
+    
+    if (para=="Nitrate") dfloc$NO3.current[dfloc$Name==well_id] <<- a1
+    if (para=="Chloride") dfloc$Cl.current[dfloc$Name==well_id] <<- a1
+    if (para=="Sodium") dfloc$Na.current[dfloc$Name==well_id] <<- a1
+    if (para=="Nitrate") dfloc$NO3.first[dfloc$Name==well_id] <<- a0
+    if (para=="Chloride") dfloc$Cl.first[dfloc$Name==well_id] <<- a0
+    if (para=="Sodium") dfloc$Na.first[dfloc$Name==well_id] <<- a0
+    
+  } 
+  
+  current.trending.WQ <- function(well_id, para, df) {
+    
+    df2 <- df %>%
+      group_by(date) %>%
+      summarise(deriv=median(deriv,na.rm=T),sig.incr=median(sig.incr,na.rm=T),sig.decr=median(sig.decr,na.rm=T)) %>%
+      ungroup()
+    t1 <- last(df2, order_by=df2$date)$deriv
+    sig <- 0
+    if (t1 > 0 & !is.na(last(df2, order_by=df2$date)$sig.incr)) sig <- 1
+    if (t1 < 0 & !is.na(last(df2, order_by=df2$date)$sig.decr)) sig <- 1
+    
+    if (para=="Nitrate") {
+      dfloc$NO3.cur.trnd[dfloc$Name==well_id] <<- t1
+      dfloc$NO3.cur.trnd.sig[dfloc$Name==well_id] <<- sig
+    }
+    if (para=="Chloride") {
+      dfloc$Cl.cur.trnd[dfloc$Name==well_id] <<- t1
+      dfloc$Cl.cur.trnd.sig[dfloc$Name==well_id] <<- sig  
+    }
+    if (para=="Sodium") {
+      dfloc$Na.cur.trnd[dfloc$Name==well_id] <<- t1
+      dfloc$Na.cur.trnd.sig[dfloc$Name==well_id] <<- sig
+    }
+  }
+  
   #   2a: GAM Trend Analyses ####
   
   neat_K5_K3 = function(muni, well_id, para) {
@@ -711,6 +760,9 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
     Report.Line = ifelse(para == "Sodium", "dotted", "blank")
     Report.Text = ifelse(para == "Sodium", "Reporting Threshold", NA)
     
+
+    
+    
     # Modelling
     GAM.Model <- gamm(Value ~ s(Time, k = K), # cc = cyclic cubic
                       data = Wells %>% filter(Muni == muni & Well == well_id & Parameter == para & Year >= Start), correlation = corARMA(form = ~ 1|Time, p = 1))
@@ -730,6 +782,9 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
     dci.GAM.Model <- confint(d.GAM.Model, term = Term)
     dsig.GAM.Model <- signifD(pdat.GAM.Model$p.GAM.Model, d = d.GAM.Model[[Term]]$deriv,
                               + dci.GAM.Model[[Term]]$upper, dci.GAM.Model[[Term]]$lower)
+    
+    current.WQ(muni,well_id,para)
+    current.trending.WQ(well_id,para,data.frame(date=as.integer(d.GAM.Model$eval),deriv=d.GAM.Model$Time$deriv,sig.incr=dsig.GAM.Model$incr,sig.decr=dsig.GAM.Model$decr))
     
     ggplot(Wells %>% filter(Muni == muni & Well == well_id & Parameter == para), aes(Time, Value)) +
       geom_point(colour = "grey50", alpha = 0.6) +
@@ -762,6 +817,8 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
   }
   
   # Test
+  # neat_K5_K3(muni = "Orangeville" , well_id = "Well 5", para = "Nitrate")
+  # dfloc[dfloc$Name=="Well 5",]
   # neat_K5_K3(muni = "Acton" , well_id = "Davidson 1", para = "Chloride")
   # neat_K5_K3(muni = "Peel", well_id = "Inglewood 4", para = "Sodium")
   # neat_K5_K3(muni = "Peel", well_id = "Caledon Village 3", para = "Nitrate")
@@ -882,13 +939,38 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
   #
   
   #   2c: Predictions (GAM & LM) ####
-  ODWQS.value <- function(lm1,gam1,limit) {
+  ODWQS.status <- function(lm1,gam1,limit) {
     o<-0
     if (predict(lm1, data.frame(Year = c(endyear)))>=limit) o=o+1
     if (predict(gam1$gam, data.frame(Year = c(endyear)))>=limit) o=o+1
     return(o)
   }
   
+  future.trending.WQ <- function(well_id, para, df) {
+    
+    df2 <- df %>%
+      group_by(date) %>%
+      summarise(deriv=median(deriv,na.rm=T),sig.incr=median(sig.incr,na.rm=T),sig.decr=median(sig.decr,na.rm=T)) %>%
+      ungroup()
+    t1 <- last(df2, order_by=df2$date)$deriv
+    sig <- 0
+    if (t1 > 0 & !is.na(last(df2, order_by=df2$date)$sig.incr)) sig <- 1
+    if (t1 < 0 & !is.na(last(df2, order_by=df2$date)$sig.decr)) sig <- 1
+    
+    if (para=="Nitrate") {
+      dfloc$NO3.fut.trnd[dfloc$Name==well_id] <<- t1
+      dfloc$NO3.fut.trnd.sig[dfloc$Name==well_id] <<- sig
+    }
+    if (para=="Chloride") {
+      dfloc$Cl.fut.trnd[dfloc$Name==well_id] <<- t1
+      dfloc$Cl.fut.trnd.sig[dfloc$Name==well_id] <<- sig  
+    }
+    if (para=="Sodium") {
+      dfloc$Na.fut.trnd[dfloc$Name==well_id] <<- t1
+      dfloc$Na.fut.trnd.sig[dfloc$Name==well_id] <<- sig
+    }
+  }
+
   
   neat_K5_LM.P = function(muni, well_id, para) {
     
@@ -926,11 +1008,22 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
     
     LM.Model <- lm(Value ~ Year, data = Wells %>% filter(Muni == muni & Well == well_id & Parameter == para & Year >= Start))
     
-    if (para=="Nitrate") dfloc$NO3.status[dfloc$Name==well_id] <<- ODWQS.value(LM.Model,GAM.Model,10)
-    if (para=="Chloride") dfloc$Cl.status[dfloc$Name==well_id] <<- ODWQS.value(LM.Model,GAM.Model,250)
-    if (para=="Sodium") dfloc$Na.status[dfloc$Name==well_id] <<- ODWQS.value(LM.Model,GAM.Model,200)
+    if (para=="Nitrate") {
+      dfloc$NO3.status[dfloc$Name==well_id] <<- ODWQS.status(LM.Model,GAM.Model,10)
+      dfloc$NO3.pred.LM[dfloc$Name==well_id] <<- predict(LM.Model, data.frame(Year = c(endyear)))
+      dfloc$NO3.pred.GAM[dfloc$Name==well_id] <<- predict(GAM.Model$gam, data.frame(Year = c(endyear)))
+    }
+    if (para=="Chloride") {
+      dfloc$Cl.status[dfloc$Name==well_id] <<- ODWQS.status(LM.Model,GAM.Model,250)
+      dfloc$Cl.pred.LM[dfloc$Name==well_id] <<- predict(LM.Model, data.frame(Year = c(endyear)))
+      dfloc$Cl.pred.GAM[dfloc$Name==well_id] <<- predict(GAM.Model$gam, data.frame(Year = c(endyear)))      
+    }
+    if (para=="Sodium") {
+      dfloc$Na.status[dfloc$Name==well_id] <<- ODWQS.status(LM.Model,GAM.Model,200)
+      dfloc$Na.pred.LM[dfloc$Name==well_id] <<- predict(LM.Model, data.frame(Year = c(endyear)))
+      dfloc$Na.pred.GAM[dfloc$Name==well_id] <<- predict(GAM.Model$gam, data.frame(Year = c(endyear)))
+    }
     #print(summary(GAM.Model$gam))
-    
     
     # Generate y limits
     Min = min(min(predict(GAM.Model$gam, level = 0, newdata = Projection, type = "response")), # Min of the GAM prediction
@@ -963,6 +1056,9 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
     dci.GAM.Model <- confint(d.GAM.Model, term = Term)
     dsig.GAM.Model <- signifD(pdat.GAM.Model$p.GAM.Model, d = d.GAM.Model[[Term]]$deriv,
                               + dci.GAM.Model[[Term]]$upper, dci.GAM.Model[[Term]]$lower)
+    
+    future.trending.WQ(well_id,para,data.frame(date=as.integer(d.GAM.Model$eval),deriv=d.GAM.Model$Year$deriv,sig.incr=dsig.GAM.Model$incr,sig.decr=dsig.GAM.Model$decr))
+    
     
     ggplot(Wells %>% filter(Muni == muni & Well == well_id & Parameter == para), aes(Year, Value)) +
       geom_point(colour = "grey50", alpha = 0.6) +
@@ -1072,9 +1168,7 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
     deframe() %>%
     set_names(c("Muni", "Well", "Parameter"))
   
-  
-  
-  
+
   # Create all the three-panel (seasonal) well figures
   Seasonal.List %>%
     pmap(function(Muni, Well, Parameter){
@@ -1087,6 +1181,7 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
       #          height = 9.5,
       #          dpi = 300,
       #          units = "cm")
+      # dfloc$muni[dfloc$Name==Well] <<- Muni
       if (Parameter=="Nitrate") dfloc$NO3.conf[dfloc$Name==Well] <<- "moderate"
       if (Parameter=="Chloride") dfloc$Cl.conf[dfloc$Name==Well] <<- "moderate"
       if (Parameter=="Sodium") dfloc$Na.conf[dfloc$Name==Well] <<- "moderate"
@@ -1107,9 +1202,11 @@ RunCVCscript <- function(csvfp, dfloc, endyear=2040) {
   # Create all the non-seasonal figures
   NonSeasonal.List %>%
     pmap(function(Muni, Well, Parameter){
+      # dfloc$muni[dfloc$Name==Well] <<- Muni
       if (Parameter=="Nitrate") dfloc$NO3.conf[dfloc$Name==Well] <<- "low"
       if (Parameter=="Chloride") dfloc$Cl.conf[dfloc$Name==Well] <<- "low"
       if (Parameter=="Sodium") dfloc$Na.conf[dfloc$Name==Well] <<- "low"
+      
       Assembly.Two(muni = Muni, well_id = Well, para = Parameter) %>%
         ggsave(# path = "dat/non-seasonal",
                # file = paste0(Parameter, " ", Muni, " ", str_replace(Well,"/","-"), ".png"),
