@@ -56,6 +56,6 @@ All requests for model codes have required the singing of a Model Sharing Agreem
 [__Request for numerical model(s) can be made here__](https://arcg.is/1OzLfX).
 
 
-As of the initiation of the program since 2017, a total of 23 models have been successfully redistributed and applied to water resource studies.
+As of the initiation of the program since 2017, a total of 29 models have been successfully redistributed and applied to water resource studies.
 
 ![](numerical-model-custodianship-program-getMSAdates.png)

@@ -79,7 +79,7 @@ head(srccnts)
 
 
 
-p <- ggplot(gdf,aes(y=group_id*max(cnts$n)/max(group_id))) + 
+p <- ggplot(gdf,aes(y=group_id*max(srccnts$n)/max(group_id))) + 
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   geom_line(data=allcnts,aes(x=year,y=n), colour="red",linewidth=2,alpha=0.5) +
@@ -88,7 +88,7 @@ p <- ggplot(gdf,aes(y=group_id*max(cnts$n)/max(group_id))) +
   geom_point(aes(year(startdate), group=name),size=.5) +
   geom_point(aes(year(enddate), group=name),size=.5) +
   scale_x_continuous(breaks=seq(min(year(gdf$startdate)),max(year(gdf$enddate)),by=10)) +
-  labs(title='ORMGP streamflow Gauges',x='year',y='average annual number of concurrent stations reporting') #+
+  labs(title='ORMGP Streamflow Gauges',x='year',y='average annual number of concurrent stations reporting') #+
   # scale_color_manual(values = c("black", "blue", "green", "yellow"))
 
 l <- ggplotly(p, tooltip = "name", height = 800) %>%
