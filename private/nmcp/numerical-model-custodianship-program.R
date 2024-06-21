@@ -6,7 +6,7 @@ library(leaflet)
 library(leaflet.extras)
 library(dplyr)
 
-mdl.bounds <- geojson_read("https://www.dropbox.com/scl/fi/u5aqvjckulef44hlj7gpd/NMCP_model_bounds.geojson?rlkey=2lxwbzdb9ckhz3a21xtzbvrxw&dl=1", what = "sp")
+mdl.bounds <- geojson_read("https://raw.githubusercontent.com/OWRC/geojson/main/NMCP_model_bounds.geojson", what = "sp")
 
 
 
@@ -44,4 +44,4 @@ m <- leaflet(mdl.bounds, #width = "100%", height = "500px",
   )
 
 
-htmlwidgets::saveWidget(m, "../../../../html/numerical-model-custodianship-program.html")
+htmlwidgets::saveWidget(m, "numerical-model-custodianship-program.html")
