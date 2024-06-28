@@ -25,6 +25,7 @@ qdf <- dbGetQuery(con,q)
 
 df <- qdf %>%
   mutate(RD_DATE = as.Date(RD_DATE)) %>%
+  # filter(year(RD_DATE)<year(Sys.Date())) %>%
   filter(!(LOC_STUDY %in% c('PGMN - TRCA; MOE-1974 to 1980 OW Network'))) %>%
   mutate(LOC_STUDY = if_else(str_detect(LOC_STUDY, 'TRCA - SW Gauge Station'), 'TRCA', LOC_STUDY)) %>%
   mutate(LOC_STUDY = factor(LOC_STUDY))
@@ -63,25 +64,25 @@ head(gdf)
 
 allcnts <- df %>%
   count(RD_DATE) %>%
-  mutate(year=year(RD_DATE)) %>%
+  mutate(year=year(RD_DATE), doy=yday(RD_DATE)) %>%
   group_by(year) %>%
-  summarize(n=sum(n)/365.24)
+  summarize(n=sum(n)/max(doy))
 head(allcnts)
 
 srccnts <- df %>%
   count(RD_DATE,LOC_STUDY) %>%
-  mutate(year=year(RD_DATE)) %>%
+  mutate(year=year(RD_DATE), doy=yday(RD_DATE)) %>%
   group_by(year,LOC_STUDY) %>%
-  summarize(n=sum(n)/365.24)
+  summarize(n=sum(n)/max(doy))
 head(srccnts)
 
 
 
 
-p <- ggplot(gdf,aes(y=group_id*max(srccnts$n)/max(group_id))) + 
+p <- ggplot(gdf,aes(y=group_id*max(allcnts$n)/max(group_id))) + 
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  geom_line(data=allcnts,aes(x=year,y=n), colour="red",linewidth=2,alpha=0.5) +
+  geom_line(data=allcnts,aes(x=year,y=n), colour="black",linewidth=2,alpha=0.65) +
   geom_line(data=srccnts,aes(x=year,y=n, colour=LOC_STUDY),linewidth=1,alpha=0.85) +    
   geom_linerange(aes(xmin = year(startdate), xmax = year(enddate), group=name, colour=src), alpha=.5) + 
   geom_point(aes(year(startdate), group=name),size=.5) +

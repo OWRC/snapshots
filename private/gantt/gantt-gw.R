@@ -23,7 +23,7 @@ q <- "SELECT L.LOC_ID, LOC_NAME, LOC_NAME_ALT1, LOC_STUDY, RD_NAME_CODE, RD_DATE
 qdf <- dbGetQuery(con,q) #%>% save(file="O:/q.Rda")
 df <- qdf %>%
   mutate(RD_DATE = as.Date(RD_DATE)) %>%
-  filter(year(RD_DATE)<year(Sys.Date())) %>%
+  # filter(year(RD_DATE)<year(Sys.Date())) %>%
   distinct()
 
 head(df)
@@ -89,10 +89,10 @@ head(gdf)
 
 cnts <- df %>%
   count(RD_DATE) %>%
-  mutate(year=year(RD_DATE)) %>%
+  mutate(year=year(RD_DATE), doy=yday(RD_DATE)) %>%
   group_by(year) %>%
   filter(year>min(year(gdf$startdate))) %>%
-  summarize(n=sum(n)/365.24)
+  summarize(n=sum(n)/max(doy))
 head(cnts)
 
 # srccnts <- df %>%
@@ -109,7 +109,7 @@ head(cnts)
 p <- ggplot(gdf,aes(y=group_id*max(cnts$n)/max(group_id))) + 
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  geom_line(data=cnts,aes(x=year,y=n), colour="red",linewidth=2,alpha=0.5) +
+  geom_line(data=cnts,aes(x=year,y=n), colour="black",linewidth=2,alpha=0.65) +
   # geom_line(data=srccnts,aes(x=year,y=n, colour=LOC_STUDY),linewidth=1,alpha=0.85) +    
   geom_linerange(aes(xmin = year(startdate), xmax = year(enddate), group=name), alpha=.5) +
   geom_point(aes(year(startdate), group=name),size=.5) +
