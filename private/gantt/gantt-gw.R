@@ -23,6 +23,7 @@ q <- "SELECT L.LOC_ID, LOC_NAME, LOC_NAME_ALT1, LOC_STUDY, RD_NAME_CODE, RD_DATE
 qdf <- dbGetQuery(con,q) #%>% save(file="O:/q.Rda")
 df <- qdf %>%
   mutate(RD_DATE = as.Date(RD_DATE)) %>%
+  filter(year(RD_DATE)<year(Sys.Date())) %>%
   distinct()
 
 head(df)
@@ -114,7 +115,7 @@ p <- ggplot(gdf,aes(y=group_id*max(cnts$n)/max(group_id))) +
   geom_point(aes(year(startdate), group=name),size=.5) +
   geom_point(aes(year(enddate), group=name),size=.5) +
   scale_x_continuous(breaks=seq(min(year(gdf$startdate)),max(year(gdf$enddate)),by=10)) +
-  labs(title='ORMGP Groundwater Monitors',x='year',y='average annual number of concurrent stations reporting')
+  labs(title='Groundwater Monitors',x='year',y='average annual number of concurrent stations reporting')
 
 l <- ggplotly(p, tooltip = "name", height = 800) %>% 
   plotly::layout(legend=list(x=0, 

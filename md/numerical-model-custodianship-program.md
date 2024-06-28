@@ -5,16 +5,16 @@ output: html_document
 ---
 
 
-The [Oak Ridges Moraine Groundwater Program](https://www.oakridgeswater.ca/) actively maintains an archive of existing numerical models called the ORMGP **Model Custodianship Program**. To date, 90 sets of numerical model files have been received and checked for consistency (search for missing/corrupt files, etc.). Many have been "re-built" and re-organized from their original/delivered form into an operational file structure that is intuitive and self contained such that the sharing of the model file can be made effectively.
+The [Oak Ridges Moraine Groundwater Program](https://www.oakridgeswater.ca/) actively maintains an archive of existing numerical models called the ORMGP **Model Custodianship Program**. To date, 98 sets of numerical model files (not including derivatives of existing models) have been received and checked for consistency (searched for missing/corrupt files, etc.). Many have been "re-built" and re-organized from their original/delivered form into an operational file structure that is intuitive and self contained such that the sharing of the model file can be made effectively.
 
 We have since published our direction in the [Guide for Actively Managing Watershed-Scale Numerical Models in Ontario](https://www.oakridgeswater.ca/_files/ugd/4a0a6e_c41c71a481ea4657806e1fbb0c912f7a.pdf) (2017) and continue to maintain its philosophy.
 
 
 ### Model codes
 
-The ORMGP is aware that 3rd party/consultants maintain independent workflows and internal expertise that it would be restrictive for this model custodianship program to specify a particular model code . Instead, and with the support of our municipal partners, we maintain software licenses for a variety of model codes and third-party user interfaces.  
+The ORMGP is aware that 3rd party/consultants maintain independent workflows and internal expertise that it would be restrictive for this model custodianship program to specify a particular model code. Instead, and with the support of our municipal partners, we maintain software licenses for a variety of model codes and third-party user interfaces.  
 
-The models we maintain typically remain in the hydrological realm, including long-term continuos surface-water/groundwater integrated models and regional models used to manage and protect our groundwater resources. 
+The models we maintain typically remain in the hydrological realm, including long-term continuous surface-water/groundwater integrated models and regional models used to manage and protect our groundwater resources. 
 
 For source water protection, the models we archive can be typically categorized as:
 

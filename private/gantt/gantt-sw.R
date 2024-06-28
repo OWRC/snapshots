@@ -88,7 +88,7 @@ p <- ggplot(gdf,aes(y=group_id*max(srccnts$n)/max(group_id))) +
   geom_point(aes(year(startdate), group=name),size=.5) +
   geom_point(aes(year(enddate), group=name),size=.5) +
   scale_x_continuous(breaks=seq(min(year(gdf$startdate)),max(year(gdf$enddate)),by=10)) +
-  labs(title='ORMGP Streamflow Gauges',x='year',y='average annual number of concurrent stations reporting') #+
+  labs(title='Streamflow Gauges',x='year',y='average annual number of concurrent stations reporting') #+
   # scale_color_manual(values = c("black", "blue", "green", "yellow"))
 
 l <- ggplotly(p, tooltip = "name", height = 800) %>%
