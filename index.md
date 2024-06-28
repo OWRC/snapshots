@@ -27,9 +27,7 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 * **Database summaries**
   * [**Boreholes — Cumulative summary**](md/cum-bh.html)
   * [**Geologic Picks**](md/picks.html)
-  * [**Groundwater levels — Periods of record**](md/gantt-gw.html)
-  * [**Meteorological — Periods of record**](md/gantt-met.html)
-  * [**Stream Flow — Periods of record**](md/gantt-sw.html)
+  * [**Timeseries periods of record**](md/gantt.html)
 * [**Groundwater Variability and Trends**](md/gwvar.html)
 * [**Hydraulic Properties**](md/hydraulicProperties.html)
 * [**Numerical Model Custodianship Program**](md/numerical-model-custodianship-program.html)
