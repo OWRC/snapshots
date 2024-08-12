@@ -17,23 +17,26 @@ rooturl = 'https://owrc.github.io/'
 # FUNCTIONS
 #######################################################
 # https://www.geeksforgeeks.org/python-program-to-recursively-scrape-all-the-urls-of-the-website/
-ids=dict()
 coll=dict()
+skipped=set()
+ids=dict()
 def next(href, site):
     # clean-up link
     href = href.replace(rooturl+'/',rooturl)
     href = href.split("#", 1)[0] # remove internal section links
-    # if href[:-1]!="/" and href[-5:]!='.html': href+='/'
-    if href[:-2]=='//': href = href[1:]
+    if href[-2:]=='//': href = href[1:]
+    if href[-1:]!="/" and href[-5:]!='.html' and href[-4:]!='.pdf' and href[-4:]!='.zip': href+='/'
 
     coll[site].append(href)
-    if href not in ids:
-        ids[href]=len(ids)    
+    if href not in ids: 
+        ids[href]=len(ids)
         scrape(href)
         
 def scrape(site):
     if site in coll: return
     coll[site] = list()
+    if site == 'https://owrc.github.io/info/':
+        pass
     r = requests.get(site)
     s = BeautifulSoup(r.text,"html.parser")
     sa = s.find_all('a')
@@ -42,17 +45,24 @@ def scrape(site):
         if 'href' in i.attrs:
             href = i.attrs['href']
 
-            if href.startswith('md/'): href = site+href  #############  HARD-CODED, should be fixing page links (check snapshots)
+            if href.startswith('md/'): href = site+href  #############  HARD-CODED, should be fixing page links (check snapshots and info)            
 
-            # print(site+" > "+href)
-            if href.startswith(rooturl) or href.startswith("/"):
-                print(site+" >>> "+href.replace(rooturl,'/'))
-                if href.startswith("/"):
-                    next(rooturl+href, site)
-                # elif href.startswith("md/"):  
-                #     next(rooturl+'snapshots/'+href, site)
-                else:
-                    next(href, site)
+            if href.startswith('#'):
+                continue
+            elif href in ['Boston-Mills/', 'HighPark/', 'ee-11-1/']:
+                continue
+
+            print(site+" >>> "+href.replace(rooturl,'/'))
+
+            if href.startswith(rooturl):
+                next(href, site)
+            elif href.startswith("/"):
+                next(rooturl+href, site)
+            elif (href.endswith("/") or href.endswith(".html")) and not href.startswith('http'):
+                next(site+href, site)
+            else:
+                skipped.add(href)                
+                    
 
 def filter(root, lst):
     a = list()
@@ -73,25 +83,24 @@ def filter(root, lst):
 # calling function
 scrape(rooturl)
 
+coll = dict(sorted(coll.items()))
+ids=dict()
+for href in coll.keys():
+    if href not in ids: ids[href]=len(ids)
+
 grps=dict()
 grps[rooturl]=0
 for href in ids:
     lnk = href.replace(rooturl,"").split("/", 1)[0]
     # hard-coded exclusions 
     if lnk == '': continue
-    if lnk == 'Boston-Mills': continue
-    if lnk == 'HighPark': continue
-    if lnk == 'ee-11-1': continue
     if not lnk in grps: grps[lnk]=len(grps)
 
-# grps['Boston-Mills']=len(grps)
-# grps['HighPark']=len(grps)
-# grps['ee-11-1']=len(grps)
 
 
 # printing
 with open('sites.txt','w') as f: f.write('\n'.join(ids.keys()))
-
+with open('external.txt','w') as f: f.write('\n'.join(sorted(skipped)))
 
 
 def groupRecurse(root,href,gid):
