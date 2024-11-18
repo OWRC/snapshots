@@ -18,7 +18,7 @@ The models we maintain typically remain in the hydrological realm, including lon
 
 For source water protection, the models we archive can be typically categorized as:
 
-1. *Hydrologic* models: *(i)* take climatological information (i.e, precipitation, temperature, etc.); *(ii)* make estimates of other climatic processes (potential evaporation, snowmelt, etc.); and *(iii)* take land surface characteristics (imperviousness, use type, soil type, etc.) to project likely quantities of evapotranspiration, groundwater recharge, and overland runoff.
+1. *Hydrologic* models: i) take climatological information (i.e, precipitation, temperature, etc.); ii) make estimates of other climatic processes (potential evaporation, snowmelt, etc.); and iii) take land surface characteristics (imperviousness, use type, soil type, etc.) to project likely quantities of evapotranspiration, groundwater recharge, and overland runoff.
 1. *Groundwater* flow models take a 3D representation of the sub-surface and provide estimates of how water migrates underground. Among many things, the groundwater model requires estimates of *groundwater recharge*, as it is a major source of water into the groundwater system.
 1. *Integrated* models are a newer technology which include all of the processing of Hydrologic and Groundwater models in one, saving the need to working with many models.
 1. *Coupled* models are such projects where multiple models were required to gain an understanding of the surface-water/groundwater interaction. These models often work in conjunction iteratively, as both models can be made to provide feedback.
@@ -56,6 +56,6 @@ All requests for model codes have required the singing of a Model Sharing Agreem
 [__Request for numerical model(s) can be made here__](https://arcg.is/1OzLfX).
 
 
-As of the initiation of the program since 2017, a total of 29 models have been successfully redistributed and applied to water resource studies.
+As of the initiation of the program since 2017, a total of 33 models have been successfully redistributed and applied to water resource studies.
 
 ![](numerical-model-custodianship-program-getMSAdates.png)

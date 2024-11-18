@@ -45,6 +45,7 @@ m <- leaflet(mdl.bounds) %>% #, width = "100%", height = "500px", options = leaf
     
   addPolygons(weight = 1, color = ~factpal(ModelType), opacity = 1, group = ~ModelType,
               highlightOptions = highlightOptions(weight = 5),
+              label = ~ModelName,
               popup = ~paste0(ModelID,'<br><b>',ModelName,'</b><br>(',Delivery,')',
                               '<br>       Area: ',round(AreaKM2,1),'km²',
                               '<br> Model code: ',ModelCode,
