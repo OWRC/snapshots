@@ -56,7 +56,7 @@ muni.sf <- read_sf('E:/Sync/@gis/Boundaries/municipal/MUNICIPAL_BOUNDARY_open_da
 pnts_sf <- st_as_sf(wells.loc %>% filter(!is.na(LAT)), coords = c('LONG', 'LAT'), crs = st_crs(muni.sf))
 wells.loc.rfmt <- pnts_sf %>% 
   mutate(intersection = as.integer(st_intersects(geometry, muni.sf)), Municipality = if_else(is.na(intersection), '', muni.sf$NAME[intersection])) %>%
-  dplyr::select(-c(LOC_ID,LOC_NAME,LOC_NAME_ALT1,GRND_ELEV,loc.id,intersection)) %>%
+  dplyr::select(-c(LOC_ID,LOC_NAME,LOC_NAME_ALT1,GRND_ELEV,intersection)) %>%
   st_drop_geometry() 
 
 up.arr = "\u2191"
@@ -251,10 +251,10 @@ Summary of municipal production wells with existing or potential Chloride Issues
 ```{r tbl.Cl, echo=FALSE, warning=FALSE}
 wells.loc.rfmt %>%
   drop_na() %>%
-  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Name) %>%
+  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Well) %>%
   mutate('Current_Concentration (mg/L)'=Cl.current,'Current_Magnitude of change (mg/L)'=Cl.current-Cl.first) %>%
   mutate('2024 Projections_2040 Concentration (mg/L)'=if_else(Cl.pred.GAM>0,Cl.pred.GAM,0),'2024 Projections_Magnitude of change (mg/L)'=Cl.pred.GAM-Cl.current) %>%
-  mutate('Current_Comparison to ODWQS'=if_else(Cl.current<10,'Below','Above')) %>%
+  mutate('Current_Comparison to ODWQS'=if_else(Cl.current<250,'Below','Above')) %>%
   mutate('2024 Projections_Likelihood of exceeding ODWQS'=if_else(Cl.status==2,'Likely',if_else(Cl.status==1,'Somewhat likely','Unlikely'))) %>%
   mutate('Current_Trend direction'=if_else(Cl.cur.trnd > trnd.trsh,
                                    if_else(Cl.cur.trnd.sig==1,up.arr.str,up.arr),
@@ -292,7 +292,7 @@ Summary of municipal production wells with existing or potential Sodium Issues. 
 ```{r tbl.Na, echo=FALSE, warning=FALSE}
 wells.loc.rfmt %>%
   drop_na() %>%
-  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Name) %>%
+  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Well) %>%
   mutate('Current_Concentration (mg/L)'=Na.current,'Current_Magnitude of change (mg/L)'=Na.current-Na.first) %>%
   mutate('2024 Projections_2040 Concentration (mg/L)'=if_else(Na.pred.GAM>0,Na.pred.GAM,0),'2024 Projections_Magnitude of change (mg/L)'=Na.pred.GAM-Na.current) %>%
   mutate('Current_Comparison to ODWQS'=if_else(Na.current<200,'Below','Above')) %>%
@@ -334,7 +334,7 @@ Summary of municipal production wells with existing or potential Nitrate Issues.
 ```{r tbl.N03, echo=FALSE, warning=FALSE}
 wells.loc.rfmt %>%
   drop_na() %>%
-  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Name) %>%
+  mutate(Location_Municipality=str_to_title(Municipality),Location_Well=Well) %>%
   mutate('Current_Concentration (mg/L)'=NO3.current,'Current_Magnitude of change (mg/L)'=NO3.current-NO3.first) %>%
   mutate('2024 Projections_2040 Concentration (mg/L)'=if_else(NO3.pred.GAM>0,NO3.pred.GAM,0),'2024 Projections_Magnitude of change (mg/L)'=NO3.pred.GAM-NO3.current) %>%
   mutate('Current_Comparison to ODWQS'=if_else(NO3.current<10,'Below','Above')) %>%
@@ -374,7 +374,7 @@ wells.loc.rfmt %>%
 Status of each well in reference to the applicable half-Maximum Allowable Concentration and ODWQS objectives based on the most recent year of data. `Hover over any point to reveal municipal well properties, click for more details.` 
 
 ```{r mappal, echo=FALSE, warning=FALSE}
-  pal <- colorNumeric(c("black", "purple", "red"), 0:2)
+  pal <- colorNumeric(c('#4daf4a','#984ea3','#e41a1c'), 0:2)
 ```
 
 ### Chloride projections
@@ -393,15 +393,43 @@ leaflet(ctc.bound) %>%
               opacity = .4,
               options = pathOptions(clickable = FALSE)
   ) %>%
+  addCircleMarkers(data = wells.loc %>% filter(is.na(Cl.status) & is.na(Cl.current)),
+                   lat = ~LAT, lng= ~LONG,
+                   radius = 2,
+                   color = 'black', #'#999999',
+                   stroke = FALSE,
+                   opacity = 1,
+                   fillOpacity = 1,
+                   group="Show all municipal wells",
+                   label = ~Well,
+                   popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+                                   '<b>',Well,'</b>',
+                                   '<br><i>No Data</i>')
+  ) %>%
+  addCircleMarkers(data = wells.loc %>% filter(is.na(Cl.status) & !is.na(Cl.current)),
+                   lat = ~LAT, lng= ~LONG,
+                   radius = 1,
+                   color = '#ff7f00',
+                   opacity = 1,
+                   fillOpacity = 1,
+                   label = ~Well, 
+                   popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+                                   '<b>',Well,'</b>',
+                                   '<br><i>Limited Data</i>',
+                                   '<br>current conc: ', Cl.current,' mg/L',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png width="600"></a>',
+                                   '<br>click image to expand'),
+                   options = popupOptions(maxWidth = 1000)                 
+                   ) %>%
   addCircleMarkers(data = wells.loc %>% filter(!is.na(Cl.status)),
                    lat = ~LAT, lng= ~LONG,
                    radius = ~Cl.status*4,
                    color = ~pal(Cl.status),
                    opacity = 1,
                    fillOpacity = 1,
-                   label = ~Name, 
+                   label = ~Well, 
                    popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-                                   '<b>',Name,'</b>',
+                                   '<b>',Well,'</b>',
                                    '<br>ODWQS exceedance: ',case_when(Cl.status==0 ~ 'unlikely',
                                                               Cl.status==1 ~ 'somewhat likely',
                                                               Cl.status==2 ~ 'highly likely'),
@@ -412,12 +440,17 @@ leaflet(ctc.bound) %>%
                                    '<br>click image to expand'),
                    options = popupOptions(maxWidth = 1000)
                    ) %>%
-  addLegendCustom(colors = c('black','purple','red','white'), 
-                  labels = c('unlikely','somewhat likely','highly likely','CTC jurisdiction'), 
-                  sizes = c(2,7,15,15), 
-                  shapes = c('circle','circle','circle','square'), 
-                  borders = c('black','purple','red','black'), 
-                  opacity = 1.)
+  addLegendCustom(colors = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','white'), 
+                  labels = c('limited data','unlikely','somewhat likely','highly likely','CTC jurisdiction'), 
+                  sizes = c(10,10,15,20,20), 
+                  shapes = c('circle','circle','circle','circle','square'), 
+                  borders = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','black'), 
+                  opacity = 1.) %>%
+  addLayersControl(
+      overlayGroups = "Show all municipal wells",
+      position = 'bottomright',
+      options = layersControlOptions(collapsed = FALSE)
+    ) %>% hideGroup("Show all municipal wells")
 ```
 
 
@@ -437,15 +470,43 @@ leaflet(ctc.bound) %>%
               opacity = .4,
               options = pathOptions(clickable = FALSE)
   ) %>%
+  addCircleMarkers(data = wells.loc %>% filter(is.na(Na.status) & is.na(Na.current)),
+                   lat = ~LAT, lng= ~LONG,
+                   radius = 2,
+                   color = 'black', #'#999999',
+                   stroke = FALSE,
+                   opacity = 1,
+                   fillOpacity = 1,
+                   group="Show all municipal wells",
+                   label = ~Well,
+                   popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+                                   '<b>',Well,'</b>',
+                                   '<br><i>No Data</i>')
+  ) %>%
+  addCircleMarkers(data = wells.loc %>% filter(is.na(Na.status) & !is.na(Na.current)),
+                   lat = ~LAT, lng= ~LONG,
+                   radius = 1,
+                   color = '#ff7f00',
+                   opacity = 1,
+                   fillOpacity = 1,
+                   label = ~Well, 
+                   popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+                                   '<b>',Well,'</b>',
+                                   '<br><i>Limited Data</i>',
+                                   '<br>current conc: ', Na.current,' mg/L',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png width="600"></a>',
+                                   '<br>click image to expand'),
+                   options = popupOptions(maxWidth = 1000)                 
+                   ) %>%
   addCircleMarkers(data = wells.loc %>% filter(!is.na(Na.status)),
                    lat = ~LAT, lng= ~LONG,
                    radius = ~Na.status*4,
                    color = ~pal(Na.status),
                    opacity = 1,
                    fillOpacity = 1,
-                   label = ~Name, 
+                   label = ~Well, 
                    popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-                                   '<b>',Name,'</b>',
+                                   '<b>',Well,'</b>',
                                    '<br>ODWQS exceedance: ',case_when(Na.status==0 ~ 'unlikely',
                                                               Na.status==1 ~ 'somewhat likely',
                                                               Na.status==2 ~ 'highly likely'),
@@ -455,12 +516,17 @@ leaflet(ctc.bound) %>%
                                    '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    ) %>%
-  addLegendCustom(colors = c('black','purple','red','white'), 
-                  labels = c('unlikely','somewhat likely','highly likely','CTC jurisdiction'), 
-                  sizes = c(2,7,15,15), 
-                  shapes = c('circle','circle','circle','square'), 
-                  borders = c('black','purple','red','black'), 
-                  opacity = 1.)
+  addLegendCustom(colors = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','white'), 
+                  labels = c('limited data','unlikely','somewhat likely','highly likely','CTC jurisdiction'), 
+                  sizes = c(10,10,15,20,20), 
+                  shapes = c('circle','circle','circle','circle','square'), 
+                  borders = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','black'), 
+                  opacity = 1.) %>%
+  addLayersControl(
+      overlayGroups = "Show all municipal wells",
+      position = 'bottomright',
+      options = layersControlOptions(collapsed = FALSE)
+    ) %>% hideGroup("Show all municipal wells")
 ```
 
 
@@ -473,6 +539,7 @@ leaflet(ctc.bound) %>%
   setView(lng = -79.45, lat = 43.84, zoom = 9) %>%
   addFullscreenControl() %>%
   addTiles() %>%
+  # addTiles("https://tile.oakridgeswater.ca/basemap/{z}/{x}/{y}", group = "ORMGP basemap", options = providerTileOptions(attribution=" © Oak Ridges Moraine Groundwater Program", maxNativeZoom = 17)) %>%
   addPolygons(weight = 2,
               color = "black",
               fill=FALSE,
@@ -480,14 +547,42 @@ leaflet(ctc.bound) %>%
               opacity = .4,
               options = pathOptions(clickable = FALSE)
   ) %>%
+  addCircleMarkers(data = wells.loc %>% filter(is.na(NO3.status) & is.na(NO3.current)),
+                   lat = ~LAT, lng= ~LONG,
+                   radius = 2,
+                   color = 'black', #'#999999',
+                   stroke = FALSE,
+                   opacity = 1,
+                   fillOpacity = 1,
+                   group="Show all municipal wells",
+                   label = ~Well,
+                   popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+                                   '<b>',Well,'</b>',
+                                   '<br><i>No Data</i>')
+  ) %>%
+  addCircleMarkers(data = wells.loc %>% filter(is.na(NO3.status) & !is.na(NO3.current)),
+                   lat = ~LAT, lng= ~LONG,
+                   radius = 1,
+                   color = '#ff7f00',
+                   opacity = 1,
+                   fillOpacity = 1,
+                   label = ~Well, 
+                   popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
+                                   '<b>',Well,'</b>',
+                                   '<br><i>Limited Data</i>',
+                                   '<br>current conc: ', NO3.current,' mg/L',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png width="600"></a>',
+                                   '<br>click image to expand'),
+                   options = popupOptions(maxWidth = 1000)                 
+                   ) %>%
   addCircleMarkers(data = wells.loc %>% filter(!is.na(NO3.status)),
                    lat = ~LAT, lng= ~LONG,
                    radius = ~NO3.status*4,
                    color = ~pal(NO3.status),
                    opacity = 1,
                    fillOpacity = 1,
-                   label = ~Name, 
-                   popup = ~paste0('<b>',Name,'</b>',
+                   label = ~Well, 
+                   popup = ~paste0('<b>',Well,'</b>',
                                    '<br>ODWQS exceedance: ',case_when(NO3.status==0 ~ 'unlikely',
                                                               NO3.status==1 ~ 'somewhat likely',
                                                               NO3.status==2 ~ 'highly likely'),
@@ -497,12 +592,17 @@ leaflet(ctc.bound) %>%
                                    '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    ) %>%
-  addLegendCustom(colors = c('black','purple','red','white'), 
-                  labels = c('unlikely','somewhat likely','highly likely','CTC jurisdiction'), 
-                  sizes = c(2,7,15,15), 
-                  shapes = c('circle','circle','circle','square'), 
-                  borders = c('black','purple','red','black'), 
-                  opacity = 1.)
+  addLegendCustom(colors = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','white'), 
+                  labels = c('limited data','unlikely','somewhat likely','highly likely','CTC jurisdiction'), 
+                  sizes = c(10,10,15,20,20), 
+                  shapes = c('circle','circle','circle','circle','square'), 
+                  borders = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','black'), 
+                  opacity = 1.) %>%
+  addLayersControl(
+      overlayGroups = "Show all municipal wells",
+      position = 'bottomright',
+      options = layersControlOptions(collapsed = FALSE)
+    ) %>% hideGroup("Show all municipal wells")
 ```
 
 <br>
@@ -532,9 +632,9 @@ leaflet(ctc.bound) %>%
   addMarkers(data = wells.loc %>% filter(!is.na(Cl.status), Cl.cur.trnd>trnd.trsh),
              lat = ~LAT, lng= ~LONG,
              icon = icons.up,
-             label = ~Name, 
+             label = ~Well, 
              popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-               '<b>',Name,':</b> Chloride',
+               '<b>',Well,':</b> Chloride',
                '<br>ODWQS exceedance: ',case_when(Cl.status==0 ~ 'unlikely',
                                                   Cl.status==1 ~ 'somewhat likely',
                                                   Cl.status==2 ~ 'highly likely'),
@@ -546,9 +646,9 @@ leaflet(ctc.bound) %>%
   addMarkers(data = wells.loc %>% filter(!is.na(Cl.status), Cl.cur.trnd < -trnd.trsh),
              lat = ~LAT, lng= ~LONG,
              icon = icons.dwn,
-             label = ~Name, 
+             label = ~Well, 
              popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-               '<b>',Name,':</b> Chloride',
+               '<b>',Well,':</b> Chloride',
                '<br>ODWQS exceedance: ',case_when(Cl.status==0 ~ 'unlikely',
                                                   Cl.status==1 ~ 'somewhat likely',
                                                   Cl.status==2 ~ 'highly likely'),
@@ -582,9 +682,9 @@ leaflet(ctc.bound) %>%
   addMarkers(data = wells.loc %>% filter(!is.na(Na.status), Na.cur.trnd>trnd.trsh),
              lat = ~LAT, lng= ~LONG,
              icon = icons.up,
-             label = ~Name, 
+             label = ~Well, 
              popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-               '<b>',Name,':</b> Chloride',
+               '<b>',Well,':</b> Chloride',
                '<br>ODWQS exceedance: ',case_when(Na.status==0 ~ 'unlikely',
                                                   Na.status==1 ~ 'somewhat likely',
                                                   Na.status==2 ~ 'highly likely'),
@@ -596,9 +696,9 @@ leaflet(ctc.bound) %>%
   addMarkers(data = wells.loc %>% filter(!is.na(Na.status), Na.cur.trnd < -trnd.trsh),
              lat = ~LAT, lng= ~LONG,
              icon = icons.dwn,
-             label = ~Name, 
+             label = ~Well, 
              popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-               '<b>',Name,':</b> Chloride',
+               '<b>',Well,':</b> Chloride',
                '<br>ODWQS exceedance: ',case_when(Na.status==0 ~ 'unlikely',
                                                   Na.status==1 ~ 'somewhat likely',
                                                   Na.status==2 ~ 'highly likely'),
@@ -632,9 +732,9 @@ leaflet(ctc.bound) %>%
   addMarkers(data = wells.loc %>% filter(!is.na(NO3.status), NO3.cur.trnd>trnd.trsh),
              lat = ~LAT, lng= ~LONG,
              icon = icons.up,
-             label = ~Name, 
+             label = ~Well, 
              popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-               '<b>',Name,':</b> Chloride',
+               '<b>',Well,':</b> Chloride',
                '<br>ODWQS exceedance: ',case_when(NO3.status==0 ~ 'unlikely',
                                                   NO3.status==1 ~ 'somewhat likely',
                                                   NO3.status==2 ~ 'highly likely'),
@@ -646,9 +746,9 @@ leaflet(ctc.bound) %>%
   addMarkers(data = wells.loc %>% filter(!is.na(NO3.status), NO3.cur.trnd < -trnd.trsh),
              lat = ~LAT, lng= ~LONG,
              icon = icons.dwn,
-             label = ~Name, 
+             label = ~Well, 
              popup = ~paste0(#'<style> div.leaflet-popup-content {width:auto !important;}</style>',
-               '<b>',Name,':</b> Chloride',
+               '<b>',Well,':</b> Chloride',
                '<br>ODWQS exceedance: ',case_when(NO3.status==0 ~ 'unlikely',
                                                   NO3.status==1 ~ 'somewhat likely',
                                                   NO3.status==2 ~ 'highly likely'),
