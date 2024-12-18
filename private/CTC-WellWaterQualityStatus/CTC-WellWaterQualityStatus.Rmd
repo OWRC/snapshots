@@ -138,6 +138,10 @@ The region is complex and diverse in terms of geology, physiology, population, a
 
 <br>
 
+### Wells outside the CTC
+
+In addition to the CTC Source Protection Region wells, municipal well data added to the ORMGP database are also included in the analysis. Many of the wells are not accompanied with water quality information. Should municipalities wish to include their water quality data within this snapshot, please [contact the ORMGP](mailto:support@owrc.ca).
+
 
 # Purpose of the snapshot
 
@@ -158,9 +162,9 @@ There are many analytic techniques available to assess water quality trends, mod
 Groundwater chemistry is evaluated based on the Ontario Drinking Water Quality Standards Guidelines (ODWQS; MOE, 2006). ODWQS has defined an aesthetic objective for chloride of 250 mg/L, sodium of 200 mg/L and a maximum acceptable concentration for nitrite + nitrate (i.e., nitrate) of 10 mg/L. Regarding municipal drinking water wells, the Local Medical Officer of Health is notified when sodium concentrations exceed 20 mg/L so that information may be communicated to local physicians for use with patients on sodium reduced diets. 
 The focus on chloride, sodium, and nitrate is to identify and differentiate natural versus anthropogenic impacts on groundwater quality. An increasing trend over time in these parameters shows an anthropogenic impact. In addition, these three parameters have been identified as existing drinking water *Issues* in the CTC Source Protection Region.
 
-## Generalized Additive Mixed Model
+## Generalized Additive Mixed Model (GAMM) {#gamm}
 
-Generalized Additive Mixed Models (GAMM) are an extension of simple regressions, where the distribution is not defined. These models are particularly useful for data sets with non-normal error distributions (i.e., proportions, counts, or when they do not have negative values) and when data points are not independent. This makes the GAMM a good approach for environmental monitoring data. In addition, these models are non-parametric, so data do not need to be normalized. This ensures that the relationship between the predictor and independent factor are not modified in the transformation process. These models are also able to include covariates and predictors, to help explain the observed trends, so we can isolate drivers behind an observed *Issue*, and better develop a management response to improve conditions. 
+Generalized additive models are an extension of simple regressions, where the distribution is not defined. These models are particularly useful for data sets with non-normal error distributions (i.e., proportions, counts, or when they do not have negative values) and when data points are not independent. This makes the GAMM a good approach for environmental monitoring data. In addition, these models are non-parametric, so data do not need to be normalized. This ensures that the relationship between the predictor and independent factor are not modified in the transformation process. These models are also able to include covariates and predictors, to help explain the observed trends, so we can isolate drivers behind an observed *Issue*, and better develop a management response to improve conditions. 
 
 Notably, GAMMs can identify patterns in the data that are more difficult to detect with other techniques. This is because the models are non-monotonic and can pick up on periods of increase and decrease within a year, and across years (**Figure 1**). Being able to isolate trends in months or seasons improves the effectiveness of mitigation recommendations.
 
@@ -371,7 +375,7 @@ wells.loc.rfmt %>%
 
 # Maps: Projections
 
-Status of each well in reference to the applicable half-Maximum Allowable Concentration and ODWQS objectives based on the most recent year of data. Please refer to [the description above](#Generalized_Additive_Mixed_Model) for more information on the exceedance likelihoods and confidence.
+Status of each well in reference to the applicable half-Maximum Allowable Concentration and ODWQS objectives based on the most recent year of data. Please refer to [the description above](#gamm) for more information on the exceedance likelihoods and confidence.
 
 `Hover over any point to reveal municipal well properties; click point for more details; click on image to enlarge` 
 
@@ -618,7 +622,7 @@ Notes:
 1. For the *current* period, concentrations are based on median observed values, and trends are based on GAMM results. 
 1. For *2040 projections*, concentrations and trend directions are based solely on GAMMs, 
 1. Trends are deemed when GAMM slopes exceed $\pm$ `r trnd.trsh` mg/L/year
-1. likelihood of exceedance is based on [comparison of GAMM and linear regression](#Generalized_Additive_Mixed_Model). 
+1. likelihood of exceedance is based on [comparison of GAMM and linear regression](#gamm). 
 
 `Hover over any point to reveal municipal well properties, click for more details.`
 
