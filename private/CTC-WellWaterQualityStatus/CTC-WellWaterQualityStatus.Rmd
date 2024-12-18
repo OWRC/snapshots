@@ -417,7 +417,7 @@ leaflet(ctc.bound) %>%
                                    '<b>',Well,'</b>',
                                    '<br><i>Limited Data</i>',
                                    '<br>current conc: ', Cl.current,' mg/L',
-                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png width="600"></a>',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png" target="_blank"><img src = https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    options = popupOptions(maxWidth = 1000)                 
                    ) %>%
@@ -436,7 +436,7 @@ leaflet(ctc.bound) %>%
                                    '<br>confidence: ', Cl.conf,
                                    '<br>current conc: ', Cl.current,' mg/L',
                                    '<br>projected conc: ', Cl.pred.GAM,' mg/L',
-                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png width="600"></a>',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png" target="_blank"><img src = https://golang.oakridgeswater.ca/pages/CTC/Chloride/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    options = popupOptions(maxWidth = 1000)
                    ) %>%
@@ -494,7 +494,7 @@ leaflet(ctc.bound) %>%
                                    '<b>',Well,'</b>',
                                    '<br><i>Limited Data</i>',
                                    '<br>current conc: ', Na.current,' mg/L',
-                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png width="600"></a>',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png" target="_blank"><img src = https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    options = popupOptions(maxWidth = 1000)                 
                    ) %>%
@@ -513,7 +513,7 @@ leaflet(ctc.bound) %>%
                                    '<br>confidence: ', Na.conf,
                                    '<br>current conc: ', Na.current,' mg/L',
                                    '<br>projected conc: ', Na.pred.GAM,' mg/L',
-                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png width="600"></a>',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png" target="_blank"><img src = https://golang.oakridgeswater.ca/pages/CTC/Sodium/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    ) %>%
   addLegendCustom(colors = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','white'), 
@@ -571,7 +571,7 @@ leaflet(ctc.bound) %>%
                                    '<b>',Well,'</b>',
                                    '<br><i>Limited Data</i>',
                                    '<br>current conc: ', NO3.current,' mg/L',
-                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png width="600"></a>',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png" target="_blank"><img src = https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    options = popupOptions(maxWidth = 1000)                 
                    ) %>%
@@ -589,7 +589,7 @@ leaflet(ctc.bound) %>%
                                    '<br>confidence: ', NO3.conf,
                                    '<br>current conc: ', NO3.current,' mg/L',
                                    '<br>projected conc: ', NO3.pred.GAM,' mg/L',
-                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png"><img src = https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png width="600"></a>',
+                                   '<br><a href="https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png" target="_blank"><img src = https://golang.oakridgeswater.ca/pages/CTC/Nitrate/', LOC_ID, '.png width="600"></a>',
                                    '<br>click image to expand'),
                    ) %>%
   addLegendCustom(colors = c('#ff7f00','#4daf4a','#984ea3','#e41a1c','white'), 
