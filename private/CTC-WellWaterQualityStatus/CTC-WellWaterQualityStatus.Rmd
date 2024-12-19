@@ -245,11 +245,13 @@ For the **detailed methodology** applied to produce the plots, please refer to t
 
 Maps providing an overview of the status and trend results for the sixty-six municipal production wells are presented below. In all the figures, the term Maximum Acceptable Concentration (MAC) and ODWQS refer to the same threshold and are interchangeable.
 
+> Note: The future projection concentrations for some wells predict a concentration of 0 mg/L and a negative magnitude of change. For the sake of transparency, these projection values will remain as currently presented, as these results are based on a statistical model projection and are thus not definitive. Please use your better judgement.
+
 <br>
 
 ### Chloride by well
 
-Summary of municipal production wells with existing or potential Chloride Issues. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
+Summary of chloride status, trend, and projections for municipal production wells in the CTC SPR. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
 
 
 ```{r tbl.Cl, echo=FALSE, warning=FALSE}
@@ -290,7 +292,7 @@ wells.loc.rfmt %>%
 
 ### Sodium by well
 
-Summary of municipal production wells with existing or potential Sodium Issues. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
+Summary of sodium status, trend, and projections for municipal production wells in the CTC SPR. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
 
 
 ```{r tbl.Na, echo=FALSE, warning=FALSE}
@@ -332,7 +334,7 @@ wells.loc.rfmt %>%
 
 ### Nitrate by well
 
-Summary of municipal production wells with existing or potential Nitrate Issues. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
+Summary of nitrate status, trend, and projections for municipal production wells in the CTC SPR. For the current period, concentrations are based on median observed values, and trends are based on GAMM results. For 2040 projections, concentrations and trend directions are based on GAMMs, and likelihood of exceedance is based on comparison of GAMM and linear regression.
 
 
 ```{r tbl.N03, echo=FALSE, warning=FALSE}

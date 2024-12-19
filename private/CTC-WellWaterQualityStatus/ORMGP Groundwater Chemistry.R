@@ -18,7 +18,7 @@ library(writexl) #Write Excel files
 library(lubridate) #Manipulate dates
 library(scales) #More figure customization
 library(cowplot) #Overlaying figures
-library(mgcv) # GAMs
+library(mgcv) # GAMMs
 library(stringr)
 
 
@@ -185,7 +185,8 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
   # --- --- Read data -  probably include a function here for filtering relevant data
   Wells <- dftem %>%
     as_tibble()  %>%
-    mutate(Time = Year + (Month - 1)*0.09)
+    # mutate(Time = Year + (Month - 1)*0.09)
+    mutate(Time = Year + yday(Date)/366.1)
   #
   
   # --- --- Check for data gaps and identify start date for analysis
@@ -310,8 +311,6 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
           inner_join(., Wells %>% select(Muni, Well, Parameter) %>% distinct()) %>%
           select(Muni, Well, Parameter, Years) %>%
           arrange(Muni, Parameter, Well)
-        
-        
       }
     )
   
@@ -765,9 +764,7 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
       
       Report.Line = ifelse(para == "Sodium", "dotted", "blank")
       Report.Text = ifelse(para == "Sodium", "Reporting Threshold", NA)
-      
 
-      
       
       # Modelling
       GAM.Model <- gamm(Value ~ s(Time, k = K), # cc = cyclic cubic
@@ -830,6 +827,7 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
     # neat_K5_K3(muni = "Acton" , well_id = "Davidson 1", para = "Chloride")
     # neat_K5_K3(muni = "Peel", well_id = "Inglewood 4", para = "Sodium")
     # neat_K5_K3(muni = "Peel", well_id = "Caledon Village 3", para = "Nitrate")
+    # neat_K5_K3(muni = "Caledon", well_id = "Palgrave PW 2", para = "Chloride")
     
     # # Suggested size
     # neat_K5_K3(muni = "Orangeville", well_id = "Well 6", para = "Chloride") %>%
@@ -939,15 +937,15 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
                 axis.title = element_text(size = 11),
                 legend.text = element_text(size = 9),
                 legend.position = "bottom")
-      }    
+      }   
+      
+      # # Test
+      # neat_S(muni = "Acton", well_id = "Davidson 1", para = "Nitrate")
+      # neat_S(muni = "Orangeville", well_id = "Well 9B", para = "Chloride")
+      # neat_S(muni = "Caledon", well_id = "Palgrave PW 2", para = "Chloride")      
+      
     }
 
-
-    
-    # Test
-    # neat_S(muni = "Acton", well_id = "Davidson 1", para = "Nitrate")
-    # neat_S(muni = "Orangeville", well_id = "Well 9B", para = "Chloride")
-    
     #
     
     #   2c: Predictions (GAM & LM) ####
@@ -1116,6 +1114,7 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
     # neat_K5_LM.P(muni = "Georgetown", well_id = "Cedarvale 1/1A", para = "Chloride")
     # neat_K5_LM.P(muni = "Orangeville" , well_id = "Well 10", para = "Sodium")
     # neat_K5_LM.P(muni = "Orangeville" , well_id = "Well 5", para = "Nitrate")
+    # neat_K5_LM.P(muni = "Caledon", well_id = "Palgrave PW 2", para = "Chloride")
     
     #   Blank plot
     ggblank <- function(msg="There is insufficient data\nto make a projection") {
@@ -1137,7 +1136,7 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
       Bucket5 = round((nowyear-1 - Start)/(K - 1), 0)
       n = nrow(Wells %>% filter(Muni == muni & Well == well_id & Parameter == para))
 
-      if (K>Kmax | Bucket5<3 | n<35 ) {
+      if (K>Kmax | Bucket5<3 | n<25 ) {
         plot_grid(neat_K5_K3(muni = muni, well_id = well_id, para = para),
                   ggblank(),
                   nrow = 1)     
@@ -1162,6 +1161,7 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
     # Test
     # Assembly.Three(muni = "Orangeville", well = "Well 9A", para = "Chloride")
     # Assembly.Two(muni = "Georgetown", well_id = "C1", para = "Chloride")
+    # Assembly.Two(muni = "Caledon", well_id = "Palgrave PW 2", para = "Chloride")
     
     # Suggested sizes for individual figures
     # Assembly.Three(muni = "Orangeville", well_id = "Well 9A", para = "Chloride") #%>%
@@ -1233,7 +1233,7 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
 
       })
 
-    # Create all the non-seasonal figures
+    # # Create all the non-seasonal figures (for testing without pmap)
     # for (i in seq_len(length(NonSeasonal.List$Muni))) {
     #   muni = NonSeasonal.List$Muni[i]
     #   well_id = NonSeasonal.List$Well[i]
@@ -1249,7 +1249,7 @@ RunCVCscript <- function(dftem, dfloc, nowyear=2023, endyear=2040) {
         if (Parameter=="Nitrate") dfloc$NO3.conf[dfloc$Well==Well] <<- "low"
         if (Parameter=="Chloride") dfloc$Cl.conf[dfloc$Well==Well] <<- "low"
         if (Parameter=="Sodium") dfloc$Na.conf[dfloc$Well==Well] <<- "low"
-        
+
         Assembly.Two(muni = Muni, well_id = Well, para = Parameter) %>%
           ggsave(# path = "dat/non-seasonal",
                 # file = paste0(Parameter, " ", Muni, " ", str_replace(Well,"/","-"), ".png"),
