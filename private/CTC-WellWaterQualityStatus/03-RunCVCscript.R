@@ -5,7 +5,7 @@ source('ORMGP Groundwater Chemistry.R')
 
 
 
-dftem <- read.csv("dat/temporal.csv")
+dftem <- read.csv("dat/temporal.csv") %>% drop_na()
 dfloc <- read.csv('dat/locations.csv')
 
 
@@ -36,14 +36,14 @@ write.csv(df.all, 'dat/locations-stats.csv', row.names = FALSE)
 
 
 
-# # for testing
-# m <- "Vaughan" # "Caledon" # "Scugog" #"Marmora and lake" # "Whitchurch-stouffville" #  "
-# # View(dftem %>% filter(Muni==m))
-# # RunCVCscript(dftem %>% filter(Muni==m),dfloc %>% filter(Muni==m))
-# source('ORMGP Groundwater Chemistry.R')
-# dfloc2 <- RunCVCscript(dftem %>% filter(Muni==m),dfloc %>% filter(Muni==m))
-# print(dfloc2)
+# for testing
+m <- "Milton" # "Vaughan" # "Caledon" # "Scugog" #"Marmora and lake" # "Whitchurch-stouffville" #  "
+# View(dftem %>% filter(Muni==m))
+# RunCVCscript(dftem %>% filter(Muni==m),dfloc %>% filter(Muni==m))
+source('ORMGP Groundwater Chemistry.R')
+dfloc2 <- RunCVCscript(dftem %>% filter(Muni==m),dfloc %>% filter(Muni==m))
+print(dfloc2)
 
 
-# dftem <- dftem %>% filter(Muni==m)
+# dftem <- View(dftem %>% filter(Muni==m))
 # dfloc <- dfloc %>% filter(Muni==m)

@@ -51,13 +51,16 @@ wells.loc <- read.csv('dat/locations-stats.csv') %>%
   mutate(Na.current=round(Na.current,2),Na.first=round(Na.first,2),Na.pred.GAM=round(Na.pred.GAM,2),Na.pred.LM=round(Na.pred.LM,2)) %>%
   mutate(NO3.current=round(NO3.current,2),NO3.first=round(NO3.first,2),NO3.pred.GAM=round(NO3.pred.GAM,2),NO3.pred.LM=round(NO3.pred.LM,2))
 
-muni.sf <- read_sf('E:/Sync/@gis/Boundaries/municipal/MUNICIPAL_BOUNDARY_open_data_shapefiles/MUNICIPAL_BOUNDARY_UPPER_TIER_AND_DISTRICT.shp')
+# muni.sf <- read_sf('E:/Sync/@gis/Boundaries/municipal/MUNICIPAL_BOUNDARY_open_data_shapefiles/MUNICIPAL_BOUNDARY_UPPER_TIER_AND_DISTRICT.shp')
+# pnts_sf <- st_as_sf(wells.loc %>% filter(!is.na(LAT)), coords = c('LONG', 'LAT'), crs = st_crs(muni.sf))
+# wells.loc.rfmt <- pnts_sf %>% 
+#   mutate(intersection = as.integer(st_intersects(geometry, muni.sf)), Municipality = if_else(is.na(intersection), '', muni.sf$NAME[intersection])) %>%
+#   dplyr::select(-c(LOC_ID,LOC_NAME,LOC_NAME_ALT1,GRND_ELEV,intersection)) %>%
+#   st_drop_geometry() 
 
-pnts_sf <- st_as_sf(wells.loc %>% filter(!is.na(LAT)), coords = c('LONG', 'LAT'), crs = st_crs(muni.sf))
-wells.loc.rfmt <- pnts_sf %>% 
-  mutate(intersection = as.integer(st_intersects(geometry, muni.sf)), Municipality = if_else(is.na(intersection), '', muni.sf$NAME[intersection])) %>%
-  dplyr::select(-c(LOC_ID,LOC_NAME,LOC_NAME_ALT1,GRND_ELEV,intersection)) %>%
-  st_drop_geometry() 
+wells.loc.rfmt <- wells.loc %>% 
+  mutate(Municipality = Upp_Muni) %>%
+  dplyr::select(-c(LOC_ID,LOC_NAME,LOC_NAME_ALT1,GRND_ELEV)) 
 
 up.arr = "\u2191"
 up.arr.str = paste0(up.arr,"*")
@@ -245,7 +248,7 @@ For the **detailed methodology** applied to produce the plots, please refer to t
 
 Maps providing an overview of the status and trend results for the sixty-six municipal production wells are presented below. In all the figures, the term Maximum Acceptable Concentration (MAC) and ODWQS refer to the same threshold and are interchangeable.
 
-> Note: The future projection concentrations for some wells predict a concentration of 0 mg/L and a negative magnitude of change. For the sake of transparency, these projection values will remain as currently presented, as these results are based on a statistical model projection and are thus not definitive. Please use your better judgement.
+<!-- > Note: The future projection concentrations for some wells predict a concentration of 0 mg/L and a negative magnitude of change. For the sake of transparency, these projection values will remain as currently presented, as these results are based on a statistical model projection and are thus not definitive. Please use your better judgement. -->
 
 <br>
 
