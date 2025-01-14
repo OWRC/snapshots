@@ -51,6 +51,17 @@ wells.loc <- read.csv('dat/locations-stats.csv') %>%
   mutate(Na.current=round(Na.current,2),Na.first=round(Na.first,2),Na.pred.GAM=round(Na.pred.GAM,2),Na.pred.LM=round(Na.pred.LM,2)) %>%
   mutate(NO3.current=round(NO3.current,2),NO3.first=round(NO3.first,2),NO3.pred.GAM=round(NO3.pred.GAM,2),NO3.pred.LM=round(NO3.pred.LM,2))
 
+
+# Crop to CTC
+wells.loc <- wells.loc %>%
+  merge(st_join(ctc.bound,
+                wells.loc %>% st_as_sf(coords = c("LONG", "LAT"), crs = "NAD83"),
+                join=st_contains) %>% select('LOC_ID'),
+             by='LOC_ID') %>% 
+  st_drop_geometry() %>%
+  select(-'geometry')
+
+
 # muni.sf <- read_sf('E:/Sync/@gis/Boundaries/municipal/MUNICIPAL_BOUNDARY_open_data_shapefiles/MUNICIPAL_BOUNDARY_UPPER_TIER_AND_DISTRICT.shp')
 # pnts_sf <- st_as_sf(wells.loc %>% filter(!is.na(LAT)), coords = c('LONG', 'LAT'), crs = st_crs(muni.sf))
 # wells.loc.rfmt <- pnts_sf %>% 
