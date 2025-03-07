@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
 
-dfLoc = pd.read_json('https://golang.oakridgeswater.ca/locsw')
+dfLoc = pd.read_json('https://data.oakridgeswater.ca/locsw')
 
 # # filter by polygon
 # with open("E:/Sync/@prj/MECP/lake_ontario_north_shore/shp/drain_bound.geojson") as f: features = json.load(f)["features"]
@@ -30,9 +30,11 @@ dfLoc = pd.read_json('https://golang.oakridgeswater.ca/locsw')
 # dfLoc = dfLoc[dfLoc.apply(point_in_polygon,axis=1)]
 
 # filter by quality (10yr POR, <25% missing, must have observations since 2000)
-dfLoc = dfLoc[dfLoc['YRe'] > 1999]
+dfLoc['DTb'] = pd.to_datetime(dfLoc['DTb'])
+dfLoc['DTe'] = pd.to_datetime(dfLoc['DTe'])
+dfLoc = dfLoc[dfLoc['DTe'].dt.year > 1999]
 dfLoc = dfLoc[dfLoc['CNT'] > 365.24*10*.75]
-dfLoc = dfLoc[dfLoc['YRe'] - dfLoc['YRb'] > 9]
+dfLoc = dfLoc[dfLoc['DTe'].dt.year - dfLoc['DTb'].dt.year > 9]
 
 
 
@@ -44,17 +46,18 @@ month_names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'
 pbar = tqdm(total=len(dfLoc))
 for i, row in dfLoc.iterrows():
     iid = int(row['INT_ID']) 
-    # if iid != 1311236873: continue
+    # if iid != 731100015: continue
     pbar.update()
     pbar.set_description(str(iid))
     da = float(row['SW_DRAINAGE_AREA_KM2'])
-    tem = pd.read_json('https://golang.oakridgeswater.ca/intgen/5/{}'.format(iid))
+    if  np.isnan(da): continue
+    tem = pd.read_json('https://golang.oakridgeswater.ca/intgen/2/{}'.format(iid))
     tem = tem[tem['RDNC']==1001]
     if 'RDTC' not in tem: tem['RDTC'] = np.nan
     tem = tem.drop(['RDNC', 'RDTC', 'unit'], axis=1)
     tem.set_index('Date', inplace=True)
+    tem = tem[tem['Val']>0]
     if tem.empty: continue
-
     k[i] = recessionCoef(tem)
     
     tem['baseflow'] = estimateBaseflow(tem, da, k[i])
@@ -100,4 +103,4 @@ dfLoc['BFI'] = dfLoc.index.map(bfi)
 dfLoc['html'] = dfLoc.index.map(html)
 
 print(dfLoc)
-dfLoc.to_csv('snapshots-private/baseflow/baseflow-piechart-gauge-summary.csv', index=False)
+dfLoc.to_csv('snapshots/private/baseflow/baseflow-piechart-gauge-summary.csv', index=False)

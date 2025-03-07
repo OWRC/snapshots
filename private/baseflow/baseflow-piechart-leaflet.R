@@ -50,11 +50,12 @@ m <- basemap  %>%
   addCircleMarkers(
     df$LONG, df$LAT,
     radius = (df$normQ+offset)/denom/2,
-    fill = FALSE,
     weight=2,
     color ="black",
+    label = paste0(df$LOC_NAME,': ',df$LOC_NAME_ALT1),
     # popup = lapply(df$html,htmltools::HTML),
     opacity = .8, 
+    fillOpacity = .0,
     group='pts'
   )
 
@@ -64,4 +65,4 @@ m <- basemap  %>%
   # )
 
 
-htmlwidgets::saveWidget(m, "baseflow/baseflow-piechart.html")
+htmlwidgets::saveWidget(m, "baseflow-piechart.html")

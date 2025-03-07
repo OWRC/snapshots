@@ -23,7 +23,7 @@ p1 <- ggplot(df) +
 # ggsave("hist-slowflow.png", width = 12, height = 10, units = "cm")
 
 
-med2 <- median(df$BFI)
+med2 <- median(df$BFI, na.rm = T)
 p2 <- ggplot(df) +
   geom_histogram(aes(x=BFI), colour = 1, fill = "white") +
   geom_vline(xintercept = med2, linetype='dashed', size=1) +
@@ -34,5 +34,5 @@ p2 <- ggplot(df) +
 grid.arrange(p1, p2, ncol=2)
 
 g <- arrangeGrob(p1, p2, ncol=2)
-ggsave("baseflow/baseflow-histogram.png", g, width = 18, height = 10, units = "cm")
+ggsave("baseflow-histogram.png", g, width = 18, height = 10, units = "cm")
 

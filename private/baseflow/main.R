@@ -9,18 +9,19 @@ library(leaflet.minicharts)
 library(leaflegend)
 library(leafpop)
 library(dplyr)
+library(lubridate)
 
 # YRe = replace(YRe, YRe>YRx, YRx)
 
-df <- read.csv("baseflow/baseflow-piechart-gauge-summary.csv") %>%
+df <- read.csv("baseflow-piechart-gauge-summary.csv") %>%
   mutate(slowflow=meanQ*BFI,
          quickflow=meanQ*(1-BFI),
          normQ=meanQ/SW_DRAINAGE_AREA_KM2*86400*365.24/1000,
          normQ=replace(normQ, normQ>1000, 1000), ##################################################################################
          normSlow=normQ*BFI,
          lab=paste0("<h2>",paste0(LOC_NAME,': ',LOC_NAME_ALT1),"</h2>",
-                    "Period of record: ",YRb,"-",YRe,
-                    "<br>Missing data: ",round((1-QUAL)*100,1),"%",
+                    "Period of record: ",year(DTb),"-",year(DTe),
+                    # "<br>Missing data: ",round((1-QUAL)*100,1),"%",
                     "<br>Drainage area: ",round(SW_DRAINAGE_AREA_KM2,1)," km²",
                     "<br>Mean discharge: ",round(meanQ,2)," m³/s",
                     "<br>Baseflow index: ", round(BFI,3),
@@ -32,8 +33,8 @@ df <- read.csv("baseflow/baseflow-piechart-gauge-summary.csv") %>%
   filter_all(all_vars(!is.infinite(.))) %>%
   filter(!(LOC_NAME %in% c('02EC004','02EC918'))) # exclusions, mainly severn canal
 
-mean <- mean(df$normSlow)
-sd <- sd(df$normSlow)
-med <- median(df$normSlow)
+mean <- mean(df$normSlow, na.rm = T)
+sd <- sd(df$normSlow, na.rm = T)
+med <- median(df$normSlow, na.rm = T)
 n <- nrow(df)
 
