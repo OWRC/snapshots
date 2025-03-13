@@ -6,11 +6,12 @@
 ## must run main.R
 
 
+sf.CAs <- read_sf("E:/Sync/@gis/Boundaries/partner_CA_regions.shp") %>%
+  st_transform(4326)
+  
 
-
-
-
-basemap <- leaflet( #width = "100%", height = "500px",
+basemap <- leaflet(st_zm(sf.CAs),
+                   # width = "100%", height = "500px",
                    # options = leafletOptions( #zoomControl = FALSE,
                    #                          attributionControl=FALSE)
   ) %>%
@@ -18,8 +19,14 @@ basemap <- leaflet( #width = "100%", height = "500px",
   addTiles(attribution = '<a href="https://owrc.github.io/snapshots/md/baseflow-piechart.html" target="_blank" rel="noopener noreferrer"><b>README</b></a>') %>%
   addTiles(group='OSM') %>% # addProviderTiles(providers$OpenTopoMap) %>% #
   addFullscreenControl() %>%
+  addPolygons(
+    fill=FALSE,
+    opacity=1.,
+    weight=.25,
+    color = 'black'
+  ) #%>%
   # addGeoJSON(ormgp.bound, weight = 4, color = "black", fillOpacity = .1, dashArray = c(10, 5), opacity = .8, group = "ORMGP jurisdiction") %>%
-  setView(lng = -78.89, lat = 43.9, zoom = 9)
+  # setView(lng = -78.89, lat = 43.9, zoom = 9)
 
 colors <- c("#ad6d00","#0069f2")
 
@@ -30,12 +37,13 @@ breaks <- c(200,400,600,800)
 sizes <- (breaks+offset)/denom
 symbols <- Map(makeSymbol, shape = 'circle', width = sizes, 
                height = sizes, color = 'black',  
-               opacity = .8, fillOpacity = 0, `stroke-width` = 2)
+               opacity = .8, fillOpacity = 0, `stroke-width` = 3)
 
 m <- basemap  %>%
   addLegendImage(images = symbols, labels = breaks, 
                  title = 'Total stream flow = slow+quick (mm/yr)', orientation = 'horizontal', labelStyle = "",
                  width = sizes, height = sizes, position = 'bottomright') %>%
+  
   addMinicharts(
     df$LONG, df$LAT,
     type = "pie",
@@ -48,12 +56,14 @@ m <- basemap  %>%
     legendPosition = "bottomright") %>%
   
   addCircleMarkers(
-    df$LONG, df$LAT,
-    radius = (df$normQ+offset)/denom/2,
-    weight=2,
+    data=df,
+    ~LONG, ~LAT,
+    radius = ~(normQ+offset)/denom/2,
+    weight=3,
+    fill = FALSE,
     color ="black",
-    label = paste0(df$LOC_NAME,': ',df$LOC_NAME_ALT1),
-    # popup = lapply(df$html,htmltools::HTML),
+    label = ~paste0(LOC_NAME,': ',LOC_NAME_ALT1),
+    # popup = lapply(~html,htmltools::HTML),
     opacity = .8, 
     fillOpacity = .0,
     group='pts'
