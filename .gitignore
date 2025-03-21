@@ -43,6 +43,7 @@ vignettes/*.pdf
 # mm
 getMSAdates.txt
 ycdb-connect.R
+snapshots-private/
 external/
 html/
 old/
