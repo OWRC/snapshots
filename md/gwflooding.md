@@ -7,11 +7,11 @@ output: html_document
 
 # Cause & Effect
 
-> Modelling with [HydroGeoSphere](https://www.aquanty.com/hydrogeosphere).
-
-Can overland flooding be the cause of groundwater flooding?
+> Can overland flooding be the *cause* of groundwater flooding?
 
 *more details to come...*
+
+Modelling with [HydroGeoSphere](https://www.aquanty.com/hydrogeosphere).
 
 Site Immdiately downstream of [02HB008: CREDIT RIVER WEST BRANCH AT NORVAL](https://wateroffice.ec.gc.ca/report/real_time_e.html?stn=02HB008) which is included in [ORMGP's Data analysis platform](https://owrc.shinyapps.io/sHyStreamflow/?sID=149227).
 
@@ -23,7 +23,7 @@ Site Immdiately downstream of [02HB008: CREDIT RIVER WEST BRANCH AT NORVAL](http
 
 ![](gwflooding-sim2.png)
 
-
+![](gwflooding-02HB008-RP.png)
 
 # Animations
 
