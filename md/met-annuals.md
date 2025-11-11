@@ -24,6 +24,15 @@ Active climate stations are colour coded based on the ten year average precipita
 
 <br>
 
+### Interpolated data
+
+For areas where stations are not available or for stations with incomplete data, the ORMGP hosts a [near real-time climate data service](https://owrc.github.io/interpolants/sources/climate-data-service.html). 
+
+
+<iframe src="https://golang.oakridgeswater.ca/pages/met-annuals-precip-stations.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
+
+<br>
+
 ## Temperature
 
 Active climate stations colour coded based on the ten year average temperature. Stations with the highest annual temperature, of around 10°C, are found along the Lake Ontario shoreline in the heavily urbanized cities or Toronto, Hamilton and Mississauga. In the northerly parts of the ORMGP study area, inland from Georgian Bay, are the stations with the lowest average temperature of between 5°C and 6°C.  The moderating influence of the Great Lakes can be observed by comparing the average temperatures at stations closer to Lake Huron and Lake Ontario to stations further inland from the lakes.
@@ -31,11 +40,3 @@ Active climate stations colour coded based on the ten year average temperature. 
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
 <iframe src="https://golang.oakridgeswater.ca/pages/met-annuals-temperature.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
-
-
-## Interpolated data
-
-For areas where stations are not available or for stations with incomplete data, the ORMGP hosts a [near real-time climate data service](https://owrc.github.io/interpolants/sources/climate-data-service.html). 
-
-
-<iframe src="https://golang.oakridgeswater.ca/pages/swsmet.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
