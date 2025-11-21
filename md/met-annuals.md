@@ -40,3 +40,9 @@ Active climate stations colour coded based on the ten year average temperature. 
 `click on any circle to reveal station summaries. Full-screen available in the top-left corner`
 
 <iframe src="https://golang.oakridgeswater.ca/pages/met-annuals-temperature.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
+
+### Interpolated data
+
+<iframe src="https://golang.oakridgeswater.ca/pages/met-annuals-temperature-stations.html" width="100%" height="550" scrolling="no" allowfullscreen></iframe>
+
+<br>
