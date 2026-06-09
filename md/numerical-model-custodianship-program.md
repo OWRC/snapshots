@@ -38,9 +38,6 @@ For source-water protection and related studies, archived models generally fall 
 
 #### Model map
 
-The map below shows the approximate boundaries of models currently tracked by the program. Clicking a model boundary displays available attributes. Model reports and model files may be made available to [partner agencies](https://www.oakridgeswater.ca/ormgp-who-we-work-with/) and other approved users for water-related studies, subject to review and completion of the ORMGP Model Sharing Agreement.
-
-
 The map below shows the approximate boundaries of models currently tracked by the program. Clicking a model boundary displays available attributes. Model reports are made available to [partner agencies](https://www.oakridgeswater.ca/ormgp-who-we-work-with/) and other approved users for water-related studies. Model files are subject to review and completion of the ORMGP *Model Sharing Agreement*. 
 
 This includes municipal and conservation authority staff who require regional geological and hydrogeological context to support decisions related to water supply, well interference, flooding, water quality, land development, fisheries, and other water-resource issues. It may also include qualified consultants working on behalf of approved agencies, allowing them to access existing data, interpretations and model files so that effort can be focused on project-specific analysis rather than reassembling foundational information.
