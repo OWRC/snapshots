@@ -9,28 +9,23 @@ output: html_document
 
 ### Purpose and Context
 
-The Ontario Wetland Evaluation System (OWES) provides the provincial framework for evaluating wetland functions and determining wetland significance. The evaluation considers four major components—Biological, Social, Hydrological and Special Features—and relies on a combination of field observations, existing information, mapping and professional judgement. OWES evaluations must ultimately be undertaken and attested to by a trained wetland evaluator.
+The Ontario Wetland Evaluation System (OWES) provides the provincial framework for evaluating wetland functions and determining wetland significance. The evaluation considers four major components: Biological, Social, Hydrological and Special Features and relies on a combination of field observations, existing information, mapping and professional judgement. OWES evaluations must ultimately be undertaken and attested to by a trained wetland evaluator.
 
-The **ORMGP OWES Hydrologic Screening Tool** was developed to automate the spatially intensive calculations associated with the **flood attenuation portion of the OWES Hydrological Component**. The intent is not to replace an OWES evaluation or the judgement of a qualified evaluator. Rather, the tool provides a rapid, consistent and reproducible means of assembling the watershed information needed to support the OWES calculation and to screen large numbers of wetlands across the Oak Ridges Moraine Groundwater Program (ORMGP) study area.
+The **ORMGP OWES Hydrologic Screening Tool** was developed to automate the spatially intensive calculations associated with the **flood attenuation portion of the OWES Hydrological Component**. The intent is not to replace an OWES evaluation or the judgement of a qualified evaluator. Rather, the tool provides a rapid, consistent and reproducible means of assembling the watershed information needed to support the OWES calculation and to screen large numbers of wetlands across the Oak Ridges Moraine Groundwater Program (ORMGP) jurisdiction.
 
 Under OWES, flood attenuation is evaluated using three principal spatial characteristics: **the area of the wetland, the area of its upstream catchment, and the area of other detention features within that catchment**. These relationships are used to assess how effectively a wetland can reduce downstream flood peaks. The ORMGP tool automates the determination of these spatial inputs and applies the OWES scoring calculations. The presentation developed for the tool identifies the required inputs as wetland area, wetland catchment area, other detention areas within the catchment, and connectivity or proximity to major waterbodies.
 
 
-`Full-screen mode available in the top-left corner`
-
-<iframe src="https://owrc.shinyapps.io/owes/" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
-
-<br>
 
 ### How the Tool Works
 
-A key capability underlying the application is automated drainage-area delineation. The ORMGP's terrain-processing workflow uses a digital elevation model to establish flow directions and drainage connectivity. Depression filling and treatment of flat areas are applied before flow paths are calculated, allowing a catchment to be delineated automatically to a selected location.
+A key capability underlying the application is automated drainage-area delineation. The [ORMGP's terrain-processing workflow](https://owrc.github.io/interpolants/interpolation/overland.html) uses a digital elevation model to establish flow directions and drainage connectivity. Depression filling and treatment of flat areas are applied before flow paths are calculated, allowing a catchment to be delineated automatically to a selected location.
 
-For wetlands, the original point-based drainage-area tool was modified so that a user selecting a location within a mapped wetland does not simply receive the area draining to that individual point. Instead, the application identifies the wetland and delineates the drainage area contributing to the **wetland as a whole**. Within that catchment, the tool identifies other wetlands and waterbodies that may provide upstream detention and calculates their areas.
+For wetlands, the original point-based drainage-area tool was modified so that a user selecting a location within a mapped wetland does not simply receive the area draining to that individual point. Instead, the application identifies the wetland and delineates the drainage area contributing to the wetland as a whole. Within that catchment, the tool identifies other wetlands and waterbodies that may provide upstream detention and calculates their areas.
 
-This directly reflects the OWES flood-attenuation methodology. OWES requires evaluators to consider **all detention areas in the basin**, not just features directly connected to an inflowing stream. Detention areas can include other wetlands—including isolated wetlands—as well as lakes, large rivers, reservoirs, ponds and flooded pits or quarries. The OWES Wetland Evaluation Data and Scoring Record then combines wetland area, catchment area and other detention area to calculate the Upstream Detention Factor and Wetland Attenuation Factor, which together determine the flood attenuation score.
+This directly reflects the OWES flood-attenuation methodology. OWES requires evaluators to consider **all detention areas in the basin**, not just features directly connected to an inflowing stream. Detention areas can include other wetlands (including isolated wetlands) as well as lakes, large rivers, reservoirs, ponds and flooded pits or quarries. The OWES Wetland Evaluation Data and Scoring Record then combines wetland area, catchment area and other detention area to calculate the **Upstream Detention Factor** and **Wetland Attenuation Factor**, which together determine the flood attenuation score.
 
-The screening application currently operates across approximately **126,700 mapped wetlands**, uses provincial wetland mapping by default, and can accommodate alternative or more detailed wetland mapping supplied by ORMGP partners. Results are available through an interactive Shiny/Leaflet application and can also be accessed programmatically through a REST API.
+The screening application currently operates across approximately **126,700 mapped wetlands**, uses provincial wetland mapping by default, and can accommodate alternative or more detailed wetland mapping supplied by ORMGP partners. Results are available through an interactive Shiny/Leaflet application (see above) and can also be accessed programmatically through a REST API.
 
 ### Treatment of Wetland Groups
 
