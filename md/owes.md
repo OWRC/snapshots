@@ -15,7 +15,13 @@ The **ORMGP OWES Hydrologic Screening Tool** was developed to automate the spati
 
 Under OWES, flood attenuation is evaluated using three principal spatial characteristics: **the area of the wetland, the area of its upstream catchment, and the area of other detention features within that catchment**. These relationships are used to assess how effectively a wetland can reduce downstream flood peaks. The ORMGP tool automates the determination of these spatial inputs and applies the OWES scoring calculations. The presentation developed for the tool identifies the required inputs as wetland area, wetland catchment area, other detention areas within the catchment, and connectivity or proximity to major waterbodies.
 
+<br>
 
+`Full-screen mode available in the top-left corner`
+
+<iframe src="https://owrc.shinyapps.io/owes/" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
+
+<br>
 
 ### How the Tool Works
 
