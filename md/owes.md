@@ -9,7 +9,7 @@ output: html_document
 
 ### Purpose and Context
 
-The Ontario Wetland Evaluation System (OWES) provides the provincial framework for evaluating wetland functions and determining wetland significance. The evaluation considers four major components: Biological, Social, Hydrological and Special Features and relies on a combination of field observations, existing information, mapping and professional judgement. OWES evaluations must ultimately be undertaken and attested to by a trained wetland evaluator.
+The [Ontario Wetland Evaluation System (OWES)](https://www.ontario.ca/files/2023-02/mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02.pdf) provides the provincial framework for evaluating wetland functions and determining wetland significance. The evaluation considers four major components: Biological, Social, Hydrological and Special Features and relies on a combination of field observations, existing information, mapping and professional judgement. OWES evaluations must ultimately be undertaken and attested to by a trained wetland evaluator.
 
 The **ORMGP OWES Hydrologic Screening Tool** was developed to automate the spatially intensive calculations associated with the **flood attenuation portion of the OWES Hydrological Component**. The intent is not to replace an OWES evaluation or the judgement of a qualified evaluator. Rather, the tool provides a rapid, consistent and reproducible means of assembling the watershed information needed to support the OWES calculation and to screen large numbers of wetlands across the Oak Ridges Moraine Groundwater Program (ORMGP) jurisdiction.
 
@@ -51,3 +51,17 @@ Importantly, **OWES does not establish a universal rule that every pair of wetla
 
 The ORMGP OWES Hydrologic Screening Tool is therefore best viewed as a **decision-support and pre-screening application**. It automates calculations that would otherwise require substantial GIS processing, applies those calculations consistently across a large regional wetland inventory, and provides evaluators with transparent information on wetland area, contributing catchment, upstream detention and hydrologic context. It can substantially reduce the effort required to undertake the hydrologic portion of an OWES assessment while leaving wetland delineation, interpretation of unusual circumstances, verification of hydrologic connectivity and the final OWES determination with the qualified wetland evaluator.
 
+
+### OWES excerpts from
+
+Ontario Ministry of Natural Resources and Forestry (MNRF). 2022. *Ontario Wetland Evaluation System: Southern Manual*. 4th Edition. King's Printer for Ontario, Peterborough, Ontario. [link](https://www.ontario.ca/files/2023-02/mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02.pdf)
+
+
+<br>
+
+
+![](mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02-FIG16.png)
+
+![](OWES_detentionarea.png)
+
+![](OWES_evaluation.png)
