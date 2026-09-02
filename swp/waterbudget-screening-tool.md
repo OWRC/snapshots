@@ -180,7 +180,7 @@ These factors are used to estimate the portion of a permitted water taking that 
 </div>
 
 <script>
-fetch("http://data.oakridgeswater.ca:8080/supplemental/SWP-Water-budget-screening/consumptive_use_factor.csv")
+fetch("data/consumptive_use_factor.csv")
   .then(response => {
     if (!response.ok) {
       throw new Error("Unable to load consumptive use table.");
