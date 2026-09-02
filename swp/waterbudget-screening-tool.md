@@ -69,11 +69,11 @@ For groundwater, the environmental reserve is set at **10% of annual groundwater
 
 Water demand is calculated using active Ministry of the Environment, Conservation and Parks (MECP) **Permits to Take Water (PTTW)**.
 
-Where recent reported actual water-taking information is available, it can be used to characterize current demand. Where recent actual-taking records are unavailable, the **maximum permitted taking volume** is used as a conservative estimate of potential demand. This approach reduces the likelihood that potential water use will be underestimated where reporting is incomplete and provides a precautionary basis for screening areas that may warrant further investigation.
+Where recent reported actual water-taking information is available, it can be used to characterize current demand. Where recent actual-taking records are unavailable, the **maximum permitted taking volume** is used as a conservative estimate of potential demand. This approach reduces the likelihood that potential water use will be underestimated where reporting is incomplete and provides a precautionary basis for screening areas that may warrant further investigation. Locations of active (as of October 2025) permits to take water (PTTW) maintained in the ORMGP database [can be found here](https://golang.oakridgeswater.ca/pages/swp/pttw.html).
 
-<iframe src="https://golang.oakridgeswater.ca/pages/swp/pttw.html" width="100%" height="300" scrolling="no" allowfullscreen></iframe>
+<!-- <iframe src="https://golang.oakridgeswater.ca/pages/swp/pttw.html" width="100%" height="300" scrolling="no" allowfullscreen></iframe>
 
-**Locations of active (as of October 2025) permits to take water (PTTW) maintained in the ORMGP database. Currently, of the 7680 permits shown, only 520 (7\%) have been co-located with a well.**
+**Locations of active (as of October 2025) permits to take water (PTTW) maintained in the ORMGP database. Currently, of the 7680 permits shown, only 520 (7\%) have been co-located with a well.** -->
 
 <br>
 
@@ -183,16 +183,13 @@ These factors are used to estimate the portion of a permitted water taking that 
 fetch("data/consumptive_use_factor.csv")
   .then(response => {
     if (!response.ok) {
-      throw new Error("Unable to load consumptive use table.");
+      throw new Error(`HTTP error ${response.status}`);
     }
     return response.text();
   })
   .then(csv => {
-
-    // Split CSV into non-empty lines
     const lines = csv.trim().split(/\r?\n/);
 
-    // Simple CSV parser that respects quoted values containing commas
     function parseCSVLine(line) {
       const values = [];
       let value = "";
@@ -226,7 +223,6 @@ fetch("data/consumptive_use_factor.csv")
     table.style.width = "100%";
     table.style.borderCollapse = "collapse";
 
-    // Header
     const thead = document.createElement("thead");
     const headerRow = document.createElement("tr");
 
@@ -242,7 +238,6 @@ fetch("data/consumptive_use_factor.csv")
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
-    // Body
     const tbody = document.createElement("tbody");
 
     rows.slice(1).forEach(row => {
@@ -267,7 +262,7 @@ fetch("data/consumptive_use_factor.csv")
   })
   .catch(error => {
     document.getElementById("consumptive-use-table").innerHTML =
-      "<p><em>Consumptive use factors could not be loaded.</em></p>";
+      `<p><em>Consumptive use factors could not be loaded: ${error.message}</em></p>`;
     console.error(error);
   });
 </script>
