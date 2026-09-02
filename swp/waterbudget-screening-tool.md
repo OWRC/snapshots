@@ -69,11 +69,12 @@ For groundwater, the environmental reserve is set at **10% of annual groundwater
 
 Water demand is calculated using active Ministry of the Environment, Conservation and Parks (MECP) **Permits to Take Water (PTTW)**.
 
-Where recent reported actual water-taking information is available, it can be used to characterize current demand. Where recent actual-taking records are unavailable, the **maximum permitted taking volume** is used as a conservative estimate of potential demand. This approach reduces the likelihood that potential water use will be underestimated where reporting is incomplete and provides a precautionary basis for screening areas that may warrant further investigation. Locations of active (as of October 2025) permits to take water (PTTW) maintained in the ORMGP database [can be found here](https://golang.oakridgeswater.ca/pages/swp/pttw.html).
+Where recent reported actual water-taking information is available, it can be used to characterize current demand. Where recent actual-taking records are unavailable, the **maximum permitted taking volume** is used as a conservative estimate of potential demand. This approach reduces the likelihood that potential water use will be underestimated where reporting is incomplete and provides a precautionary basis for screening areas that may warrant further investigation. Locations of active Permits to Take Water (PTTWs), as of October 2025, maintained in the ORMGP database <a href="https://golang.oakridgeswater.ca/pages/swp/pttw.html" target="_blank" rel="noopener noreferrer">**can be viewed here**</a>. Currently, of the 7680 known permits, only 520 (7%) have been co-located with a well.
+
 
 <!-- <iframe src="https://golang.oakridgeswater.ca/pages/swp/pttw.html" width="100%" height="300" scrolling="no" allowfullscreen></iframe>
 
-**Locations of active (as of October 2025) permits to take water (PTTW) maintained in the ORMGP database. Currently, of the 7680 permits shown, only 520 (7\%) have been co-located with a well.** -->
+**Locations of active (as of October 2025) permits to take water (PTTW) maintained in the ORMGP database. Currently, of the 7680 permits shown, only 520 (7%) have been co-located with a well.** -->
 
 <br>
 
