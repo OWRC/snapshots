@@ -175,26 +175,101 @@ Consumptive use factors applied in the screening assessment are summarized below
 
 These factors are used to estimate the portion of a permitted water taking that is not returned to the local water system.
 
-{% assign rows = site.data.consumptive_use_factor %}
-{% assign firstrow = rows | first %}
+<div id="consumptive-use-table">
+  <p>Loading consumptive use factors...</p>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      {% for item in firstrow %}
-        <th>{{ item[0] }}</th>
-      {% endfor %}
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in rows %}
-      <tr>
-        {% for item in firstrow %}
-          <td>{{ row[item[0]] }}</td>
-        {% endfor %}
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<script>
+fetch("https://data.oakridgeswater.ca/supplemental/SWP-Water-budget-screening/consumptive_use_factor.csv")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Unable to load CSV");
+    }
+    return response.text();
+  })
+  .then(csv => {
+
+    // Split CSV into non-empty lines
+    const lines = csv.trim().split(/\r?\n/);
+
+    // Simple CSV parser that respects quoted values containing commas
+    function parseCSVLine(line) {
+      const values = [];
+      let value = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+
+        if (char === '"') {
+          if (insideQuotes && line[i + 1] === '"') {
+            value += '"';
+            i++;
+          } else {
+            insideQuotes = !insideQuotes;
+          }
+        } else if (char === "," && !insideQuotes) {
+          values.push(value.trim());
+          value = "";
+        } else {
+          value += char;
+        }
+      }
+
+      values.push(value.trim());
+      return values;
+    }
+
+    const rows = lines.map(parseCSVLine);
+
+    const table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+
+    // Header
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+
+    rows[0].forEach(header => {
+      const th = document.createElement("th");
+      th.textContent = header;
+      th.style.textAlign = "left";
+      th.style.padding = "6px 10px";
+      th.style.borderBottom = "2px solid #888";
+      headerRow.appendChild(th);
+    });
+
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Body
+    const tbody = document.createElement("tbody");
+
+    rows.slice(1).forEach(row => {
+      const tr = document.createElement("tr");
+
+      row.forEach(value => {
+        const td = document.createElement("td");
+        td.textContent = value;
+        td.style.padding = "6px 10px";
+        td.style.borderBottom = "1px solid #ddd";
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+
+    const container = document.getElementById("consumptive-use-table");
+    container.innerHTML = "";
+    container.appendChild(table);
+  })
+  .catch(error => {
+    document.getElementById("consumptive-use-table").innerHTML =
+      "<p><em>Consumptive use factors could not be loaded.</em></p>";
+    console.error(error);
+  });
+</script>
 
 <!-- [Download the consumptive use factor CSV](https://data.oakridgeswater.ca/supplemental/SWP-Water-budget-screening/consumptive_use_factor.csv) -->
