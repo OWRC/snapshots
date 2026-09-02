@@ -171,9 +171,9 @@ Where these effects are significant, or where cross-boundary groundwater flow is
 
 ## Consumptive Use Factors
 
-Consumptive use factors applied in the screening assessment are summarized below. 
-These factors are used to estimate the portion of a permitted water taking that is
-not returned to the local water system.
+Consumptive use factors applied in the screening assessment are summarized below.
+
+These factors are used to estimate the portion of a permitted water taking that is not returned to the local water system.
 
 {% assign rows = site.data.consumptive_use_factor %}
 {% assign firstrow = rows | first %}
