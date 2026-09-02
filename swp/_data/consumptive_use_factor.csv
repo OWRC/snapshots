@@ -1,0 +1,46 @@
+Category,Specific_Purpose,Consumptive_Factor
+Agricultural,Field and Pasture Crops,0.8
+Agricultural,Fruit Orchards,0.8
+Agricultural,Market Gardens/Flowers,0.9
+Agricultural,Nursery,0.9
+Agricultural,Other - Agricultural,0.8
+Agricultural,Sod Farm,0.9
+Agricultural,Tender Fruit,0.8
+Agricultural,Tobacco,0.9
+Commercial,Aquaculture,0.1
+Commercial,Bottled Water,1
+Commercial,Golf Course Irrigation,0.7
+Commercial,Mall/Business,0.25
+Commercial,Other - Commercial,1
+Commercial,Snowmaking,0.5
+Construction,Other - Construction,0.75
+Construction,Road Building,0.75
+Construction,Construction,0.25
+Dewatering,Other - Dewatering,0.25
+Dewatering,Pits and Quarries,0.25
+Dewatering,Aggregate Washing,0.25
+Industrial,Brewing and Soft Drinks,1
+Industrial,Cooling Water,0.25
+Industrial,Food Processing,1
+Institutional,Hospitals,0.25
+Institutional,Other - Institutional,0.25
+Institutional,Schools,0.25
+Miscellaneous,Dams and Reservoirs,0.1
+Miscellaneous,Heat Pumps,0.1
+Miscellaneous,Other - Miscellaneous,1
+Miscellaneous,Pumping test,0.1
+Miscellaneous,Wildlife Conservation,0.1
+Recreational,Aesthetics,0.25
+Industrial,Manufacturing,0.25
+Industrial,Other - Industrial,0.25
+Industrial,Pipeline Testing,0.25
+Industrial,Power Production,0.1
+Recreational,Fish Ponds,0.25
+Recreational,Other - Recreational,0.1
+Recreational,Wetlands,0.1
+Remediation,Groundwater,0.5
+Remediation,Other - Remediation,0.25
+Water Supply,Campgrounds,0.2
+Water Supply,Communal,0.2
+Water Supply,Municipal,1
+Water Supply,Other - Water Supply,0.2
