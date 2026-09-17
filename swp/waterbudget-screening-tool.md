@@ -7,6 +7,8 @@ output: html_document
 
 > The Source Water Protection Stress Assessment Screening Tool provides an interactive way to explore potential water quantity stress under Ontario’s Source Water Protection Program. By bringing together current water-taking information, regional climate data, and surface-water monitoring within a single web-mapping environment, the tool helps users identify areas of potential concern, examine the factors contributing to stress, and highlight where further investigation may be warranted across participating watersheds.
 
+**[Interactive Water Balance tool](https://owrc.shinyapps.io/SWP-WaterbudgetScreeningTool/)**
+
 ## Introduction
 
 Groundwater and surface-water resources must be managed to ensure they can continue to support ecological, municipal, agricultural, and industrial needs. Under Ontario's Source Water Protection program, water quantity stress assessments are used to identify subwatersheds where water demand may be approaching available supply and where more detailed investigation may be warranted.
@@ -85,7 +87,7 @@ Following Ontario’s Source Protection guidance, water quantity stress is class
 
 <iframe src="https://golang.oakridgeswater.ca/pages/swp/pwd.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
 
-**Current water quantity stress conditions. Click a water-taking permit (point) or Source Water Protection watershed to view a breakdown of the stress calculation.**
+**Current *groundwater* water quantity stress conditions. Click a water-taking permit (point) or Source Water Protection watershed to view a breakdown of the stress calculation.**
 
 <br>
 
