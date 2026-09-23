@@ -1,0 +1,43 @@
+﻿General Purpose,Specific Purpose,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
+Agricultural,Field and Pasture Crops,0,0,0,0,0,0,1,1,0,0,0,0
+Agricultural,Fruit Orchards,0,0,0,0,0,0,1,1,0,0,0,0
+Agricultural,Market Gardens / Flowers,0,0,0,0,0,0,1,1,0,0,0,0
+Agricultural,Nursery,0,0,0,0,0,0,1,1,0,0,0,0
+Agricultural,Other - Agricultural,0,0,0,0,0,0,1,1,0,0,0,0
+Agricultural,Sod Farm,0,0,0,0,0,1,1,1,1,0,0,0
+Agricultural,Tender Fruit,0,0,0,0,0,0,1,1,0,0,0,0
+Agricultural,Tobacco,0,0,0,0,0,0,1,1,0,0,0,0
+Commercial,Aquaculture,1,1,1,1,1,1,1,1,1,1,1,1
+Commercial,Bottled Water,1,1,1,1,1,1,1,1,1,1,1,1
+Commercial,Golf Course Irrigation,0,0,0,0,0,1,1,1,1,0,0,0
+Commercial,Mall / Business,1,1,1,1,1,1,1,1,1,1,1,1
+Commercial,Other - Commercial,1,1,1,1,1,1,1,1,1,1,1,1
+Commercial,Snowmaking,1,1,0,0,0,0,0,0,0,0,0,1
+Construction,Other - Construction,1,1,1,1,1,1,1,1,1,1,1,1
+Construction,Road Building,1,1,1,1,1,1,1,1,1,1,1,1
+Dewatering,Construction,1,1,1,1,1,1,1,1,1,1,1,1
+Dewatering,Other - Dewatering,1,1,1,1,1,1,1,1,1,1,1,1
+Dewatering,Pits and Quarries,1,1,1,1,1,1,1,1,1,1,1,1
+Industrial,Aggregate Washing,0,0,0,0,1,1,1,1,1,1,1,0
+Industrial,Cooling Water,1,1,1,1,1,1,1,1,1,1,1,1
+Industrial,Food Processing,1,1,1,1,1,1,1,1,1,1,1,1
+Industrial,Manufacturing,1,1,1,1,1,1,1,1,1,1,1,1
+Industrial,Other - Dewatering,1,1,1,1,1,1,1,1,1,1,1,1
+Industrial,Other - Industrial,1,1,1,1,1,1,1,1,1,1,1,1
+Industrial,Pipeline Testing,1,1,1,1,1,1,1,1,1,1,1,1
+Institutional,Other - Institutional,1,1,1,1,1,1,1,1,1,1,1,1
+Institutional,Schools,1,1,1,1,1,1,0,0,1,1,1,1
+Miscellaneous,Dams and Reservoirs,1,1,1,1,1,1,1,1,1,1,1,1
+Miscellaneous,Heat Pumps,1,1,1,1,1,1,1,1,1,1,1,1
+Miscellaneous,Other - Miscellaneous,1,1,1,1,1,1,1,1,1,1,1,1
+Miscellaneous,Pumping Test,1,1,1,1,1,1,1,1,1,1,1,1
+Miscellaneous,Wildlife Conservation,1,1,1,1,1,1,1,1,1,1,1,1
+Missing,Missing,1,1,1,1,1,1,1,1,1,1,1,1
+Recreational,Other - Recreational,1,1,1,1,1,1,1,1,1,1,1,1
+Recreational,Wetlands,1,1,1,1,1,1,1,1,1,1,1,1
+Remediation,Groundwater,1,1,1,1,1,1,1,1,1,1,1,1
+Remediation,Other - Remediation,1,1,1,1,1,1,1,1,1,1,1,1
+Water Supply,Campgrounds,0,0,0,0,1,1,1,1,1,0,0,0
+Water Supply,Communal,1,1,1,1,1,1,1,1,1,1,1,1
+Water Supply,Municipal,1,1,1,1,1,1,1,1,1,1,1,1
+Water Supply,Other - Water Supply,1,1,1,1,1,1,1,1,1,1,1,1

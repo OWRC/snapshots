@@ -59,11 +59,13 @@ For the purposes of this screening tool, groundwater supply is estimated from ob
 
 A portion of the available water supply is reserved for environmental needs before water demand is considered.
 
-For groundwater, the environmental reserve is set at **10% of annual groundwater supply**. For surface water, the reserve is based on monthly low-flow conditions, represented by the **10th percentile monthly discharge** $(Q_\text{p90})$, to account for the need to maintain streamflow and associated ecological functions during periods of reduced water availability.
+For **groundwater**, the environmental reserve is set at **10% of annual groundwater supply**. 
+
+For **surface water**, the reserve is based on monthly low-flow conditions, represented by the **10th percentile monthly discharge** $(Q_\text{p90})$, to account for the need to maintain streamflow and associated ecological functions during periods of reduced water availability.
 
 <iframe src="https://golang.oakridgeswater.ca/pages/swp/streamflow.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
 
-**Locations of recent stream gauges and estimated recharge rates (mm/year). Point size represents gauge catchment area, while colour indicates relative differences in estimated recharge. Click a gauge point or watershed polygon to view a summary of $Q_\text{supply}$ and $Q_\text{reserve}$. The method used to generate the map is [described below](#derivation-and-spatial-infill-of-mean-annual-runoff).**
+**Locations of recent stream gauges and estimated recharge rates (mm/year). Point size represents gauge catchment area, while colour indicates relative differences in estimated recharge. Click a gauge point or watershed polygon to view the monthly summary of $Q_\text{supply}$ and $Q_\text{reserve}$. The method used to generate the map is [described below](#derivation-and-spatial-infill-of-mean-annual-runoff).**
 
 <br>
 
@@ -73,6 +75,7 @@ Water demand is calculated using active Ministry of the Environment, Conservatio
 
 Where recent reported actual water-taking information is available, it can be used to characterize current demand. Where recent actual-taking records are unavailable, the **maximum permitted taking volume** is used as a conservative estimate of potential demand. This approach reduces the likelihood that potential water use will be underestimated where reporting is incomplete and provides a precautionary basis for screening areas that may warrant further investigation. Locations of active Permits to Take Water (PTTWs), as of October 2025, maintained in the ORMGP database <a href="https://golang.oakridgeswater.ca/pages/swp/pttw.html" target="_blank" rel="noopener noreferrer">**can be viewed here**</a>. Currently, of the 7680 known permits, only 520 (7%) have been co-located with a well.
 
+Monthly surface water demand is adjusted using the **seasonal demand factors** provided in Table 15 of the Assessment Report Guidance Module 7 (2007). For each permit, the maximum permitted daily taking rate is multiplied by the maximum number of taking days per year to estimate the maximum annual permitted volume. This annual volume is then distributed among the applicable months according to the seasonal factors in [the table below](#monthly-demand-factors).
 
 <!-- <iframe src="https://golang.oakridgeswater.ca/pages/swp/pttw.html" width="100%" height="300" scrolling="no" allowfullscreen></iframe>
 
@@ -83,11 +86,13 @@ Where recent reported actual water-taking information is available, it can be us
 
 ### Stress Assessment
 
-Following Ontario’s Source Protection guidance, water quantity stress is classified using Percent Water Demand (PWD). Stress is considered **significant** where PWD exceeds 50%, **moderate** where PWD exceeds 25%, and **low** where PWD is less than 25%. Results shown here reflect current water-taking conditions and the applied [consumptive use factors](#consumptive-use-factors).
+Following Ontario's Source Protection guidance, **groundwater quantity stress** is classified using Percent Water Demand (PWD). Stress is considered **significant** where PWD exceeds 50%, **moderate** where PWD exceeds 25%, and **low** where PWD is less than 25%. Results shown here reflect current water-taking conditions and the applied [consumptive use factors](#consumptive-use-factors).
+
+For **surface water quantity stress**, stress is classified as **significant** where Percent Water Demand (PWD) exceeds 50% in any month, **moderate** where PWD exceeds 20%, and **low** where PWD is below 18%. The guidance manual recommends a sensitivity analysis when PWD falls between 18% and 20%; therefore, the map below uses **18% as the threshold for moderate stress**. Results reflect current water-taking conditions and the applied [consumptive use factors](#consumptive-use-factors) and [monthly demand factors](#monthly-demand-factors).
 
 <iframe src="https://golang.oakridgeswater.ca/pages/swp/pwd.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
 
-**Current *groundwater* water quantity stress conditions. Click a water-taking permit (point) or Source Water Protection watershed to view a breakdown of the stress calculation.**
+**Current water quantity stress conditions. Click a water-taking permit (point) or Source Water Protection watershed to view a breakdown of the stress calculation.**
 
 <br>
 
@@ -273,3 +278,107 @@ fetch("data/consumptive_use_factor.csv")
 <br>
 
 <!-- [Download the consumptive use factor CSV](https://data.oakridgeswater.ca/supplemental/SWP-Water-budget-screening/consumptive_use_factor.csv) -->
+
+
+
+
+
+## Monthly Demand Factors
+
+Monthly Demand factors applied in the screening assessment are summarized below. These factors are used to estimate the portion of a permitted water taking that is not returned to the local water system.
+
+<div id="monthly-demand-table">
+  <p>Loading monthly demand factors...</p>
+</div>
+
+<script>
+fetch("data/table15_default_monthly_demand_adjustments.csv")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+    return response.text();
+  })
+  .then(csv => {
+    const lines = csv.trim().split(/\r?\n/);
+
+    function parseCSVLine(line) {
+      const values = [];
+      let value = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+
+        if (char === '"') {
+          if (insideQuotes && line[i + 1] === '"') {
+            value += '"';
+            i++;
+          } else {
+            insideQuotes = !insideQuotes;
+          }
+        } else if (char === "," && !insideQuotes) {
+          values.push(value.trim());
+          value = "";
+        } else {
+          value += char;
+        }
+      }
+
+      values.push(value.trim());
+      return values;
+    }
+
+    const rows = lines.map(parseCSVLine);
+
+    const table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+
+    rows[0].forEach(header => {
+      const th = document.createElement("th");
+      th.textContent = header;
+      th.style.textAlign = "left";
+      th.style.padding = "6px 10px";
+      th.style.borderBottom = "2px solid #888";
+      headerRow.appendChild(th);
+    });
+
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+
+    rows.slice(1).forEach(row => {
+      const tr = document.createElement("tr");
+
+      row.forEach(value => {
+        const td = document.createElement("td");
+        td.textContent = value;
+        td.style.padding = "6px 10px";
+        td.style.borderBottom = "1px solid #ddd";
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+
+    const container = document.getElementById("monthly-demand-table");
+    container.innerHTML = "";
+    container.appendChild(table);
+  })
+  .catch(error => {
+    document.getElementById("monthly-demand-table").innerHTML =
+      `<p><em>Monthly demand factors could not be loaded: ${error.message}</em></p>`;
+    console.error(error);
+  });
+</script>
+
+<br>
+
+<!-- [Download the monthly factors CSV](https://data.oakridgeswater.ca/supplemental/SWP-Water-budget-screening/table15_default_monthly_demand_adjustments.csv) -->
