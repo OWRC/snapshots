@@ -1,74 +1,198 @@
 ---
-title: Wetland Hydrologic Screening Tool
-author: Oak Ridges Moraine Groundwater Program
+title: "Wetland Hydrologic Screening Tool"
+author: "Oak Ridges Moraine Groundwater Program"
 output: html_document
 ---
 
+## Automated Catchment Delineation and Watershed Characterization
 
-## Purpose, Method and Treatment of Wetland Groups
+### Purpose and Overview
 
-### Purpose and Context
+The **ORMGP Wetland Hydrologic Screening Tool** provides an automated means of delineating surface-water catchments and characterizing their hydrological properties across the Oak Ridges Moraine Groundwater Program (ORMGP) study area.
 
-The [Ontario Wetland Evaluation System (OWES)](https://www.ontario.ca/files/2023-02/mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02.pdf) provides the provincial framework for evaluating wetland functions and determining wetland significance. The evaluation considers four major components: Biological, Social, Hydrological and Special Features and relies on a combination of field observations, existing information, mapping and professional judgement. OWES evaluations must ultimately be undertaken and attested to by a trained wetland evaluator.
+Built using **R Shiny and Leaflet**, the application combines automated drainage-area delineation with spatial analysis of regional environmental datasets. By selecting a mapped wetland, users can identify its contributing catchment, characterize the surrounding landscape and obtain watershed-scale estimates of hydrological conditions.
 
-The **ORMGP Wetland Hydrologic Screening Tool** was developed to automate the spatially intensive calculations associated with the **flood attenuation portion of the OWES Hydrological Component**. The intent is not to replace an OWES evaluation or the judgement of a qualified evaluator. Rather, the tool provides a rapid, consistent and reproducible means of assembling the watershed information needed to support the OWES calculation and to screen large numbers of wetlands across the Oak Ridges Moraine Groundwater Program (ORMGP) jurisdiction.
+The application brings together three principal capabilities:
 
-Under OWES, flood attenuation is evaluated using three principal spatial characteristics: **the area of the wetland, the area of its upstream catchment, and the area of other detention features within that catchment**. These relationships are used to assess how effectively a wetland can reduce downstream flood peaks. The ORMGP tool automates the determination of these spatial inputs and applies the OWES scoring calculations. The presentation developed for the tool identifies the required inputs as wetland area, wetland catchment area, other detention areas within the catchment, and connectivity or proximity to major waterbodies.
+1. **Automated catchment delineation:** Identification of the surface drainage area contributing to a selected wetland.
+2. **Watershed characterization:** Aggregation of topographic, land-use and surficial-geology properties across the delineated catchment.
+3. **Water-budget estimation:** Summarization of spatially distributed water-budget estimates at the watershed scale.
+
+These capabilities provide a consistent and reproducible means of examining catchment characteristics without requiring users to undertake extensive GIS processing.
+
+> The resulting information can support preliminary hydrological investigations, regional comparisons and the prioritization of locations requiring more detailed assessment.
 
 ### Interactive Mapping Tool
 
-`Full-screen mode available in the top-left corner`
+*Full-screen mode is available in the top-left corner.*
 
-<iframe src="https://owrc.shinyapps.io/owes/" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://owrc.shinyapps.io/owes/" width="100%" height="600" scrolling="no" allowfullscreen></iframe>
 
-<br>
+### Automated Catchment Delineation
 
-### How the Tool Works
+A central capability of the tool is the automatic identification of contributing drainage areas.
 
-A key capability underlying the application is automated drainage-area delineation. The [ORMGP's terrain-processing workflow](https://owrc.github.io/interpolants/interpolation/overland.html) uses a digital elevation model to establish flow directions and drainage connectivity. Depression filling and treatment of flat areas are applied before flow paths are calculated, allowing a catchment to be delineated automatically to a selected location.
+The application uses the ORMGP's regional **Hydrologically Corrected Digital Elevation Model (HDEM)** to establish surface drainage directions and connectivity.
 
-For wetlands, the original point-based drainage-area tool was modified so that a user selecting a location within a mapped wetland does not simply receive the area draining to that individual point. Instead, the application identifies the wetland and delineates the drainage area contributing to the wetland as a whole. Within that catchment, the tool identifies other wetlands and waterbodies that may provide upstream detention and calculates their areas.
+The HDEM was developed from the Ontario Ministry of Natural Resources and Forestry's Provincial Digital Elevation Model. Hydrological processing includes depression filling, the correction of flow directions across flat terrain and D8 flow-routing calculations. Manual flow-path corrections have also been incorporated where automated processing does not adequately represent known drainage pathways.
 
-This directly reflects the OWES flood-attenuation methodology. OWES requires evaluators to consider **all detention areas in the basin**, not just features directly connected to an inflowing stream. Detention areas can include other wetlands (including isolated wetlands) as well as lakes, large rivers, reservoirs, ponds and flooded pits or quarries. The OWES Wetland Evaluation Data and Scoring Record then combines wetland area, catchment area and other detention areas to calculate the **Upstream Detention Factor** and **Wetland Attenuation Factor**, which together determine the flood attenuation score.
+These procedures establish a continuous drainage topology that allows contributing catchments to be delineated automatically.
 
-The screening application currently operates across approximately **126,700 mapped wetlands**, uses provincial wetland mapping by default, and can accommodate alternative or more detailed wetland mapping supplied by ORMGP partners. Results are available through an interactive Shiny/Leaflet application (see above) and can also be accessed programmatically through a REST API.
+For wetlands, the original point-based catchment delineation methodology has been extended so that selecting a location within a mapped wetland identifies the **catchment contributing to the wetland as a whole**, rather than simply the area draining to the selected point.
 
-### Treatment of Wetland Groups
+This provides a consistent spatial boundary within which additional environmental and hydrological properties can be calculated.
 
-An important implementation consideration is determining **what constitutes the wetland being evaluated**, particularly where mapped wetland polygons are divided by roads, railways or other narrow non-wetland features.
+The underlying terrain-processing and drainage-area delineation methodology is described in:
 
-OWES clearly recognizes that a wetland does not necessarily have to consist of a single homogeneous vegetation polygon. A *Wetland Unit* is defined as **“a single wetland or a contiguous group of wetland communities,”** surrounded by non-wetland areas. The manual also explicitly recognizes situations in which **closely grouped wetlands function together as one**. Examples include clusters of small wetland ponds separated by small upland pockets and wetlands along a lake or river separated by short distances. In these circumstances, OWES directs that the features be evaluated as one wetland rather than as separate individual wetlands.
+[ORMGP — Overland Drainage Pathways](https://owrc.github.io/interpolants/interpolation/overland.html)
 
-<!-- OWES boundary mapping also distinguishes between the **outer boundary of the wetland** and features occurring within that boundary. The Wetland Boundary Map is expected to show all outer wetland boundaries as well as features such as **roads, rivers and streams occurring within or adjacent to the wetland**. Wetland boundaries themselves are primarily determined from the presence and relative abundance of wetland vegetation, supported where necessary by substrates, topography and other evidence. -->
+### Raster-Based Watershed Characterization
 
-<!-- On this basis, the screening tool currently **groups wetland polygons that are interrupted by road segments where they appear to represent parts of the same functional wetland**. This treatment is important because arbitrarily dividing a wetland at a road can substantially alter its calculated area, catchment and relationship to upstream detention areas, and therefore change its calculated flood-attenuation score. The current implementation is documented in the tool presentation as grouping wetlands broken by road segments, while recognizing that whether these features should remain separate is an important evaluation question.
+Once a catchment has been delineated, the application characterizes the watershed using regional raster datasets.
 
-The working assumption is that where wetland vegetation and wetland conditions continue on both sides of a road or railway, the portions will commonly remain **hydrologically connected**, for example through culverts, surface drainage or groundwater, and will generally occupy the same local catchment. Consequently, a narrow transportation corridor should not automatically be assumed to represent a functional hydrologic separation.
+The delineated catchment is used as the spatial boundary for aggregating topographic, land-use and surficial-geology information, allowing the landscape to be described using a consistent set of watershed-scale characteristics.
 
-Importantly, **OWES does not establish a universal rule that every pair of wetlands separated by a road or railway must be combined**. The automated grouping used by the tool should therefore be regarded as a screening assumption rather than a replacement for evaluator judgement. Where field observations, vegetation mapping, hydraulic structures, topography or other information indicate that two areas function independently, the evaluator should be able to treat them as separate wetland units. -->
+The principal datasets include:
 
-<br>
+| Raster Dataset | Source | Watershed Characterization |
+|---|---|---|
+| Digital Elevation Model | MNRF / ORMGP | Terrain elevation, slope, aspect and drainage characteristics. |
+| Land Use | Southern Ontario Land Resource Information System (SOLRIS) | Distribution of land-use categories and associated properties, including impervious surfaces, vegetation, wetlands and open water. |
+| Surficial Geology | Ontario Geological Survey (OGS) | Distribution of surficial geological materials and their associated relative permeability characteristics. |
+| Depth to Watertable | ORMGP | Distribution of the interpolated watertable [WT1](https://owrc.github.io/watertable/). |
 
-For purposes of the screening tool, however, **mapped wetland polygons are treated independently** rather than being automatically grouped into larger wetland units. Where a road, railway, upland area, or other mapped feature separates wetland polygons, each polygon is evaluated as a separate wetland feature based on its mapped geometry. The tool therefore does not attempt to infer whether adjacent or closely spaced polygons are hydrologically or functionally connected.
+Raster values are summarized within the delineated catchment to produce watershed-scale statistics.
 
-This approach represents a deliberate divergence from the evaluator-based interpretation permitted under OWES. Evaluating mapped polygons independently provides a consistent and reproducible screening basis and preserves the spatial distinctions present in the source wetland mapping. It should not, however, be interpreted as a conclusion that wetlands separated by roads, railways, or other narrow features are necessarily hydrologically independent. In a detailed OWES evaluation, an evaluator may determine that two or more mapped polygons form part of the same functional wetland and should be considered together.
+For continuous datasets, these summaries may include representative values such as mean elevation or slope. For categorical datasets, the relative coverage of different land-use or geological classes provides a description of the watershed's composition.
 
+This approach allows watersheds to be compared using their physical characteristics, including topographic relief, land cover, imperviousness and the relative permeability of surficial materials.
 
-### Intended Use
+These characteristics provide useful context for interpreting watershed hydrology, particularly the processes influencing infiltration, surface runoff and groundwater recharge.
 
-The ORMGP Wetland Hydrologic Screening Tool is therefore best viewed as a **decision-support and pre-screening application**. It automates calculations that would otherwise require substantial GIS processing, applies those calculations consistently across a large regional wetland inventory, and provides evaluators with transparent information on wetland area, contributing catchment, upstream detention and hydrologic context. It can substantially reduce the effort required to undertake the hydrologic portion of an OWES assessment while leaving wetland delineation, interpretation of unusual circumstances, verification of hydrologic connectivity and the final OWES determination with the qualified wetland evaluator.
+Further documentation:
 
+- [ORMGP Sub-watershed Characterization](https://owrc.github.io/interpolants/interpolation/subwatershed.html)
+- [Land Use Characterization](https://owrc.github.io/interpolants/interpolation/landuse.html)
+- [Surficial Geology](https://owrc.github.io/interpolants/interpolation/surfgeo.html)
 
-### OWES excerpts from
+### Watershed Water-Budget Estimates
 
-Ontario Ministry of Natural Resources and Forestry (MNRF). 2022. *Ontario Wetland Evaluation System: Southern Manual*. 4th Edition. King's Printer for Ontario, Peterborough, Ontario. [link](https://www.ontario.ca/files/2023-02/mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02.pdf)
+In addition to its physical characteristics, the tool provides estimates of watershed-scale hydrological conditions using the ORMGP's regional water-budget information.
 
+The ORMGP maintains a spatially distributed hydrological model that estimates the movement and partitioning of water across the landscape. Model outputs include estimates of precipitation, evapotranspiration, surface runoff and groundwater recharge.
 
-<br>
+By aggregating spatially distributed water-budget estimates over the delineated catchment, the application provides a watershed-scale representation of these hydrological quantities.
 
+This allows the estimated water budget to be considered alongside the watershed's topography, land use and surficial geology.
 
-![](mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02-FIG16.png)
+Importantly, these are **model-derived regional estimates**, rather than direct measurements of watershed water balance. Their reliability depends on the underlying hydrological model, input datasets and spatial resolution.
 
-![](OWES_detentionarea.png)
+The water-budget estimates are intended to provide regional hydrological context and should not be interpreted as a substitute for a calibrated, site-specific hydrological assessment.
 
-![](OWES_evaluation.png)
+Additional information on the underlying model is available here:
+
+[ORMGP — Regional Water Budget Model](https://owrc.github.io/interpolants/modelling/ravenmodel.html)
+
+### Wetland Mapping
+
+The application uses a consolidated regional inventory of mapped wetlands.
+
+The primary wetland mapping originates from the **Ontario Ministry of Natural Resources and Forestry (MNRF)**.
+
+Additional wetland mapping was provided by:
+
+- **Credit Valley Conservation (CVC)**
+- **Nottawasaga Valley Conservation Authority (NVCA)**
+
+Within their respective coverage areas, the wetland layers supplied by CVC and NVCA were used to **replace the corresponding provincial wetland mapping**.
+
+This approach incorporates locally maintained mapping where available while retaining provincial coverage throughout the remainder of the study area.
+
+The screening application includes approximately **126,700 mapped wetland features**.
+
+### Additional Analysis: OWES Flood Attenuation
+
+One application of the automated catchment delineation and watershed characterization is the calculation of the flood-attenuation component of the [Ontario Wetland Evaluation System (OWES)](https://www.ontario.ca/files/2023-02/mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02.pdf).
+
+Under OWES, flood attenuation is evaluated using three principal spatial characteristics:
+
+1. The area of the wetland being evaluated.
+2. The area of its contributing catchment.
+3. The area of other detention features within that catchment.
+
+The evaluation also considers connectivity or proximity to major waterbodies.
+
+The application automatically determines these spatial characteristics and applies the relevant OWES calculations to derive the **Upstream Detention Factor** and **Wetland Attenuation Factor**.
+
+Other detention features may include wetlands, lakes, reservoirs, ponds and other mapped waterbodies within the contributing catchment.
+
+This functionality demonstrates how the underlying catchment analysis can be extended to automate an established environmental assessment procedure.
+
+#### Treatment of Wetland Groups
+
+An important consideration in applying the OWES methodology is determining what constitutes an individual wetland.
+
+OWES recognizes that closely grouped wetlands may function together as a single wetland unit, including situations where wetland areas are separated by roads, railways or narrow upland features.
+
+For purposes of the screening tool, however, **mapped wetland polygons are evaluated independently**, rather than being automatically grouped into larger wetland complexes.
+
+Where a road, railway or other mapped feature separates two wetland polygons, each is assessed according to its mapped geometry.
+
+This provides a consistent and reproducible screening approach but does not establish that the features are hydrologically independent.
+
+During a formal OWES evaluation, a qualified evaluator may determine that several mapped polygons should be considered together. Such an interpretation may alter the calculated wetland area, contributing catchment and associated flood-attenuation score.
+
+### Technical Limitations
+
+#### Spatial Resolution
+
+The regional HDEM has a spatial resolution of **60 m × 60 m**, equivalent to 0.36 hectares per grid cell.
+
+Although suitable for regional-scale drainage analysis, this resolution introduces uncertainty when delineating smaller watersheds.
+
+Particular caution is warranted for:
+
+- Small wetlands and catchments comprising relatively few DEM cells.
+- Narrow drainage pathways and headwater catchments.
+- Flat terrain where small elevation differences influence drainage direction.
+- Areas where roads, culverts, drainage ditches or other infrastructure influence surface drainage.
+
+These features may not be adequately represented in the regional elevation model, potentially affecting the calculated catchment boundaries and associated watershed statistics.
+
+**Results for small watersheds should therefore be interpreted with particular caution.** Where greater accuracy is required, catchment boundaries should be verified using higher-resolution elevation data, local drainage information or field observations.
+
+#### Source Data and Model Uncertainty
+
+Watershed characterization depends on the accuracy and resolution of the underlying raster datasets.
+
+Land-use and surficial-geology classifications represent regional interpretations and may not capture local variability or recent changes in landscape conditions.
+
+Similarly, aggregated water-budget estimates inherit uncertainties associated with the regional hydrological model and its input data.
+
+The application provides a systematic basis for regional screening but does not replace detailed field investigations, local hydrological modelling or professional interpretation.
+
+### Intended Use — Screening Purposes Only
+
+> **Screening Tool:** A preliminary, systematic decision-support method used to identify and prioritize locations where further investigation may be warranted. Its purpose is to guide the efficient allocation of limited resources, not to provide definitive technical conclusions.
+
+The ORMGP Wetland Hydrologic Screening Tool is intended to support preliminary watershed investigations, regional comparisons and the prioritization of locations for further study.
+
+By combining automated catchment delineation, raster-based watershed characterization and regional water-budget estimates, the tool provides rapid access to hydrological information that would otherwise require substantial GIS processing.
+
+Additional analyses, including the OWES flood-attenuation calculation, demonstrate how these underlying datasets and procedures can be applied to specific environmental assessment questions.
+
+**The results should not be interpreted as definitive technical conclusions or used independently for regulatory determinations.**
+
+Where the results inform planning, management or regulatory decisions, they should be considered alongside higher-resolution datasets, local hydrological knowledge, field observations and appropriate professional judgement.
+
+### OWES Reference Figures
+
+Ontario Ministry of Natural Resources and Forestry (MNRF). 2022. *Ontario Wetland Evaluation System: Southern Manual*. Fourth Edition. King's Printer for Ontario, Peterborough, Ontario.
+
+[OWES Southern Manual — Fourth Edition](https://www.ontario.ca/files/2023-02/mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02.pdf)
+
+![OWES wetland boundary illustration](mnrf-pd-rpdpb-ontario-wetlands-evaluation-system-southern-manual-2022-en-2023-02-02-FIG16.png)
+
+![OWES upstream detention area illustration](OWES_detentionarea.png)
+
+![OWES hydrological evaluation](OWES_evaluation.png)
