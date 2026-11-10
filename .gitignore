@@ -59,5 +59,6 @@ rosm.cache/
 *.pdf
 *_files/
 *.Rproj
-# *.csv
+*.csv
+*.png
 # *.html

@@ -38,6 +38,7 @@ The **O**ak **R**idges **M**oraine **G**roundwater **P**rogram is an arm's-lengt
 ### Hydrology
 * [**Annual climate summary**](md/met-annuals.html)
 * [**Automated Hydrograph Separation**](md/baseflow-piechart.html)
+* [**Groundwater Hydrograph Outlier Detection**](md/outliers.html)
 
 ### Water Quality
 * [**Chlorides**](md/chem-chloride.html)
