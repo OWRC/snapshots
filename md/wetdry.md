@@ -6,6 +6,9 @@ output: html_document
 
 The Wet/Dry Conditions Map provides an overview of recent hydrological conditions across the Oak Ridges Moraine Groundwater Program (ORMGP) study area. Conditions are classified as **Wet**, **Dry**, or **Normal** using recent precipitation totals and streamflow observations.
 
+<iframe src="https://owrc.shinyapps.io/sHySpatialAnalysis/" width="100%" height="600" scrolling="no" allowfullscreen></iframe>
+
+
 ## 5-day Antecedent Precipitation
 
 The cumulative precipitation over the preceding five days $(P_5)$ is used as an indicator of Antecedent Moisture Condition (AMC). Each precipitation monitoring station is classified according to three thresholds:
