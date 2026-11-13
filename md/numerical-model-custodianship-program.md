@@ -73,6 +73,6 @@ Before files are released, requesters are required to complete a Model Sharing A
 
 Model users are responsible for determining whether a shared model is appropriate for their intended application. A model may have been developed for a specific purpose, scale, time period, or decision context, and it may not be suitable for all future uses without review, modification, or recalibration. Any limitations, assumptions, uncertainty, software requirements, or data gaps should be considered before relying on model results.
 
-As of the initiation of the program in 2017, 37 models have been redistributed and applied to water-resource studies.
+As of the initiation of the program in 2017, 40 models have been redistributed and applied to water-resource studies.
 
 ![](numerical-model-custodianship-program-getMSAdates.png)

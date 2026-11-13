@@ -60,5 +60,5 @@ rosm.cache/
 *_files/
 *.Rproj
 *.csv
-*.png
+# *.png
 # *.html
