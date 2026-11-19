@@ -17,14 +17,19 @@ The original Source Water Protection (SWP) stress assessments were completed bet
 
 The Source Water Protection Stress Assessment Screening Tool was developed by the [Oak Ridges Moraine Groundwater Program (ORMGP)](https://www.oakridgeswater.ca/), in collaboration with Source Protection Regions including the [South Georgian Bay Lake Simcoe Source Protection Region (SGBLS)](https://ourwatershed.ca/) and the [CTC Source Protection Region](https://www.ctcswp.ca/). The tool responds to a shared need to periodically revisit earlier Source Water Protection stress assessments using current datasets and regional modelling information.
 
-Web-based tools bring together current water-taking information, regional climate data, groundwater and surface-water modelling, and water-budget information in a single interactive mapping environment. Users can explore potential groundwater and surface-water stress, compare screening results among subwatersheds, and investigate the factors contributing to those results.
 
-The tool is intended as a screening and decision-support resource. It provides a consistent way to identify areas that may warrant additional review or more detailed water-budget assessment, rather than replacing the formal Source Water Protection stress-assessment process.
+## Scope
+
+The CTC Source Protection Committee in their Meeting on [October 15, 2026](https://www.ctcswp.ca/who-we-are/meetings/rpt_20261015_ctcspc_demrecpolicies_fnl.pdf), directed staff, in collaboration with ORMGP, to create a screening process to identify subwatersheds where Tier 2 stress assessments may require update based on increasing consumptive takings. Through engagement with CTC implementing municipalities, it was determined that a new policy may not be needed to direct the periodic review and update of water budget stress assessments. This can be achieved through the adjustment of CTC SPR administrative processes and adopted as a standard operating procedure for the CTC SPR. The process is informed by Reviewing Water Budgets: [A Guidance Document (LSRCA 2025)](https://www.ctcswp.ca/who-we-are/meetings/attachment-1_reviewingwaterbudgets_aguidancedocumentlsrca2025.pdf),  
+
+This web-based tool brings together current water-taking information, regional climate data, groundwater and surface-water modelling, and water-budget information in a single interactive mapping environment. Users can explore potential groundwater and surface-water stress, compare screening results among subwatersheds, and investigate the factors contributing to those results.  
+
+The tool is intended as a screening and decision-support resource that will allow municipalities to cost-effectively integrate water budget considerations in master planning and EAs for growth management and drinking water systems. It provides a consistent, science-based, cost-effective process to identify areas that may warrant additional review or more detailed water-budget assessment, rather than replacing the formal Source Water Protection stress-assessment process.  
 
 
 ## The Stress Assessment Screening Tool
 
-The screening tool provides an automated and reproducible framework for evaluating water quantity stress within defined source protection subwatersheds. It connects directly to ORMGP database allowing screening results to be updated as water-taking information, monitoring data, and model results change.
+The screening tool provides an automated and reproducible framework for evaluating water quantity stress within defined source protection subwatersheds per requirements of the Clean Water Act, 2006. It connects directly to ORMGP database allowing screening results to be updated as water-taking information, monitoring data, and model results change.
 
 Users can examine groundwater and surface-water stress across participating areas, including the SGBLS and CTC Source Protection regions, and explore the individual water-budget components that contribute to the calculated stress.
 
