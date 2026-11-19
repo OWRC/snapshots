@@ -1,5 +1,5 @@
 ---
-title: SWP Stress Assessment Screening Tool 
+title: Stress Assessment Screening Tool 
 author: Oak Ridges Moraine Groundwater Program
 output: html_document
 ---
