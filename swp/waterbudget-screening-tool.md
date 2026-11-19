@@ -7,7 +7,8 @@ output: html_document
 
 > The Source Water Protection Stress Assessment Screening Tool provides an interactive way to explore potential water quantity stress under Ontario’s Source Water Protection Program. By bringing together current water-taking information, regional climate data, and surface-water monitoring within a single web-mapping environment, the tool helps users identify areas of potential concern, examine the factors contributing to stress, and highlight where further investigation may be warranted across participating watersheds.
 
-**[Interactive Water Balance tool](https://owrc.shinyapps.io/SWP-WaterbudgetScreeningTool/)**
+**[Interactive Water Balance tool](https://owrc.shinyapps.io/SWP-WaterbudgetScreeningTool/){target="_blank" rel="noopener noreferrer"}**
+
 
 ## Introduction
 
@@ -68,7 +69,7 @@ For **groundwater**, the environmental reserve is set at **10% of annual groundw
 
 For **surface water**, the reserve is based on monthly low-flow conditions, represented by the **10th percentile monthly discharge** $(Q_\text{p90})$, to account for the need to maintain streamflow and associated ecological functions during periods of reduced water availability.
 
-<iframe src="https://golang.oakridgeswater.ca/pages/swp/streamflow.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://golang.oakridgeswater.ca/pages/swp/streamflow.html" width="100%" height="600" scrolling="no" allowfullscreen></iframe>
 
 **Locations of recent stream gauges and estimated recharge rates (mm/year). Point size represents gauge catchment area, while colour indicates relative differences in estimated recharge. Click a gauge point or watershed polygon to view the monthly summary of $Q_\text{supply}$ and $Q_\text{reserve}$. The method used to generate the map is [described below](#derivation-and-spatial-infill-of-mean-annual-runoff).**
 
@@ -78,7 +79,7 @@ For **surface water**, the reserve is based on monthly low-flow conditions, repr
 
 Water demand is calculated using active Ministry of the Environment, Conservation and Parks (MECP) **Permits to Take Water (PTTW)**.
 
-Where recent reported actual water-taking information is available, it can be used to characterize current demand. Where recent actual-taking records are unavailable, the **maximum permitted taking volume** is used as a conservative estimate of potential demand. This approach reduces the likelihood that potential water use will be underestimated where reporting is incomplete and provides a precautionary basis for screening areas that may warrant further investigation. Locations of active Permits to Take Water (PTTWs), as of October 2025, maintained in the ORMGP database <a href="https://golang.oakridgeswater.ca/pages/swp/pttw.html" target="_blank" rel="noopener noreferrer">**can be viewed here**</a>. Currently, of the 7680 known permits, only 520 (7%) have been co-located with a well.
+Where recent reported actual water-taking information is available, it can be used to characterize current demand. Where recent actual-taking records are unavailable, the **maximum permitted taking volume** is used as a conservative estimate of potential demand. This approach reduces the likelihood that potential water use will be underestimated where reporting is incomplete and provides a precautionary basis for screening areas that may warrant further investigation. Locations of active Permits to Take Water (PTTWs), as of **October 2025**, maintained in the ORMGP database <a href="https://golang.oakridgeswater.ca/pages/swp/pttw.html" target="_blank" rel="noopener noreferrer">**can be viewed here**</a>. Currently, of the 7680 known permits, only 520 (7%) have been co-located with a well. [This map](https://golang.oakridgeswater.ca/pages/swp/pttw-cluster.html) shows the distribution of well locations clustered under the same permit.
 
 Monthly surface water demand is adjusted using the **seasonal demand factors** provided in Table 15 of the Assessment Report Guidance Module 7 (2007). For each permit, the maximum permitted daily taking rate is multiplied by the maximum number of taking days per year to estimate the maximum annual permitted volume. This annual volume is then distributed among the applicable months according to the seasonal factors in [the table below](#monthly-demand-factors).
 
@@ -95,18 +96,27 @@ Following Ontario's Source Protection guidance, **groundwater quantity stress** 
 
 For **surface water quantity stress**, stress is classified as **significant** where Percent Water Demand (PWD) exceeds 50% in any month, **moderate** where PWD exceeds 20%, and **low** where PWD is below 18%. The guidance manual recommends a sensitivity analysis when PWD falls between 18% and 20%; therefore, the map below uses **18% as the threshold for moderate stress**. Results reflect current water-taking conditions and the applied [consumptive use factors](#consumptive-use-factors) and [monthly demand factors](#monthly-demand-factors).
 
-<iframe src="https://golang.oakridgeswater.ca/pages/swp/pwd.html" width="100%" height="400" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://golang.oakridgeswater.ca/pages/swp/pwd.html" width="100%" height="700" scrolling="no" allowfullscreen></iframe>
 
-**Current water quantity stress conditions. Click a water-taking permit (point) or Source Water Protection watershed to view a breakdown of the stress calculation.**
+**Current water quantity stress conditions. Click a water-taking permit (point) or Source Water Protection watershed to view a breakdown of the stress calculation. Locations circled indicate permits where no reported actual takings are available.**
 
 <br>
+
+### Considering Groundwater Level Trends
+
+Groundwater level [monitoring records should be reviewed](https://owrc.github.io/snapshots/md/gwvar.html) to assess recent trends. The review should check whether shifts in groundwater levels coincide with changes in Percent Water Demand (PWD). This comparison is especially important where PWD has crossed a threshold and changed the stress classification.
+
+
+<hr>
 
 
 # Calculations
 
+The remainder of this document describes the data and methods behind the screening tool. It begins with how streamflow-gauge records and the modelled drainage network are used to estimate mean annual runoff and baseflow, including in basins without gauges.
+
 ## Derivation and Spatial Infill of Mean Annual Runoff
 
-Mean annual runoff and baseflow are estimated across the 10 km² basin network using available streamflow-gauge statistics together with the modelled drainage topology.
+Mean annual runoff and baseflow are estimated across the [ORMGP 10 km² basin network](https://owrc.github.io/interpolants/interpolation/subwatershed.html) using available streamflow-gauge statistics together with the modelled drainage topology.
 
 For each gauge, mean discharge is normalized by the reported drainage area and converted to an equivalent annual runoff depth:
 
@@ -116,7 +126,7 @@ $$
 
 where $Q_r$ is mean annual runoff (mm/year), $\overline{Q}$ is mean discharge (m³/s), and $A$ is gauge drainage area (km²). Gauge records producing calculated runoff values greater than 1,000 mm/year are excluded from further processing as potential outliers.
 
-Mean annual baseflow is then estimated from the calculated runoff and the gauge-specific baseflow index (`BFI`):
+Mean annual baseflow is then [estimated from the calculated runoff](https://owrc.github.io/snapshots/md/baseflow-piechart.html) and the gauge-specific baseflow index (`BFI`):
 
 $$
 Q_b = Q_r \times BFI
@@ -181,6 +191,8 @@ Flow regulation, reservoirs, water diversions, urban stormwater management, and 
 
 Where these effects are significant, or where cross-boundary groundwater flow is expected to be an important component of the water budget, estimates derived from a calibrated regional groundwater-flow model may provide a more appropriate basis for detailed assessment.
 
+
+# Tables 
 
 ## Consumptive Use Factors
 
